@@ -14,7 +14,7 @@
   
 <script>
 import Navbar from "./components/Navbar.vue";
-import SearchBar from "./components/SearchBar.vue";
+import SearchBar from "./components/Search.vue";
 import ProjectBlock from "./components/ProjectBlock.vue";
 
 export default {
@@ -30,6 +30,13 @@ export default {
       projects: [], // 从 config.json 中获取的项目数据
     };
   },
+  created() {
+    fetch('./config.json')
+      .then(response => response.json())
+      .then(data => {
+        this.projects = data.projects
+      })
+  },
   computed: {
     filteredProjects() {
       return this.projects.filter(
@@ -38,14 +45,8 @@ export default {
           project.tags.some((tag) => tag.includes(this.searchText))
       );
     },
-  },
-  created() {
-    fetch('./config.json')
-      .then(response => response.json())
-      .then(data => {
-        this.projects = data.projects
-      })
   }
+  
 };
 </script>
   
