@@ -10,8 +10,15 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/vue-fontawesome": "^3.0.5",
     "@vue/cli": "^5.0.8",
+    "global": "^4.4.0",
     "vue": "^3.3.8",
     "vue-router": "^4.2.5",
-    "vuex": "^4.1.0"
+    "vuex": "^4.1.0",
+    "vue-cli-plugin-tailwind": "^3.0.0",
+    "vue-cli-plugin-yaml": "^1.0.2",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-service": "~5.0.0"
   }
 }
