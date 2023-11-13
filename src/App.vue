@@ -27,15 +27,29 @@ export default {
   data() {
     return {
       searchText: "",
-      projects: [], // 从 config.json 中获取的项目数据
+      projects: [
+        {
+          "id": "1",
+          "title": "项目1",
+          "description": "这是项目1的描述",
+          "icon": "https://example.com/icon1.png",
+          "tags": [
+            "标签1",
+            "标签2"
+          ]
+        },
+        {
+          "id": "2",
+          "title": "项目2",
+          "description": "这是项目2的描述",
+          "icon": "https://example.com/icon2.png",
+          "tags": [
+            "标签3",
+            "标签4"
+          ]
+        }
+      ],
     };
-  },
-  created() {
-    fetch('./config.json')
-      .then(response => response.json())
-      .then(data => {
-        this.projects = data.projects
-      })
   },
   computed: {
     filteredProjects() {
@@ -63,4 +77,3 @@ export default {
   justify-content: center;
 }
 </style>
-  
