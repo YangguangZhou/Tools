@@ -1,10 +1,12 @@
 <template>
-  <div class="project-block">
-    <img :src="project.icon" alt="项目图标" />
-    <h2>{{ project.title }}</h2>
-    <p>{{ project.description }}</p>
-    <div class="tags">
-      <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
+  <div class="project-container">
+    <div class="project-block">
+      <img :src="project.icon" alt="项目图标" />
+      <h2>{{ project.title }}</h2>
+      <p>{{ project.description }}</p>
+      <div class="tags">
+        <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -17,6 +19,12 @@ export default {
 </script>
   
 <style scoped>
+.project-container {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  /* 其他样式属性 */
+}
 .project-block {
   width: 200px;
   margin: 10px;
