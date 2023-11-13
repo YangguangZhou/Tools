@@ -8,6 +8,9 @@
         :key="project.id"
         :project="project"
       />
+      <div v-if="filteredProjects.length === 0" class="no-results">
+        No matching projects found.
+      </div>
     </div>
   </div>
 </template>
@@ -69,11 +72,19 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   color: #2c3e50;
   margin-top: 60px;
+  padding: 20px;
 }
 
 .projects {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.no-results {
+  text-align: center;
+  width: 100%;
+  margin-top: 20px;
+  color: #e74c3c; /* Red color for emphasis */
 }
 </style>
