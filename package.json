@@ -1,0 +1,16 @@
+{
+  "name": "Tools",
+  "version": "1.0.0",
+  "description": "Jerry Zhou的工具箱和个人项目",
+  "main": "index.js",
+  "repository": "https://github.com/YangguangZhou/Tools",
+  "author": "Jerry Zhou <61733195+YangguangZhou@users.noreply.github.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.4.2",
+    "@fortawesome/vue-fontawesome": "^3.0.5",
+    "vue": "^3.3.8",
+    "vue-router": "^4.2.5",
+    "vuex": "^4.1.0"
+  }
+}
