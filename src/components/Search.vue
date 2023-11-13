@@ -9,9 +9,8 @@ export default {
   name: "SearchBar",
   props: ["value"],
   data() {
-    return {
-      searchText: ''
-    }
+    // Remove searchText from data
+    return {};
   },
   computed: {
     searchText: {
@@ -25,7 +24,7 @@ export default {
   },
 };
 </script>
-  
+
 <style scoped>
 input {
   width: 100%;
