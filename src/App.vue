@@ -40,13 +40,12 @@ export default {
     },
   },
   created() {
-    // 在这里从 config.json 中获取项目数据，并赋值给 this.projects
-    fetch("./config.json")
-      .then((response) => response.json())
-      .then((data) => {
-        this.projects = data.projects;
-      });
-  },
+    fetch('./config.json')
+      .then(response => response.json())
+      .then(data => {
+        this.projects = data.projects
+      })
+  }
 };
 </script>
   
