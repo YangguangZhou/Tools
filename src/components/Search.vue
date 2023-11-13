@@ -1,7 +1,5 @@
 <template>
-  <div>
     <input type="text" v-model="searchText" placeholder="搜索项目">
-  </div>
 </template>
   
 <script>
