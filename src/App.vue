@@ -49,6 +49,13 @@ export default {
           icon: "https://example.com/icon2.png",
           tags: ["标签3", "标签4"],
         },
+        {
+          id: "3",
+          title: "测试项目",
+          description: "这是一个用于测试FontAwesome的项目",
+          icon: "fas fa-rocket", // 使用 FontAwesome 图标类
+          tags: ["测试", "FontAwesome"],
+        },
       ],
     };
   },
@@ -59,6 +66,11 @@ export default {
           project.title.includes(this.searchText) ||
           project.tags.some((tag) => tag.includes(this.searchText))
       );
+    },
+  },
+  methods: {
+    isFontAwesomeIcon(icon) {
+      return icon.startsWith("fas");
     },
   },
 };
@@ -95,32 +107,11 @@ export default {
   gap: 20px; /* 项目间距 */
 }
 
-.project-block {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px; /* 圆角 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-  width: 300px; /* 统一项目卡片宽度 */
-}
-
 .no-results {
   text-align: center;
   width: 100%;
   margin-top: 20px;
   color: #e74c3c; /* 红色突出显示无结果 */
-}
-
-.search-bar {
-  margin-bottom: 30px; /* 搜索栏与项目间的间距 */
-}
-
-/* 搜索栏样式 */
-.search-bar input {
-  padding: 10px;
-  border: 1px solid #bdc3c7; /* 边框颜色 */
-  border-radius: 5px; /* 圆角输入框 */
-  width: 100%; /* 完整宽度 */
-  box-sizing: border-box; /* 防止内边距影响宽度 */
 }
 
 /* 适应屏幕大小的响应式设计 */
@@ -139,20 +130,5 @@ export default {
   }
 }
 
-/* 项目卡片内部样式 */
-.project-block img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px; /* 图片圆角 */
-  margin-bottom: 15px;
-}
 
-.project-block h3 {
-  margin-top: 0;
-  color: #34495e; /* 标题颜色 */
-}
-
-.project-block p {
-  color: #7f8c8d; /* 描述文字颜色 */
-}
 </style>

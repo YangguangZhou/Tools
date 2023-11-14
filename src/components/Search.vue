@@ -26,10 +26,10 @@ export default {
 
 <style scoped>
 input {
-  width: 100%;
   padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid #bdc3c7; /* 边框颜色 */
+  border-radius: 5px; /* 圆角输入框 */
+  width: 100%; /* 完整宽度 */
+  box-sizing: border-box; /* 防止内边距影响宽度 */
 }
 </style>

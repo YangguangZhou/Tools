@@ -39,19 +39,21 @@ export default {
   width: 300px; /* 统一项目卡片宽度 */
 }
 
-.project-block img {
-  width: 50px;
-  height: 50px;
+/* 项目卡片内部样式 */
+.project-block img,font-awesome-icon {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px; /* 图片圆角 */
+  margin-bottom: 15px;
 }
 
-.project-block h2 {
-  font-size: 20px;
-  color: #2c3e50;
+.project-block h3 {
+  margin-top: 0;
+  color: #34495e; /* 标题颜色 */
 }
 
 .project-block p {
-  font-size: 14px;
-  color: #95a5a6;
+  color: #7f8c8d; /* 描述文字颜色 */
 }
 
 .tags {
