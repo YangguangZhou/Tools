@@ -1,12 +1,13 @@
 <template>
   <div class="project-container">
     <div class="project-block">
-      <img :src="project.icon" alt="项目图标" />
-      <h2>{{ project.title }}</h2>
+      <font-awesome-icon
+        :icon="project.icon"
+        v-if="isFontAwesomeIcon(project.icon)"
+      />
+      <img :src="project.icon" v-else />
+      <h3>{{ project.title }}</h3>
       <p>{{ project.description }}</p>
-      <div class="tags">
-        <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
-      </div>
     </div>
   </div>
 </template>
@@ -15,6 +16,11 @@
 export default {
   name: "ProjectBlock",
   props: ["project"],
+  methods: {
+    isFontAwesomeIcon(icon) {
+      return icon.startsWith("fas");
+    },
+  },
 };
 </script>
   
@@ -26,12 +32,11 @@ export default {
   /* 其他样式属性 */
 }
 .project-block {
-  width: 200px;
-  margin: 10px;
+  background-color: white;
   padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  text-align: center;
+  border-radius: 10px; /* 圆角 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+  width: 300px; /* 统一项目卡片宽度 */
 }
 
 .project-block img {
