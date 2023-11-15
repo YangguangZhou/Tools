@@ -8,6 +8,9 @@
       <img :src="project.icon" v-else />
       <h3>{{ project.title }}</h3>
       <p>{{ project.description }}</p>
+      <div class="tags">
+        <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
+      </div>
     </div>
   </div>
 </template>
