@@ -49,6 +49,13 @@ export default {
           icon: "https://example.com/icon2.png",
           tags: ["标签3", "标签4"],
         },
+        {
+     "id": "3",
+     "title": "测试项目",
+     "description": "这是一个用于测试FontAwesome的项目",
+     "icon": "fas fa-rocket", // 使用 FontAwesome 图标类
+     "tags": ["测试", "FontAwesome"]
+   }
       ],
     };
   },
