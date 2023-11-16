@@ -46,13 +46,13 @@ export default {
 }
 
 .project-image {
-  max-width: 100%; /* 确保图片不超过容器宽度 */
+  max-width: 15%; /* 确保图片不超过容器宽度 */
   height: auto; /* 保持原始宽高比 */
   display: block; /* 防止默认的内联元素间距 */
-  margin: 0 auto; /* 居中显示 */
+  /* margin: 0 auto; 居中显示 */
 }
 
-.project-block img, .project-block .font-awesome-icon {
+.project-block .project-block {
   max-width: 100%;
   height: auto;
   border-radius: 5px;
