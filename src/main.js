@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 const app = createApp(App)
 app.mount('#app')
-
 library.add(fas);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

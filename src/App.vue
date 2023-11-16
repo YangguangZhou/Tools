@@ -1,33 +1,32 @@
 <template>
-  <div class="header">
-    <h1>Tools & Projects</h1>
-    <h2>Jerry Zhou的工具箱和个人项目</h2>
-  </div>
-  <div id="app">
-    <Navbar />
-    <SearchBar v-model="searchText" />
-    <div class="projects">
-      <ProjectBlock
-        v-for="project in filteredProjects"
-        :key="project.id"
-        :project="project"
-      />
-      <div v-if="filteredProjects.length === 0" class="no-results">
-        No matching projects found.
+  <div class="app-container">
+    <div class="header">
+      <h1>Tools & Projects</h1>
+      <h2>Jerry Zhou的工具箱和个人项目</h2>
+    </div>
+    <div class="content">
+      <SearchBar v-model="searchText" />
+      <div class="projects">
+        <ProjectBlock
+          v-for="project in filteredProjects"
+          :key="project.id"
+          :project="project"
+        />
+        <div v-if="filteredProjects.length === 0" class="no-results">
+          No matching projects found.
+        </div>
       </div>
     </div>
   </div>
 </template>
-  
+
 <script>
-import Navbar from "./components/Navbar.vue";
 import SearchBar from "./components/Search.vue";
 import ProjectBlock from "./components/ProjectBlock.vue";
 
 export default {
   name: "App",
   components: {
-    Navbar,
     SearchBar,
     ProjectBlock,
   },
@@ -35,18 +34,18 @@ export default {
     return {
       searchText: "",
       projects: [
-        {
+      {
           id: "1",
           title: "项目1",
           description: "这是项目1的描述",
-          icon: "https://example.com/icon1.png",
+          icon: "https://jerryz.com.cn/favicon.png",
           tags: ["标签1", "标签2"],
         },
         {
           id: "2",
           title: "项目2",
           description: "这是项目2的描述",
-          icon: "https://example.com/icon2.png",
+          icon: "https://jerryz.com.cn/favicon.png",
           tags: ["标签3", "标签4"],
         },
         {
@@ -61,28 +60,26 @@ export default {
   },
   computed: {
     filteredProjects() {
-      return this.projects.filter(
-        (project) =>
-          project.title.includes(this.searchText) ||
-          project.tags.some((tag) => tag.includes(this.searchText))
-      );
-    },
-  },
-  methods: {
-    isFontAwesomeIcon(icon) {
-      return icon.startsWith("fas");
+      const lowerSearchText = this.searchText.toLowerCase();
+      return this.projects.filter(project => {
+        const titleMatch = project.title.toLowerCase().includes(lowerSearchText);
+        const descriptionMatch = project.description.toLowerCase().includes(lowerSearchText);
+        const tagsMatch = project.tags.some(tag => tag.toLowerCase().includes(lowerSearchText));
+        return titleMatch || descriptionMatch || tagsMatch;
+      });
     },
   },
 };
 </script>
-  
+
 <style>
-#app {
+.app-container {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   color: #2c3e50;
-  margin-top: 60px;
-  padding: 20px;
-  background-color: #f5f5f5; /* 浅灰色背景 */
+  margin: 60px auto;
+  max-width: 1200px;
+  padding: 40px;
+  background-color: #f5f5f5;
 }
 
 .header {
@@ -91,44 +88,40 @@ export default {
 }
 
 .header h1 {
-  color: #34495e; /* 深蓝色 */
+  color: #34495e;
   margin-bottom: 10px;
 }
 
 .header h2 {
-  color: #7f8c8d; /* 淡灰色 */
+  color: #7f8c8d;
   font-weight: normal;
+}
+
+.content {
+  padding: 30px; /* 为内容区域添加更多的内边距 */
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .projects {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px; /* 项目间距 */
+  gap: 30px;
 }
 
 .no-results {
   text-align: center;
   width: 100%;
   margin-top: 20px;
-  color: #e74c3c; /* 红色突出显示无结果 */
+  color: #e74c3c;
 }
 
-/* 适应屏幕大小的响应式设计 */
 @media (max-width: 600px) {
   .projects {
     flex-direction: column;
     align-items: center;
   }
-
-  .project-block {
-    width: 100%; /* 小屏幕下项目卡片宽度 */
-  }
-
-  .search-bar input {
-    width: calc(100% - 20px); /* 考虑边距的宽度 */
-  }
 }
-
-
 </style>

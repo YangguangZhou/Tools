@@ -1,11 +1,8 @@
 <template>
   <div class="project-container">
     <div class="project-block">
-      <font-awesome-icon
-        :icon="project.icon"
-        v-if="isFontAwesomeIcon(project.icon)"
-      />
-      <img :src="project.icon" v-else />
+      <component :is="iconComponent" :icon="project.icon" v-if="isFontAwesomeIcon(project.icon)" />
+      <img :src="project.icon" v-else class="project-image" />
       <h3>{{ project.title }}</h3>
       <p>{{ project.description }}</p>
       <div class="tags">
@@ -14,11 +11,16 @@
     </div>
   </div>
 </template>
-  
+
 <script>
 export default {
   name: "ProjectBlock",
   props: ["project"],
+  computed: {
+    iconComponent() {
+      return this.isFontAwesomeIcon(this.project.icon) ? 'font-awesome-icon' : 'img';
+    }
+  },
   methods: {
     isFontAwesomeIcon(icon) {
       return icon.startsWith("fas");
@@ -26,37 +28,48 @@ export default {
   },
 };
 </script>
-  
+
 <style scoped>
 .project-container {
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 10px;
-  /* 其他样式属性 */
+  margin: 15px;
 }
+
 .project-block {
   background-color: white;
   padding: 20px;
-  border-radius: 10px; /* 圆角 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
-  width: 300px; /* 统一项目卡片宽度 */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
 
-/* 项目卡片内部样式 */
-.project-block img,font-awesome-icon {
+.project-image {
+  max-width: 100%; /* 确保图片不超过容器宽度 */
+  height: auto; /* 保持原始宽高比 */
+  display: block; /* 防止默认的内联元素间距 */
+  margin: 0 auto; /* 居中显示 */
+}
+
+.project-block img, .project-block .font-awesome-icon {
   max-width: 100%;
   height: auto;
-  border-radius: 5px; /* 图片圆角 */
+  border-radius: 5px;
   margin-bottom: 15px;
 }
 
+.project-icon {
+  max-width: 100%; /* 确保图片不会超出容器宽度 */
+  height: auto; /* 保持图片的原始宽高比 */
+}
+
 .project-block h3 {
-  margin-top: 0;
-  color: #34495e; /* 标题颜色 */
+  color: #34495e;
 }
 
 .project-block p {
-  color: #7f8c8d; /* 描述文字颜色 */
+  color: #7f8c8d;
 }
 
 .tags {
@@ -73,4 +86,3 @@ export default {
   border-radius: 5px;
 }
 </style>
-  
