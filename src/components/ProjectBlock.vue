@@ -2,7 +2,7 @@
   <div class="project-container" @click="goToProjectUrl">
     <div class="project-block">
       <div class="project-header">
-        <component :is="iconComponent" :icon="project.icon" v-if="isFontAwesomeIcon(project.icon)" class="project-image" />
+        <component :is="iconComponent" :icon="project.icon" v-if="isFontAwesomeIcon(project.icon)" class="project-image" style="color: #666;" />
         <img :src="project.icon" v-else class="project-image" />
         <h3>{{ project.title }}</h3>
       </div>
