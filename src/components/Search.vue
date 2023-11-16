@@ -1,5 +1,10 @@
 <template>
-  <input type="text" v-model="searchText" placeholder="搜索项目" @input="updateValue" />
+  <input
+    type="text"
+    v-model="searchText"
+    placeholder="搜索项目"
+    @input="updateValue"
+  />
 </template>
 
 <script>
@@ -26,10 +31,11 @@ export default {
 
 <style scoped>
 input {
-  padding: 10px;
-  border: 1px solid #bdc3c7;
-  border-radius: 5px;
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
   width: 100%;
   box-sizing: border-box;
+  outline-color: #279cff; /* 焦点颜色 */
 }
 </style>

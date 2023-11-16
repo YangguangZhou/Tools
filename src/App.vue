@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import SearchBar from "./components/Search.vue";
 import ProjectBlock from "./components/ProjectBlock.vue";
 
@@ -33,38 +34,31 @@ export default {
   data() {
     return {
       searchText: "",
-      projects: [
-      {
-          id: "1",
-          title: "项目1",
-          description: "这是项目1的描述",
-          icon: "https://jerryz.com.cn/favicon.png",
-          tags: ["标签1", "标签2"],
-        },
-        {
-          id: "2",
-          title: "项目2",
-          description: "这是项目2的描述",
-          icon: "https://jerryz.com.cn/favicon.png",
-          tags: ["标签3", "标签4"],
-        },
-        {
-          id: "3",
-          title: "测试项目",
-          description: "这是一个用于测试FontAwesome的项目",
-          icon: "fas fa-rocket", // 使用 FontAwesome 图标类
-          tags: ["测试", "FontAwesome"],
-        },
-      ],
+      projects: [],
     };
+  },
+  created() {
+    axios.get('./projects.json')
+      .then(response => {
+        this.projects = response.data;
+      })
+      .catch(error => {
+        console.error(error);
+      });
   },
   computed: {
     filteredProjects() {
       const lowerSearchText = this.searchText.toLowerCase();
-      return this.projects.filter(project => {
-        const titleMatch = project.title.toLowerCase().includes(lowerSearchText);
-        const descriptionMatch = project.description.toLowerCase().includes(lowerSearchText);
-        const tagsMatch = project.tags.some(tag => tag.toLowerCase().includes(lowerSearchText));
+      return this.projects.filter((project) => {
+        const titleMatch = project.title
+          .toLowerCase()
+          .includes(lowerSearchText);
+        const descriptionMatch = project.description
+          .toLowerCase()
+          .includes(lowerSearchText);
+        const tagsMatch = project.tags.some((tag) =>
+          tag.toLowerCase().includes(lowerSearchText)
+        );
         return titleMatch || descriptionMatch || tagsMatch;
       });
     },
@@ -74,51 +68,52 @@ export default {
 
 <style>
 .app-container {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  color: #2c3e50;
-  margin: 60px auto;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #333;
+  margin: 30px auto;
   max-width: 1200px;
-  padding: 40px;
-  background-color: #f5f5f5;
+  padding: 20px;
+  background-color: #fff;
 }
 
 .header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .header h1 {
-  color: #34495e;
-  margin-bottom: 10px;
+  color: #279cff; /* 更亮的蓝色 */
+  margin-bottom: 15px;
 }
 
 .header h2 {
-  color: #7f8c8d;
+  color: #6c757d; /* 柔和的灰色 */
   font-weight: normal;
 }
 
 .content {
-  padding: 30px; /* 为内容区域添加更多的内边距 */
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
 .projects {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 30px;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 .no-results {
   text-align: center;
   width: 100%;
-  margin-top: 20px;
-  color: #e74c3c;
+  margin-top: 15px;
+  color: #f17162; /* 更鲜艳的红色 */
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .projects {
     flex-direction: column;
     align-items: center;

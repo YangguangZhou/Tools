@@ -1,9 +1,11 @@
 <template>
-  <div class="project-container">
+  <div class="project-container" @click="goToProjectUrl">
     <div class="project-block">
-      <component :is="iconComponent" :icon="project.icon" v-if="isFontAwesomeIcon(project.icon)" />
-      <img :src="project.icon" v-else class="project-image" />
-      <h3>{{ project.title }}</h3>
+      <div class="project-header">
+        <component :is="iconComponent" :icon="project.icon" v-if="isFontAwesomeIcon(project.icon)" class="project-image" />
+        <img :src="project.icon" v-else class="project-image" />
+        <h3>{{ project.title }}</h3>
+      </div>
       <p>{{ project.description }}</p>
       <div class="tags">
         <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
@@ -18,12 +20,17 @@ export default {
   props: ["project"],
   computed: {
     iconComponent() {
-      return this.isFontAwesomeIcon(this.project.icon) ? 'font-awesome-icon' : 'img';
-    }
+      return this.isFontAwesomeIcon(this.project.icon)
+        ? "font-awesome-icon"
+        : "img";
+    },
   },
   methods: {
     isFontAwesomeIcon(icon) {
-      return icon.startsWith("fas");
+      return icon.startsWith("fa");
+    },
+    goToProjectUrl() {
+      window.location.href = this.project.url;
     },
   },
 };
@@ -31,45 +38,43 @@ export default {
 
 <style scoped>
 .project-container {
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 15px;
+  margin: 10px;
+  cursor: pointer; /* 鼠标指向时变为手形 */
+  transition: transform 0.3s ease; /* 添加过渡效果 */
+}
+
+.project-container:hover {
+  transform: scale(1.05); /* 鼠标指向时方框稍微放大 */
 }
 
 .project-block {
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   width: 300px;
 }
 
-.project-image {
-  max-width: 15%; /* 确保图片不超过容器宽度 */
-  height: auto; /* 保持原始宽高比 */
-  display: block; /* 防止默认的内联元素间距 */
-  /* margin: 0 auto; 居中显示 */
-}
-
-.project-block .project-block {
-  max-width: 100%;
-  height: auto;
-  border-radius: 5px;
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 15px;
 }
 
-.project-icon {
-  max-width: 100%; /* 确保图片不会超出容器宽度 */
-  height: auto; /* 保持图片的原始宽高比 */
+.project-image {
+  width: 50px; /* 调整大小 */
+  height: auto;
+  /* border-radius: 50%; */
 }
 
 .project-block h3 {
-  color: #34495e;
+  color: #279cff;
+  margin: 0;
 }
 
 .project-block p {
-  color: #7f8c8d;
+  color: #6c757d;
 }
 
 .tags {
@@ -80,8 +85,8 @@ export default {
 
 .tags span {
   margin: 5px;
-  padding: 5px;
-  background-color: #3498db;
+  padding: 5px 10px;
+  background-color: #3dacff;
   color: #fff;
   border-radius: 5px;
 }

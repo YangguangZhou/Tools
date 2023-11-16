@@ -1,11 +1,19 @@
+/* Set up using Vue 3 */
 import { createApp } from 'vue'
 import App from './App.vue'
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { fas } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-const app = createApp(App)
-app.mount('#app')
-library.add(fas);
+/* import the fontawesome core */
+import { library } from '@fortawesome/fontawesome-svg-core'
 
-Vue.component('font-awesome-icon', FontAwesomeIcon);
+/* import font awesome icon component */
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+/* import specific icons */
+import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+
+/* add icons to the library */
+library.add(faUserSecret)
+
+createApp(App)
+    .component('font-awesome-icon', FontAwesomeIcon)
+    .mount('#app')
