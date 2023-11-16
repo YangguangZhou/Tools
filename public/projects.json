@@ -19,7 +19,7 @@
     "id": "3",
     "title": "Monet All",
     "description": "Magisk 莫奈取色整合模块",
-    "icon": "fas fa-user-secret",
+    "icon": "./assets/magisk.svg",
     "tags": ["Magisk", "Monet", "Material You"],
     "url": "https://monet.jerryz.com.cn"
   }

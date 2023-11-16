@@ -2,13 +2,15 @@
   <div class="project-container" @click="goToProjectUrl">
     <div class="project-block">
       <div class="project-header">
-        <component :is="iconComponent" :icon="project.icon" v-if="isFontAwesomeIcon(project.icon)" class="project-image" style="color: #666;" />
+        <component :is="iconComponent" :icon="project.icon" v-if="isFontAwesomeIcon(project.icon)" class="project-image" style="color: #888;" />
         <img :src="project.icon" v-else class="project-image" />
         <h3>{{ project.title }}</h3>
       </div>
       <p>{{ project.description }}</p>
       <div class="tags">
-        <span v-for="tag in project.tags" :key="tag">{{ tag }}</span>
+        <span v-for="tag in project.tags" :key="tag" @click="tagClicked($event, tag)">
+          {{ tag }}
+        </span>
       </div>
     </div>
   </div>
@@ -28,6 +30,11 @@ export default {
   methods: {
     isFontAwesomeIcon(icon) {
       return icon.startsWith("fa");
+    },
+    tagClicked(event, tag) {
+      event.stopPropagation(); // 阻止事件冒泡
+      event.preventDefault();
+      this.$emit('tag-clicked', tag);
     },
     goToProjectUrl() {
       window.location.href = this.project.url;
@@ -63,7 +70,7 @@ export default {
 }
 
 .project-image {
-  width: 50px; /* 调整大小 */
+  width: 30px; /* 调整大小 */
   height: auto;
   /* border-radius: 50%; */
 }
@@ -89,5 +96,11 @@ export default {
   background-color: #3dacff;
   color: #fff;
   border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* 添加过渡效果 */
+}
+
+.tags span:hover {
+  background-color: #2a8fd8; /* 鼠标指向时背景颜色变深 */
+  transform: scale(1.1); /* 鼠标指向时标签稍微放大 */
 }
 </style>

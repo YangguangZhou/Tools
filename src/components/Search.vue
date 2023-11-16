@@ -19,7 +19,7 @@ export default {
   watch: {
     value(newVal) {
       this.searchText = newVal;
-    },
+    }
   },
   methods: {
     updateValue() {

@@ -11,9 +11,10 @@
           v-for="project in filteredProjects"
           :key="project.id"
           :project="project"
+          @tag-clicked="tagClicked"
         />
         <div v-if="filteredProjects.length === 0" class="no-results">
-          No matching projects found.
+          未找到匹配的项目。
         </div>
       </div>
     </div>
@@ -61,6 +62,11 @@ export default {
         );
         return titleMatch || descriptionMatch || tagsMatch;
       });
+    },
+  },
+  methods: {
+    tagClicked(tag) {
+      this.searchText = tag;
     },
   },
 };
