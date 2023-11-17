@@ -62,5 +62,29 @@
     "icon": "fab fa-markdown",
     "tags": ["Markdown", "编辑器", "预览"],
     "url": "https://md.jerryz.com.cn/"
+  },
+  {
+    "id": "9",
+    "title": "RandomName",
+    "description": "随机点名器，电教必备",
+    "icon": "fas fa-dice",
+    "tags": ["随机", "点名"],
+    "url": "https://github.com/YangguangZhou/RandomName"
+  },
+  {
+    "id": "10",
+    "title": "ChatGPT Next Web",
+    "description": "可以国内访问的ChatGPT，需要搭配OpenAI API Key使用",
+    "icon": "./assets/chatgpt.svg",
+    "tags": ["ChatGPT", "AI", "LLM"],
+    "url": "https://gpt.jerryz.com.cn"
+  },
+  {
+    "id": "11",
+    "title": "Lobe Chat",
+    "description": "可以国内访问的ChatGPT，需要搭配OpenAI API Key使用，有丰富的提示词预设和插件",
+    "icon": "./assets/lobe-chat.svg",
+    "tags": ["ChatGPT", "AI", "LLM"],
+    "url": "https://lobe.jerryz.com.cn"
   }
 ]
