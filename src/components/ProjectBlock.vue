@@ -1,14 +1,25 @@
 <template>
-  <div class="project-container" @click="goToProjectUrl">
+  <div class="project-container" @click="goToProjectUrl" :title="project.url">
     <div class="project-block">
       <div class="project-header">
-        <component :is="iconComponent" :icon="project.icon" v-if="isFontAwesomeIcon(project.icon)" class="project-image" style="color: #888;" />
+        <component
+          :is="iconComponent"
+          :icon="project.icon"
+          v-if="isFontAwesomeIcon(project.icon)"
+          class="project-image"
+          style="color: #888"
+        />
         <img :src="project.icon" v-else class="project-image" />
         <h3>{{ project.title }}</h3>
       </div>
       <p>{{ project.description }}</p>
       <div class="tags">
-        <span v-for="tag in project.tags" :key="tag" @click="tagClicked($event, tag)">
+        <span
+          v-for="tag in project.tags"
+          :key="tag"
+          @click="tagClicked($event, tag)"
+          :title="tag"
+        >
           {{ tag }}
         </span>
       </div>
@@ -34,7 +45,7 @@ export default {
     tagClicked(event, tag) {
       event.stopPropagation(); // 阻止事件冒泡
       event.preventDefault();
-      this.$emit('tag-clicked', tag);
+      this.$emit("tag-clicked", tag);
     },
     goToProjectUrl() {
       window.location.href = this.project.url;
@@ -60,6 +71,8 @@ export default {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   width: 300px;
+  max-width: 100%; /* 添加最大宽度 */
+  margin: auto; /* 添加自动边距 */
 }
 
 .project-header {
@@ -102,5 +115,11 @@ export default {
 .tags span:hover {
   background-color: #2a8fd8; /* 鼠标指向时背景颜色变深 */
   transform: scale(1.1); /* 鼠标指向时标签稍微放大 */
+}
+
+@media (max-width: 768px) {
+  .project-block {
+    width: 90%; /* 在小屏幕上，设置宽度为90% */
+  }
 }
 </style>

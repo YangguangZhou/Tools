@@ -22,5 +22,45 @@
     "icon": "./assets/magisk.svg",
     "tags": ["Magisk", "Monet", "Material You"],
     "url": "https://monet.jerryz.com.cn"
+  },
+  {
+    "id": "4",
+    "title": "Luogu User Card",
+    "description": "洛谷用户信息卡片",
+    "icon": "./assets/luogu.svg",
+    "tags": ["洛谷", "API", "Markdown"],
+    "url": "https://api.jerryz.com.cn"
+  },
+  {
+    "id": "5",
+    "title": "Cards",
+    "description": "个人身份卡片",
+    "icon": "fas fa-address-card",
+    "tags": ["名片", "API", "Markdown"],
+    "url": "https://cards.jerryz.com.cn"
+  },
+  {
+    "id": "6",
+    "title": "Links",
+    "description": "友链合集",
+    "icon": "./assets/links.svg",
+    "tags": ["友链"],
+    "url": "https://links.jerryz.com.cn"
+  },
+  {
+    "id": "7",
+    "title": "HTML-Editor",
+    "description": "HTML代码在线编辑器，可即时预览",
+    "icon": "fab fa-html5",
+    "tags": ["HTML", "编辑器", "编程", "预览"],
+    "url": "https://html.jerryz.com.cn/"
+  },
+  {
+    "id": "8",
+    "title": "Markdown-Editor",
+    "description": "Markdown在线编辑器，可即时预览",
+    "icon": "fab fa-markdown",
+    "tags": ["Markdown", "编辑器", "预览"],
+    "url": "https://md.jerryz.com.cn/"
   }
 ]

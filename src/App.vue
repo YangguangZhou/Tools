@@ -5,7 +5,11 @@
       <h2>Jerry Zhou的工具箱和个人项目</h2>
     </div>
     <div class="content">
-      <SearchBar v-model="searchText" />
+      <input
+        type="text"
+        placeholder="搜索项目"
+        v-model="searchText"
+      />
       <div class="projects">
         <ProjectBlock
           v-for="project in filteredProjects"
@@ -22,14 +26,12 @@
 </template>
 
 <script>
-import axios from 'axios';
-import SearchBar from "./components/Search.vue";
+import axios from "axios";
 import ProjectBlock from "./components/ProjectBlock.vue";
 
 export default {
   name: "App",
   components: {
-    SearchBar,
     ProjectBlock,
   },
   data() {
@@ -39,11 +41,12 @@ export default {
     };
   },
   created() {
-    axios.get('./projects.json')
-      .then(response => {
+    axios
+      .get("./projects.json")
+      .then((response) => {
         this.projects = response.data;
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
       });
   },
@@ -95,6 +98,15 @@ export default {
 .header h2 {
   color: #6c757d; /* 柔和的灰色 */
   font-weight: normal;
+}
+
+input {
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+  outline-color: #279cff; /* 焦点颜色 */
 }
 
 .content {
