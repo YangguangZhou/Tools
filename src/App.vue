@@ -70,10 +70,13 @@ export default {
         const descriptionMatch = project.description
           .toLowerCase()
           .includes(lowerSearchText);
+        const urlMatch = project.url
+          .toLowerCase()
+          .includes(lowerSearchText);
         const tagsMatch = project.tags.some((tag) =>
           tag.toLowerCase().includes(lowerSearchText)
         );
-        return titleMatch || descriptionMatch || tagsMatch;
+        return titleMatch || descriptionMatch || tagsMatch || urlMatch;
       });
     },
   },

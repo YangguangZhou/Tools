@@ -135,7 +135,7 @@
     "id": "11",
     "title": "Lobe Chat",
     "description": "可以国内访问的ChatGPT，需要搭配OpenAI API Key使用，有丰富的提示词预设和插件",
-    "icon": "./assets/lobe-chat.svg",
+    "icon": "./assets/chatgpt.svg",
     "tags": [
       "ChatGPT",
       "AI",
@@ -143,5 +143,56 @@
     ],
     "url": "https://lobe.jerryz.com.cn",
     "mine": true
+  },
+  {
+    "id": "12",
+    "title": "综合计算器",
+    "description": "一个简单的综合计算器",
+    "icon": "fas fa-calculator",
+    "tags": [
+      "计算器",
+      "小工具",
+      "HTML"
+    ],
+    "url": "https://cal.jerryz.com.cn",
+    "mine": true
+  },
+  {
+    "id": "13",
+    "title": "颜色转换器",
+    "description": "16进制色值与RGB色值的转换器",
+    "icon": "fas fa-palette",
+    "tags": [
+      "颜色",
+      "小工具",
+      "HTML"
+    ],
+    "url": "https://color.jerryz.com.cn",
+    "mine": true
+  },
+  {
+    "id": "14",
+    "title": "福音战士标题生成器",
+    "description": "生成福音战士风格的标题图片",
+    "icon": "fas fa-image",
+    "tags": [
+      "图片",
+      "二次元",
+      "小工具"
+    ],
+    "url": "https://lab.magiconch.com/eva-title/",
+    "mine": false
+  },
+  {
+    "id": "15",
+    "title": "Stable Audio",
+    "description": "用AI创造音乐",
+    "icon": "fas fa-file-audio",
+    "tags": [
+      "音乐",
+      "AI"
+    ],
+    "url": "https://www.stableaudio.com/",
+    "mine": false
   }
 ]

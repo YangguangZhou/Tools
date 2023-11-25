@@ -1,5 +1,11 @@
 <template>
-  <div class="project-container" @click="goToProjectUrl" :title="project.url">
+  <div
+    class="project-container"
+    @click="goToProjectUrl"
+    :title="project.url"
+    @mouseover="showPreview = true"
+    @mouseleave="showPreview = false"
+  >
     <div class="project-block" :class="{ 'mine-border': project.mine }">
       <div class="project-header">
         <component
@@ -24,6 +30,21 @@
         </span>
       </div>
     </div>
+    <transition name="fade">
+      <div
+        class="preview-window"
+        :style="{ width: previewWidth, height: previewHeight }"
+        v-show="showPreview"
+      >
+        <div class="preview-actions">
+          <button @click.stop="openInNewTab">
+            <i class="fas fa-external-link-alt"></i>
+          </button>
+          <button @click.stop="copyLink"><i class="fas fa-copy"></i></button>
+        </div>
+        <iframe ref="previewFrame" :src="project.url" frameborder="0"></iframe>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -31,11 +52,23 @@
 export default {
   name: "ProjectBlock",
   props: ["project"],
+  data() {
+    return {
+      showPreview: false,
+      previewTimeout: null,
+    };
+  },
   computed: {
     iconComponent() {
       return this.isFontAwesomeIcon(this.project.icon)
         ? "font-awesome-icon"
         : "img";
+    },
+    previewWidth() {
+      return Math.min(600, window.innerWidth * 0.5) + "px";
+    },
+    previewHeight() {
+      return Math.min(400, window.innerHeight * 0.5) + "px";
     },
   },
   methods: {
@@ -48,9 +81,44 @@ export default {
       this.$emit("tag-clicked", tag);
     },
     goToProjectUrl() {
-      window.location.href = this.project.url;
+      this.showPreview = false;
+      clearTimeout(this.previewTimeout);
+      this.$nextTick(() => {
+        window.location.href = this.project.url;
+      });
+    },
+    openInNewTab(event) {
+      event.stopPropagation();
+      clearTimeout(this.previewTimeout);
+      window.open(this.project.url, "_blank");
+    },
+    copyLink(event) {
+      event.stopPropagation();
+      clearTimeout(this.previewTimeout);
+      navigator.clipboard.writeText(this.project.url);
+    },
+    showPreviewWithDelay() {
+      this.previewTimeout = setTimeout(() => {
+        this.showPreview = true;
+      }, 1000); // 1 second delay
+    },
+    hidePreviewAndStopLoading() {
+      this.showPreview = false;
+      clearTimeout(this.previewTimeout);
+      if (this.$refs.previewFrame) {
+        this.$refs.previewFrame.src = '';
+      }
     },
   },
+  // mounted() {
+  //   // 预加载页面
+  //   if (
+  //     this.$refs.previewFrame &&
+  //     !window.matchMedia("(max-width: 768px)").matches
+  //   ) {
+  //     this.$refs.previewFrame.src = this.project.url;
+  //   }
+  // },
 };
 </script>
 
@@ -100,7 +168,7 @@ export default {
 .mine-border {
   border-radius: 10px;
   /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); */
-  border: 2px solid #C0E2FF;
+  border: 2px solid #c0e2ff;
 }
 
 .tags {
@@ -112,14 +180,14 @@ export default {
 .tags span {
   margin: 5px;
   padding: 5px 10px;
-  background-color: #41A8FF;
+  background-color: #41a8ff;
   color: #fff;
   border-radius: 5px;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .tags span:hover {
-  background-color: #279CFF;
+  background-color: #279cff;
   transform: scale(1.05);
 }
 
@@ -127,5 +195,47 @@ export default {
   .project-block {
     max-width: 90%;
   }
+  .preview-window {
+    display: none;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+.preview-window {
+  position: absolute;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+.preview-window iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.preview-actions {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+}
+.preview-actions button {
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 5px;
+  margin-left: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+.preview-actions button i {
+  color: #666;
 }
 </style>
