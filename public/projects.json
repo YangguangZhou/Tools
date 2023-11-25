@@ -4,87 +4,144 @@
     "title": "主页",
     "description": "Jerry Zhou的个人主页",
     "icon": "fas fa-house",
-    "tags": ["主页"],
-    "url": "https://jerryz.com.cn"
+    "tags": [
+      "主页",
+      "Vue"
+    ],
+    "url": "https://jerryz.com.cn",
+    "mine": true
   },
   {
     "id": "2",
     "title": "博客",
     "description": "Jerry Zhou的个人博客，记录有趣的信息学、IT和个人内容",
     "icon": "fas fa-newspaper",
-    "tags": ["博客", "RSS"],
-    "url": "https://blog.jerryz.com.cn"
+    "tags": [
+      "博客",
+      "RSS",
+      "Hexo",
+      "Butterfly"
+    ],
+    "url": "https://blog.jerryz.com.cn",
+    "mine": true
   },
   {
     "id": "3",
     "title": "Monet All",
     "description": "Magisk 莫奈取色整合模块",
     "icon": "./assets/magisk.svg",
-    "tags": ["Magisk", "Monet", "Material You"],
-    "url": "https://monet.jerryz.com.cn"
+    "tags": [
+      "Magisk",
+      "Monet",
+      "Material You"
+    ],
+    "url": "https://monet.jerryz.com.cn",
+    "mine": true
   },
   {
     "id": "4",
     "title": "Luogu User Card",
     "description": "洛谷用户信息卡片",
     "icon": "./assets/luogu.svg",
-    "tags": ["洛谷", "API", "Markdown"],
-    "url": "https://api.jerryz.com.cn"
+    "tags": [
+      "洛谷",
+      "API",
+      "Markdown",
+      "Serverless"
+    ],
+    "url": "https://api.jerryz.com.cn",
+    "mine": true
   },
   {
     "id": "5",
     "title": "Cards",
     "description": "个人身份卡片",
     "icon": "fas fa-address-card",
-    "tags": ["名片", "API", "Markdown"],
-    "url": "https://cards.jerryz.com.cn"
+    "tags": [
+      "名片",
+      "API",
+      "Markdown",
+      "Serverless"
+    ],
+    "url": "https://cards.jerryz.com.cn",
+    "mine": true
   },
   {
     "id": "6",
     "title": "Links",
     "description": "友链合集",
     "icon": "./assets/links.svg",
-    "tags": ["友链"],
-    "url": "https://links.jerryz.com.cn"
+    "tags": [
+      "友链",
+      "HTML"
+    ],
+    "url": "https://links.jerryz.com.cn",
+    "mine": true
   },
   {
     "id": "7",
     "title": "HTML-Editor",
     "description": "HTML代码在线编辑器，可即时预览",
     "icon": "fab fa-html5",
-    "tags": ["HTML", "编辑器", "编程", "预览"],
-    "url": "https://html.jerryz.com.cn/"
+    "tags": [
+      "HTML",
+      "编辑器",
+      "编程",
+      "预览"
+    ],
+    "url": "https://html.jerryz.com.cn/",
+    "mine": true
   },
   {
     "id": "8",
     "title": "Markdown-Editor",
     "description": "Markdown在线编辑器，可即时预览",
     "icon": "fab fa-markdown",
-    "tags": ["Markdown", "编辑器", "预览"],
-    "url": "https://md.jerryz.com.cn/"
+    "tags": [
+      "Markdown",
+      "编辑器",
+      "预览"
+    ],
+    "url": "https://md.jerryz.com.cn/",
+    "mine": true
   },
   {
     "id": "9",
     "title": "RandomName",
     "description": "随机点名器，电教必备",
     "icon": "fas fa-dice",
-    "tags": ["随机", "点名"],
-    "url": "https://github.com/YangguangZhou/RandomName"
+    "tags": [
+      "随机",
+      "点名",
+      "HTML"
+    ],
+    "url": "https://github.com/YangguangZhou/RandomName",
+    "mine": true
   },
   {
     "id": "10",
     "title": "ChatGPT Next Web",
     "description": "可以国内访问的ChatGPT，需要搭配OpenAI API Key使用",
     "icon": "./assets/chatgpt.svg",
-    "tags": ["ChatGPT", "AI", "LLM"],
-    "url": "https://gpt.jerryz.com.cn"
+    "tags": [
+      "ChatGPT",
+      "AI",
+      "LLM"
+    ],
+    "url": "https://gpt.jerryz.com.cn",
+    "mine": true
   },
   {
     "id": "11",
     "title": "Lobe Chat",
     "description": "可以国内访问的ChatGPT，需要搭配OpenAI API Key使用，有丰富的提示词预设和插件",
     "icon": "./assets/lobe-chat.svg",
-    "tags": ["ChatGPT", "AI", "LLM"],
-    "url": "https://lobe.jerryz.com.cn"
+    "tags": [
+      "ChatGPT",
+      "AI",
+      "LLM"
+    ],
+    "url": "https://lobe.jerryz.com.cn",
+    "mine": true
   }
 ]

@@ -1,6 +1,6 @@
 <template>
   <div class="project-container" @click="goToProjectUrl" :title="project.url">
-    <div class="project-block">
+    <div class="project-block" :class="{ 'mine-border': project.mine }">
       <div class="project-header">
         <component
           :is="iconComponent"
@@ -57,12 +57,12 @@ export default {
 <style scoped>
 .project-container {
   margin: 10px;
-  cursor: pointer; /* 鼠标指向时变为手形 */
-  transition: transform 0.3s ease; /* 添加过渡效果 */
+  cursor: pointer;
+  transition: transform 0.3s ease;
 }
 
 .project-container:hover {
-  transform: scale(1.05); /* 鼠标指向时方框稍微放大 */
+  transform: scale(1.05);
 }
 
 .project-block {
@@ -71,8 +71,8 @@ export default {
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   width: 300px;
-  max-width: 100%; /* 添加最大宽度 */
-  margin: auto; /* 添加自动边距 */
+  max-width: 100%;
+  margin: auto;
 }
 
 .project-header {
@@ -83,7 +83,7 @@ export default {
 }
 
 .project-image {
-  width: 30px; /* 调整大小 */
+  width: 30px;
   height: auto;
   /* border-radius: 50%; */
 }
@@ -97,6 +97,12 @@ export default {
   color: #6c757d;
 }
 
+.mine-border {
+  border-radius: 10px;
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); */
+  border: 2px solid #C0E2FF;
+}
+
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -106,20 +112,20 @@ export default {
 .tags span {
   margin: 5px;
   padding: 5px 10px;
-  background-color: #3dacff;
+  background-color: #41A8FF;
   color: #fff;
   border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.3s ease; /* 添加过渡效果 */
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .tags span:hover {
-  background-color: #2a8fd8; /* 鼠标指向时背景颜色变深 */
-  transform: scale(1.1); /* 鼠标指向时标签稍微放大 */
+  background-color: #279CFF;
+  transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
   .project-block {
-    width: 90%; /* 在小屏幕上，设置宽度为90% */
+    max-width: 90%;
   }
 }
 </style>

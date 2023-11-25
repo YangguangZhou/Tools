@@ -3,6 +3,7 @@
     <div class="header">
       <h1>Tools & Projects</h1>
       <h2>Jerry Zhou的工具箱和个人项目</h2>
+      <p>边框为蓝色表示是Jerry Zhou自己搭建或部署的项目</p>
     </div>
     <div class="content">
       <input
@@ -22,6 +23,15 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="counter">
+    <span id="busuanzi_value_page_pv"><i class="el-icon-loading"></i></span> Views |
+    <span id="busuanzi_value_site_uv"><i class="el-icon-loading"></i></span> Viewers
+  </div>
+  <div class="copyright">
+    Copyright &copy; 2023 <a href="https://jerryz.com.cn" target="_blank">Jerry Zhou</a>
+    <br/>
+    <a href="https://github.com/YangguangZhou/Tools" target="_blank">GitHub</a>
   </div>
 </template>
 
@@ -76,13 +86,18 @@ export default {
 </script>
 
 <style>
+/* @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap');
+
+* {
+    font-family: "EB Garamond",  "Noto Serif SC" , "simsun", songti sc, microsoft yahei, serif;
+} */
+
 .app-container {
   font-family: "Segoe UI", Arial, sans-serif;
   color: #333;
   margin: 30px auto;
   max-width: 1200px;
   padding: 20px;
-  background-color: #fff;
 }
 
 .header {
@@ -91,12 +106,17 @@ export default {
 }
 
 .header h1 {
-  color: #279cff; /* 更亮的蓝色 */
+  color: #279cff;
   margin-bottom: 15px;
 }
 
 .header h2 {
-  color: #6c757d; /* 柔和的灰色 */
+  color: #6c757d;
+  font-weight: normal;
+}
+
+.header p {
+  color: #888;
   font-weight: normal;
 }
 
@@ -106,7 +126,7 @@ input {
   border-radius: 8px;
   width: 100%;
   box-sizing: border-box;
-  outline-color: #279cff; /* 焦点颜色 */
+  outline-color: #279cff;
 }
 
 .content {
@@ -128,7 +148,32 @@ input {
   text-align: center;
   width: 100%;
   margin-top: 15px;
-  color: #f17162; /* 更鲜艳的红色 */
+  color: #f17162;
+}
+
+.copyright {
+    text-align: center;
+    margin: 15px 0;
+    color: #999;
+    font-size: 14px;
+}
+
+.copyright a {
+    text-decoration: none;
+    font-weight: bold;
+    color: unset;
+    transition: opacity .2s;
+}
+
+.copyright a:hover {
+    opacity: .5;
+}
+
+.counter {
+    text-align: center;
+    margin-top: 10px;
+    color: #999;
+    font-size: 14px;
 }
 
 @media (max-width: 768px) {
