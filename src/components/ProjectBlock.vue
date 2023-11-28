@@ -193,7 +193,7 @@ export default {
 
 @media (max-width: 768px) {
   .project-block {
-    max-width: 90%;
+    max-width: 50%;
   }
   .preview-window {
     display: none;
