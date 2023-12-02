@@ -224,7 +224,7 @@ export default {
 }
 .preview-actions {
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 30px;
 }
 .preview-actions button {

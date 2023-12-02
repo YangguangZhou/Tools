@@ -194,5 +194,18 @@
     ],
     "url": "https://www.stableaudio.com/",
     "mine": false
+  },
+  {
+    "id": "16",
+    "title": "How To Cook",
+    "description": "程序员做饭指南",
+    "icon": "fas fa-kitchen-set",
+    "tags": [
+      "文档",
+      "生活",
+      "美食"
+    ],
+    "url": "https://cook.aiurs.co/",
+    "mine": false
   }
 ]

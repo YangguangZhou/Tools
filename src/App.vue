@@ -181,7 +181,6 @@ input {
 
 @media (max-width: 768px) {
   .projects {
-    flex-direction: column;
     align-items: center;
   }
 }
