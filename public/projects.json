@@ -55,7 +55,7 @@
   {
     "id": "5",
     "title": "Cards",
-    "description": "个人身份卡片",
+    "description": "可以显示社交信息、倒数日、访问统计的个人身份卡片",
     "icon": "fas fa-address-card",
     "tags": [
       "名片",

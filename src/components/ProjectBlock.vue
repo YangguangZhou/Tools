@@ -29,7 +29,7 @@
           {{ tag }}
         </span>
       </div>
-      <div class="views">访问量: {{ times }}</div>
+      <div class="views">访问量: {{ project.views }}</div>
     </div>
     <transition name="fade">
       <div
@@ -78,17 +78,11 @@ export default {
     },
   },
   methods: {
-    async fetchTimes() {
-      const url = "https://g3rvbpemgm.us.aircode.run/view";
-      const name = "tools-" + this.project.id;
-      const response = await axios.post(url, { name });
-      this.times = response.data.times;
-    },
     async incrementCounter() {
       const url = "https://g3rvbpemgm.us.aircode.run/counter";
-      const name = "toools-" + this.project.id;
+      const name = "tools-" + this.project.id;
       await axios.post(url, { name });
-      this.fetchTimes();
+      this.views++;
     },
     isFontAwesomeIcon(icon) {
       return icon.startsWith("fa");
@@ -98,10 +92,10 @@ export default {
       event.preventDefault();
       this.$emit("tag-clicked", tag);
     },
-    goToProjectUrl() {
-      this.incrementCounter();
+    async goToProjectUrl() {
       this.showPreview = false;
       clearTimeout(this.previewTimeout);
+      await this.incrementCounter();
       this.$nextTick(() => {
         window.location.href = this.project.url;
       });
@@ -122,7 +116,6 @@ export default {
       this.isMouseOver = true;
       this.previewTimeout = setTimeout(() => {
         if (this.isMouseOver) {
-          
           this.showPreview = true;
         }
       }, this.hoverDelay);
@@ -133,9 +126,9 @@ export default {
       this.showPreview = false;
     },
   },
-  mounted() {
-    this.fetchTimes();
-  },
+  // mounted() {
+  //   this.fetchTimes();
+  // },
 };
 </script>
 

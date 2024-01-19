@@ -42,8 +42,12 @@
     Viewers
   </div>
   <div class="copyright">
-    <p>鼠标在方框上停留可以预览项目网站</p> <p>点击标签可以查找相同标签的内容</p>
-    <a href="https://github.com/YangguangZhou/Tools/issues" target="_blank">申请收录</a>
+    <p>点击项目可以直接跳转到对应的网站</p>
+    <p>鼠标在方框上停留可以预览项目网站</p>
+    <p>点击标签可以查找相同标签的内容</p>
+    <a href="https://github.com/YangguangZhou/Tools/issues" target="_blank"
+      >申请收录</a
+    >
     |
     <a href="https://github.com/YangguangZhou/Tools" target="_blank">GitHub</a>
   </div>
@@ -57,19 +61,13 @@
 import axios from "axios";
 import ProjectBlock from "./components/ProjectBlock.vue";
 
-// 洗牌函数
 function shuffle(array) {
   let currentIndex = array.length,
     temporaryValue,
     randomIndex;
-
-  // 当还剩有元素未洗牌时
   while (0 !== currentIndex) {
-    // 选取一个剩余元素
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-
-    // 并与当前元素交换
     temporaryValue = array[currentIndex];
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = temporaryValue;
@@ -87,7 +85,7 @@ export default {
     return {
       searchText: "",
       projects: [],
-      sortMethod: "views", // 默认排序方式为推荐
+      sortMethod: "views",
       originalProjects: [],
       isLoading: true,
     };
@@ -98,7 +96,7 @@ export default {
       this.originalProjects = response.data;
       for (let project of this.originalProjects) {
         const url = "https://g3rvbpemgm.us.aircode.run/view";
-        const name = "links" + project.id;
+        const name = "tools-" + project.id;
         const res = await axios.post(url, { name });
         project.views = res.data.times;
       }
@@ -133,13 +131,13 @@ export default {
     },
     sortProjects() {
       if (this.sortMethod === "random") {
-        this.projects = shuffle([...this.originalProjects]); // 基于原始项目列表的副本进行洗牌
+        this.projects = shuffle([...this.originalProjects]);
       } else if (this.sortMethod === "views") {
-        this.projects = [...this.originalProjects]; // 还原为原始的推荐排序
-        this.projects.sort((a, b) => b.views - a.views); // 根据访问量进行排序
+        this.projects = [...this.originalProjects];
+        this.projects.sort((a, b) => b.views - a.views);
       } else {
-        this.projects = [...this.originalProjects]; // 还原为原始的推荐排序
-        this.projects.sort((a, b) => b.recommended - a.recommended); // 根据推荐程度进行排序
+        this.projects = [...this.originalProjects];
+        this.projects.sort((a, b) => b.recommended - a.recommended);
       }
     },
   },
