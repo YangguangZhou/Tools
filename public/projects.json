@@ -207,5 +207,18 @@
     ],
     "url": "https://cook.aiurs.co/",
     "mine": false
+  },
+  {
+    "id": "17",
+    "title": "疯狂星期X",
+    "description": "向朋友开口要钱神器",
+    "icon": "fas fa-money-bills",
+    "tags": [
+      "社交",
+      "实用",
+      "KFC"
+    ],
+    "url": "https://cal.jerryz.com.cn/crazy",
+    "mine": true
   }
 ]

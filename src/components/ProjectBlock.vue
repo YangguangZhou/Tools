@@ -3,8 +3,8 @@
     class="project-container"
     @click="goToProjectUrl"
     :title="project.url"
-    @mouseover="showPreview = true"
-    @mouseleave="showPreview = false"
+    @mouseover="handleMouseOver"
+    @mouseleave="handleMouseLeave"
   >
     <div class="project-block" :class="{ 'mine-border': project.mine }">
       <div class="project-header">
@@ -34,7 +34,7 @@
       <div
         class="preview-window"
         :style="{ width: previewWidth, height: previewHeight }"
-        v-show="showPreview"
+        v-if="showPreview"
       >
         <div class="preview-actions">
           <button @click.stop="openInNewTab">
@@ -56,6 +56,8 @@ export default {
     return {
       showPreview: false,
       previewTimeout: null,
+      hoverDelay: 500,
+      isMouseOver: false,
     };
   },
   computed: {
@@ -97,17 +99,18 @@ export default {
       clearTimeout(this.previewTimeout);
       navigator.clipboard.writeText(this.project.url);
     },
-    showPreviewWithDelay() {
+    handleMouseOver() {
+      this.isMouseOver = true;
       this.previewTimeout = setTimeout(() => {
-        this.showPreview = true;
-      }, 1000); // 1 second delay
+        if (this.isMouseOver) {
+          this.showPreview = true;
+        }
+      }, this.hoverDelay);
     },
-    hidePreviewAndStopLoading() {
-      this.showPreview = false;
+    handleMouseLeave() {
+      this.isMouseOver = false;
       clearTimeout(this.previewTimeout);
-      if (this.$refs.previewFrame) {
-        this.$refs.previewFrame.src = '';
-      }
+      this.showPreview = false;
     },
   },
   // mounted() {
@@ -141,6 +144,12 @@ export default {
   width: 300px;
   max-width: 100%;
   margin: auto;
+  transition: box-shadow 0.3s ease, transform 0.3s ease; /* 添加过渡效果 */
+}
+
+.project-block:hover,
+.project-block:focus {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 鼠标悬停或聚焦时增加阴影效果 */
 }
 
 .project-header {
@@ -183,12 +192,14 @@ export default {
   background-color: #41a8ff;
   color: #fff;
   border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* 添加过渡效果 */
 }
 
-.tags span:hover {
+.tags span:hover,
+.tags span:focus {
   background-color: #279cff;
   transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 鼠标悬停或聚焦时增加阴影效果 */
 }
 
 @media (max-width: 768px) {
