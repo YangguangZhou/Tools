@@ -275,5 +275,19 @@
     ],
     "url": "https://counter.jerryz.com.cn/",
     "mine": true
+  },
+  {
+    "id": "22",
+    "title": "V0.dev",
+    "description": "AI页面设计助手，可以从文字到页面或图片到页面",
+    "icon": "fas fa-6",
+    "tags": [
+      "网站",
+      "AI",
+      "React",
+      "HTML"
+    ],
+    "url": "https://v0.dev/",
+    "mine": false
   }
 ]
