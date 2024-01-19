@@ -80,13 +80,13 @@ export default {
   methods: {
     async fetchTimes() {
       const url = "https://g3rvbpemgm.us.aircode.run/view";
-      const name = "links" + this.project.id;
+      const name = "tools-" + this.project.id;
       const response = await axios.post(url, { name });
       this.times = response.data.times;
     },
     async incrementCounter() {
       const url = "https://g3rvbpemgm.us.aircode.run/counter";
-      const name = "links" + this.project.id;
+      const name = "toools-" + this.project.id;
       await axios.post(url, { name });
       this.fetchTimes();
     },
