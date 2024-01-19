@@ -2,32 +2,35 @@
   <div class="app-container">
     <div class="header">
       <h1>Tools & Projects</h1>
-      <h2>Jerry Zhou的工具箱和个人项目</h2>
+      <h2>一些有趣的工具和项目</h2>
       <p>边框为蓝色表示是Jerry Zhou自己搭建或部署的项目</p>
-      <p>鼠标在方框上停留可以预览项目网站</p>
     </div>
     <div class="content">
       <input type="text" placeholder="搜索项目" v-model="searchText" />
       <div class="sort-container">
-      <select
-        id="sort"
-        class="sort-select"
-        v-model="sortMethod"
-        @change="sortProjects"
-      >
-        <option value="recommended">推荐排序</option>
-        <option value="random">随机排序</option>
-      </select>
-    </div>
-      <div class="projects">
-        <ProjectBlock
-          v-for="project in filteredProjects"
-          :key="project.id"
-          :project="project"
-          @tag-clicked="tagClicked"
-        />
-        <div v-if="filteredProjects.length === 0" class="no-results">
-          未找到匹配的项目。
+        <select
+          id="sort"
+          class="sort-select"
+          v-model="sortMethod"
+          @change="sortProjects"
+        >
+          <option value="recommended">推荐排序</option>
+          <option value="random">随机排序</option>
+          <option value="views">按访问量排序</option>
+        </select>
+      </div>
+      <div v-if="isLoading" class="isLoading">加载中...</div>
+      <div v-else>
+        <div class="projects">
+          <ProjectBlock
+            v-for="project in filteredProjects"
+            :key="project.id"
+            :project="project"
+            @tag-clicked="tagClicked"
+          />
+          <div v-if="filteredProjects.length === 0" class="no-results">
+            未找到匹配的项目
+          </div>
         </div>
       </div>
     </div>
@@ -39,10 +42,14 @@
     Viewers
   </div>
   <div class="copyright">
+    <p>鼠标在方框上停留可以预览项目网站</p> <p>点击标签可以查找相同标签的内容</p>
+    <a href="https://github.com/YangguangZhou/Tools/issues" target="_blank">申请收录</a>
+    |
+    <a href="https://github.com/YangguangZhou/Tools" target="_blank">GitHub</a>
+  </div>
+  <div class="copyright">
     Copyright &copy; 2023
     <a href="https://jerryz.com.cn" target="_blank">Jerry Zhou</a>
-    <br />
-    <a href="https://github.com/YangguangZhou/Tools" target="_blank">GitHub</a>
   </div>
 </template>
 
@@ -80,20 +87,27 @@ export default {
     return {
       searchText: "",
       projects: [],
-      sortMethod: "recommended", // 默认排序方式为推荐
+      sortMethod: "views", // 默认排序方式为推荐
       originalProjects: [],
+      isLoading: true,
     };
   },
-  created() {
-    axios
-      .get("./projects.json")
-      .then((response) => {
-        this.originalProjects = response.data;
-        this.projects = [...this.originalProjects]; // 初始化项目列表为原始项目列表的副本
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  async created() {
+    try {
+      const response = await axios.get("./projects.json");
+      this.originalProjects = response.data;
+      for (let project of this.originalProjects) {
+        const url = "https://g3rvbpemgm.us.aircode.run/view";
+        const name = "links" + project.id;
+        const res = await axios.post(url, { name });
+        project.views = res.data.times;
+      }
+      this.projects = [...this.originalProjects];
+      this.sortProjects();
+      this.isLoading = false;
+    } catch (error) {
+      console.error(error);
+    }
   },
   computed: {
     filteredProjects() {
@@ -120,6 +134,9 @@ export default {
     sortProjects() {
       if (this.sortMethod === "random") {
         this.projects = shuffle([...this.originalProjects]); // 基于原始项目列表的副本进行洗牌
+      } else if (this.sortMethod === "views") {
+        this.projects = [...this.originalProjects]; // 还原为原始的推荐排序
+        this.projects.sort((a, b) => b.views - a.views); // 根据访问量进行排序
       } else {
         this.projects = [...this.originalProjects]; // 还原为原始的推荐排序
         this.projects.sort((a, b) => b.recommended - a.recommended); // 根据推荐程度进行排序
@@ -130,11 +147,12 @@ export default {
 </script>
 
 <style>
-/* @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap");
 
 * {
-    font-family: "EB Garamond",  "Noto Serif SC" , "simsun", songti sc, microsoft yahei, serif;
-} */
+  font-family: "EB Garamond", "Noto Serif SC", "simsun", songti sc,
+    microsoft yahei, serif;
+}
 
 .app-container {
   font-family: "Segoe UI", Arial, sans-serif;
@@ -188,6 +206,13 @@ input {
   margin-top: 15px;
 }
 
+.isLoading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px; /* 你可以根据需要调整这个值 */
+}
+
 .no-results {
   text-align: center;
   width: 100%;
@@ -197,7 +222,7 @@ input {
 
 .copyright {
   text-align: center;
-  margin: 15px 0;
+  margin: 7px 0;
   color: #999;
   font-size: 14px;
 }
@@ -223,7 +248,7 @@ input {
 .sort-container {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top: 20px;
   align-items: center;
 }
 
@@ -244,7 +269,7 @@ input {
 }
 
 .sort-select:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {

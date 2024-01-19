@@ -29,6 +29,7 @@
           {{ tag }}
         </span>
       </div>
+      <div class="views">访问量: {{ times }}</div>
     </div>
     <transition name="fade">
       <div
@@ -49,6 +50,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "ProjectBlock",
   props: ["project"],
@@ -58,6 +61,7 @@ export default {
       previewTimeout: null,
       hoverDelay: 500,
       isMouseOver: false,
+      times: 0,
     };
   },
   computed: {
@@ -74,6 +78,18 @@ export default {
     },
   },
   methods: {
+    async fetchTimes() {
+      const url = "https://g3rvbpemgm.us.aircode.run/view";
+      const name = "links" + this.project.id;
+      const response = await axios.post(url, { name });
+      this.times = response.data.times;
+    },
+    async incrementCounter() {
+      const url = "https://g3rvbpemgm.us.aircode.run/counter";
+      const name = "links" + this.project.id;
+      await axios.post(url, { name });
+      this.fetchTimes();
+    },
     isFontAwesomeIcon(icon) {
       return icon.startsWith("fa");
     },
@@ -83,6 +99,7 @@ export default {
       this.$emit("tag-clicked", tag);
     },
     goToProjectUrl() {
+      this.incrementCounter();
       this.showPreview = false;
       clearTimeout(this.previewTimeout);
       this.$nextTick(() => {
@@ -90,11 +107,13 @@ export default {
       });
     },
     openInNewTab(event) {
+      this.incrementCounter();
       event.stopPropagation();
       clearTimeout(this.previewTimeout);
       window.open(this.project.url, "_blank");
     },
     copyLink(event) {
+      this.incrementCounter();
       event.stopPropagation();
       clearTimeout(this.previewTimeout);
       navigator.clipboard.writeText(this.project.url);
@@ -103,6 +122,7 @@ export default {
       this.isMouseOver = true;
       this.previewTimeout = setTimeout(() => {
         if (this.isMouseOver) {
+          
           this.showPreview = true;
         }
       }, this.hoverDelay);
@@ -113,15 +133,9 @@ export default {
       this.showPreview = false;
     },
   },
-  // mounted() {
-  //   // 预加载页面
-  //   if (
-  //     this.$refs.previewFrame &&
-  //     !window.matchMedia("(max-width: 768px)").matches
-  //   ) {
-  //     this.$refs.previewFrame.src = this.project.url;
-  //   }
-  // },
+  mounted() {
+    this.fetchTimes();
+  },
 };
 </script>
 
@@ -192,7 +206,8 @@ export default {
   background-color: #41a8ff;
   color: #fff;
   border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* 添加过渡效果 */
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease; /* 添加过渡效果 */
 }
 
 .tags span:hover,
@@ -200,6 +215,12 @@ export default {
   background-color: #279cff;
   transform: scale(1.05);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 鼠标悬停或聚焦时增加阴影效果 */
+}
+
+.views {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #888;
 }
 
 @media (max-width: 768px) {

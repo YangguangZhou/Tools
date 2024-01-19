@@ -215,10 +215,65 @@
     "icon": "fas fa-money-bills",
     "tags": [
       "社交",
-      "实用",
+      "小工具",
       "KFC"
     ],
     "url": "https://cal.jerryz.com.cn/crazy",
+    "mine": true
+  },
+  {
+    "id": "18",
+    "title": "Favicon Finder",
+    "description": "在网站上查找图标",
+    "icon": "fas fa-icons",
+    "tags": [
+      "网站",
+      "图标",
+      "小工具"
+    ],
+    "url": "https://besticon-demo.herokuapp.com/",
+    "mine": false
+  },
+  {
+    "id": "19",
+    "title": "Tiny PNG",
+    "description": "智能WebP、PNG和JPEG压缩",
+    "icon": "fas fa-file-image",
+    "tags": [
+      "图片",
+      "压缩",
+      "小工具"
+    ],
+    "url": "https://tinypng.com/",
+    "mine": false
+  },
+  {
+    "id": "20",
+    "title": "原神点名器",
+    "description": "随机点名器，模仿原神抽卡的画面，电教必备",
+    "icon": "/assets/genshin.svg",
+    "tags": [
+      "原神",
+      "二次元",
+      "抽卡",
+      "随机",
+      "点名"
+    ],
+    "url": "https://genshin.jerryz.com.cn/",
+    "mine": true
+  },
+  {
+    "id": "21",
+    "title": "计数器",
+    "description": "可以插入Markdown文件或HTML网页的计数器",
+    "icon": "fas fa-6",
+    "tags": [
+      "网站",
+      "计数",
+      "Markdown",
+      "HTML"
+    ],
+    "url": "https://counter.jerryz.com.cn/",
     "mine": true
   }
 ]
