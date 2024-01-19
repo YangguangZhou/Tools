@@ -52,7 +52,7 @@
     <a href="https://github.com/YangguangZhou/Tools" target="_blank">GitHub</a>
   </div>
   <div class="copyright">
-    Copyright &copy; 2023
+    Copyright &copy; 2023-2024
     <a href="https://jerryz.com.cn" target="_blank">Jerry Zhou</a>
   </div>
 </template>
