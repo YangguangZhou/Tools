@@ -29,7 +29,7 @@
           {{ tag }}
         </span>
       </div>
-      <div class="views">访问量: {{ project.views }}</div>
+      <!-- <div class="views">访问量: {{ project.views }}</div> -->
     </div>
     <transition name="fade">
       <div
@@ -82,7 +82,7 @@ export default {
       const url = "https://g3rvbpemgm.us.aircode.run/counter";
       const name = "tools-" + this.project.id;
       await axios.post(url, { name });
-      this.views++;
+      // this.views++;
     },
     isFontAwesomeIcon(icon) {
       return icon.startsWith("fa");
