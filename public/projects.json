@@ -308,7 +308,7 @@
   {
     "id": "24",
     "title": "Hexo Theme Solitude",
-    "description": "https://github.com/valor-x/hexo-theme-solitude",
+    "description": "一款优雅的 Hexo 主题，支持懒加载、PWA、Latex以及多种评论系统",
     "icon": "fas fa-brush",
     "tags": [
       "Hexo",
