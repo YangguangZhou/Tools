@@ -304,5 +304,18 @@
     ],
     "url": "https://p.jerryz.com.cn/",
     "mine": true
+  },
+  {
+    "id": "24",
+    "title": "Hexo Theme Solitude",
+    "description": "https://github.com/valor-x/hexo-theme-solitude",
+    "icon": "fas fa-brush",
+    "tags": [
+      "Hexo",
+      "博客",
+      "主题"
+    ],
+    "url": "https://github.com/valor-x/hexo-theme-solitude",
+    "mine": false
   }
 ]
