@@ -85,7 +85,7 @@ export default {
     return {
       searchText: "",
       projects: [],
-      sortMethod: "recommended",
+      sortMethod: "random",
       originalProjects: [],
       isLoading: true,
     };
