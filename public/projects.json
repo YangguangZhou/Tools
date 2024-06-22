@@ -317,5 +317,57 @@
     ],
     "url": "https://github.com/valor-x/hexo-theme-solitude",
     "mine": false
+  },
+  {
+    "id": "25",
+    "title": "OpenAI Refresh Token to Access/Share Token",
+    "description": "通过 OpenAI Refresh Token 自动获取 Access/Share Token",
+    "icon": "./assets/chatgpt.svg",
+    "tags": [
+      "ChatGPT",
+      "AI",
+      "LLM"
+    ],
+    "url": "https://tokens.jerryz.com.cn",
+    "mine": true
+  },
+  {
+    "id": "26",
+    "title": "OpenAI Chat2API",
+    "description": "OpenAI Chat2API，支持多账号负载均衡和通过 Refresh Token 请求",
+    "icon": "./assets/chatgpt.svg",
+    "tags": [
+      "ChatGPT",
+      "AI",
+      "LLM",
+      "API"
+    ],
+    "url": "https://blog.jerryz.com.cn/article/chat2api/",
+    "mine": true
+  },
+  {
+    "id": "27",
+    "title": "CNChat",
+    "description": "ChatGPT 官网共享镜像站",
+    "icon": "./assets/chatgpt.svg",
+    "tags": [
+      "ChatGPT",
+      "AI",
+      "LLM"
+    ],
+    "url": "https://cn.jerryz.com.cn/",
+    "mine": true
+  },
+  {
+    "id": "28",
+    "title": "Some Stars",
+    "description": "Jerry Zhou 的 GitHub Stars 列表，每周自动更新",
+    "icon": "fas fa-star",
+    "tags": [
+      "GitHub",
+      "Stars"
+    ],
+    "url": "https://stars.jerryz.com.cn/",
+    "mine": true
   }
 ]
