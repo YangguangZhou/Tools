@@ -7,16 +7,30 @@
     </div>
     <div v-else>
       <h1>新增项目</h1>
-      <input type="text" placeholder="标题" v-model="newProject.title" />
-      <textarea placeholder="简介" v-model="newProject.description"></textarea>
-      <input type="text" placeholder="图标" v-model="newProject.icon" />
-      <input type="text" placeholder="URL" v-model="newProject.url" />
       <label>
-        自建项目
+        标题
+        <input type="text" placeholder="标题" v-model="newProject.title" />
+      </label>
+      <label>
+        简介
+        <textarea placeholder="简介" v-model="newProject.description"></textarea>
+      </label>
+      <label>
+        图标
+        <input type="text" placeholder="图标" v-model="newProject.icon" />
+      </label>
+      <label>
+        URL
+        <input type="text" placeholder="URL" v-model="newProject.url" />
+      </label>
+      <div class="mine-section">
+        <label>
+          自建项目
+        </label>
         <button @click="toggleMine" :class="{'active': newProject.mine}">
           {{ newProject.mine ? '是' : '否' }}
         </button>
-      </label>
+      </div>
       <div class="tags">
         <span v-for="(tag, index) in newProject.tags" :key="index" class="tag">
           {{ tag }}
@@ -118,15 +132,22 @@ export default {
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
 
 input, textarea {
   width: 100%;
   padding: 0.5rem;
-  margin: 0.5rem 0;
+  margin: 0.5rem 0 1rem 0;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
 }
 
 .tags {
@@ -152,6 +173,13 @@ input, textarea {
   font-size: 1rem;
   line-height: 1;
   color: #ff5e57;
+  border-radius: 50%;
+  padding: 0.2rem;
+  transition: background-color 0.3s ease;
+}
+
+.tag-remove:hover {
+  background-color: #ff5e574d;
 }
 
 button {
@@ -162,6 +190,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   margin-top: 1rem;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
@@ -172,10 +201,14 @@ button.active {
   background-color: #28a745;
 }
 
-label {
+.mine-section {
   display: flex;
   align-items: center;
-  margin-top: 1rem;
   gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.mine-section label {
+  margin-top: 0;
 }
 </style>
