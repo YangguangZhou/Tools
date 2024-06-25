@@ -59,7 +59,7 @@
   
   <script>
   import axios from "axios";
-  import ProjectBlock from "./components/ProjectBlock.vue";
+  import ProjectBlock from "../components/ProjectBlock.vue"; // 更新路径
   
   function shuffle(array) {
     let currentIndex = array.length,
@@ -77,7 +77,7 @@
   }
   
   export default {
-    name: "App",
+    name: "Home",
     components: {
       ProjectBlock,
     },
@@ -147,6 +147,7 @@
   </script>
   
   <style>
+  /* 保留现有样式 */
   @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap");
   
   * {
@@ -278,3 +279,4 @@
     }
   }
   </style>
+  
