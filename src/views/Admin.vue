@@ -40,7 +40,7 @@
         <div class="tags">
           <span v-for="(tag, index) in newProject.tags" :key="index" class="tag">
             {{ tag }}
-            <i class="fas fa-times tag-remove" @click="handleRemoveTag(index)"></i>
+            <i class="fas fa-xmark tag-remove" @click="handleRemoveTag(index)"></i>
           </span>
         </div>
       </div>
