@@ -228,6 +228,7 @@ textarea {
   resize: vertical;
   font-family: inherit;
   line-height: 1.5;
+  box-sizing: border-box; /* Ensures the padding and border are included in the element's total width and height */
 }
 
 .tags {
@@ -245,6 +246,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   font-size: 0.9rem;
+  line-height: 1.1rem; /* Ensures vertical alignment */
   transition: background-color 0.3s ease;
 }
 
