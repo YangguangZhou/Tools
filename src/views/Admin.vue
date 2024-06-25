@@ -47,6 +47,7 @@
       <button @click="handleSubmit" :disabled="isSubmitting">
         {{ isSubmitting ? '提交中...' : '新增项目' }}
       </button>
+      <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>
   </div>
 </template>
@@ -69,7 +70,8 @@ export default {
         mine: false
       },
       newTag: '',
-      isSubmitting: false
+      isSubmitting: false,
+      errorMessage: ''
     };
   },
   async created() {
@@ -120,22 +122,31 @@ export default {
       const updatedProjects = [...this.projects, updatedProject];
       const githubToken = process.env.VUE_APP_GITHUB_TOKEN;
 
+      if (!githubToken) {
+        this.errorMessage = 'GitHub token is not set';
+        console.error('GitHub token is not set');
+        this.isSubmitting = false;
+        return;
+      }
+
       try {
         const currentFileContent = await this.getCurrentFileContent();
+        console.log('Current file content fetched:', currentFileContent);
+        
         const response = await axios.put(
           'https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json',
           {
             message: 'Add new project',
-            content: btoa(JSON.stringify(updatedProjects, null, 2)),
+            content: btoa(unescape(encodeURIComponent(JSON.stringify(updatedProjects, null, 2)))),
             sha: currentFileContent.sha
           },
           {
             headers: {
-              Authorization: `Bearer $${githubToken}`
+              Authorization: `Bearer ${githubToken}`
             }
           }
         );
-        
+
         if (response.status === 200) {
           alert('项目添加成功');
           this.resetForm();
@@ -144,7 +155,7 @@ export default {
         }
       } catch (error) {
         console.error('Failed to add project:', error);
-        alert('添加项目失败，请重试');
+        this.errorMessage = `添加项目失败，请重试: ${error.message}`;
       } finally {
         this.isSubmitting = false;
       }
@@ -156,13 +167,14 @@ export default {
           'https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json',
           {
             headers: {
-              Authorization: `Bearer $${githubToken}`
+              Authorization: `Bearer ${githubToken}`
             }
           }
         );
         return response.data;
       } catch (error) {
         console.error('Failed to get current file content:', error);
+        this.errorMessage = `获取当前文件内容失败: ${error.message}`;
         throw error;
       }
     },
@@ -176,6 +188,7 @@ export default {
         mine: false
       };
       this.newTag = '';
+      this.errorMessage = '';
     }
   }
 };
@@ -310,6 +323,12 @@ button:disabled {
 
 input[type="text"] {
   margin-bottom: 0.5rem;
+}
+
+.error-message {
+  color: red;
+  margin-top: 1rem;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
