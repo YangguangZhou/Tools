@@ -372,15 +372,14 @@
   },
   {
     "id": "29",
-    "title": "FileDiff",
-    "description": "在线文本差异比对和字数统计",
-    "icon": "fas fa-file-pen",
+    "title": "ITDOG",
+    "description": "网站在线测速/Ping",
+    "icon": "fas fa-gauge-high",
     "tags": [
-      "HTML",
-      "小工具",
-      "文本"
+      "Ping",
+      "测速"
     ],
-    "url": "https://diff.jerryz.com.cn",
-    "mine": true
+    "url": "https://www.itdog.cn/",
+    "mine": false
   }
 ]
