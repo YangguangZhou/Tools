@@ -115,11 +115,10 @@ export default {
     },
     async handleSubmit() {
       if (this.isSubmitting) return;
-      
+
       this.isSubmitting = true;
       const newId = (parseInt(this.projects[this.projects.length - 1].id) + 1).toString();
       const updatedProject = { id: newId, ...this.newProject };
-      const updatedProjects = [...this.projects, updatedProject];
       const githubToken = process.env.VUE_APP_GITHUB_TOKEN;
 
       if (!githubToken) {
@@ -130,9 +129,11 @@ export default {
       }
 
       try {
+        // Re-fetch the current file content and its SHA before submitting
         const currentFileContent = await this.getCurrentFileContent();
         console.log('Current file content fetched:', currentFileContent);
-        
+
+        const updatedProjects = [...this.projects, updatedProject];
         const response = await axios.put(
           'https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json',
           {
@@ -150,6 +151,8 @@ export default {
         if (response.status === 200) {
           alert('项目添加成功');
           this.resetForm();
+          // Update the local projects array with the new project
+          this.projects = updatedProjects;
         } else {
           throw new Error('Unexpected response status');
         }
