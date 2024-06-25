@@ -372,13 +372,13 @@
   },
   {
     "id": "29",
-    "title": "Free Credit Card Checker",
-    "description": "信用卡验活测试器",
+    "title": "Namsogen",
+    "description": "随机测试信用卡号码生成器",
     "icon": "fas fa-credit-card",
     "tags": [
       "C卡"
     ],
-    "url": "https://checker.top/",
+    "url": "https://namso-gen.com/",
     "mine": false
   }
 ]
