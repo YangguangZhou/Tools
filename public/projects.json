@@ -294,7 +294,7 @@
     "id": "23",
     "title": "万能付款码",
     "description": "支持微信、支付宝、QQ的万能付款码，可以在线制作",
-    "icon": "fas fa-credit-card",
+    "icon": "fas fa-qrcode",
     "tags": [
       "付款",
       "微信",
