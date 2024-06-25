@@ -372,14 +372,13 @@
   },
   {
     "id": "29",
-    "title": "ITDOG",
-    "description": "网站在线测速/Ping",
-    "icon": "fas fa-gauge-high",
+    "title": "Free Credit Card Checker",
+    "description": "信用卡验活测试器",
+    "icon": "fas fa-credit-card",
     "tags": [
-      "Ping",
-      "测速"
+      "C卡"
     ],
-    "url": "https://www.itdog.cn/",
+    "url": "https://checker.top/",
     "mine": false
   }
 ]
