@@ -1,6 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../App.vue';
-import Admin from '../Admin.vue'; // 确保导入Admin组件
+import { createRouter, createWebHistory } from 'vue-router'
+import Home from '../views/Home.vue'
+import Admin from '../views/Admin.vue'
 
 const routes = [
   {
@@ -13,10 +13,11 @@ const routes = [
     name: 'Admin',
     component: Admin
   }
-];
+]
 
 const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes
-});
+})
 
-export default router;
+export default router
