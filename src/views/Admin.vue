@@ -2,34 +2,22 @@
   <div class="container">
     <div v-if="!auth">
       <h1>请输入密码</h1>
-      <input type="password" v-model="password" />
+      <input type="password" v-model="password" placeholder="输入密码"/>
       <button @click="handleAuth">提交</button>
     </div>
     <div v-else>
       <h1>新增项目</h1>
-      <label>
-        标题
-        <input type="text" placeholder="标题" v-model="newProject.title" />
-      </label>
-      <label>
-        简介
-        <textarea placeholder="简介" v-model="newProject.description"></textarea>
-      </label>
-      <label>
-        图标
-        <input type="text" placeholder="图标" v-model="newProject.icon" />
-      </label>
-      <label>
-        URL
-        <input type="text" placeholder="URL" v-model="newProject.url" />
-      </label>
-      <div class="mine-section">
+      <input type="text" placeholder="标题" v-model="newProject.title" />
+      <textarea placeholder="简介" v-model="newProject.description"></textarea>
+      <input type="text" placeholder="图标URL" v-model="newProject.icon" />
+      <input type="text" placeholder="项目URL" v-model="newProject.url" />
+      <div class="toggle-row">
         <label>
           自建项目
+          <button @click="toggleMine" :class="{'active': newProject.mine}">
+            {{ newProject.mine ? '是' : '否' }}
+          </button>
         </label>
-        <button @click="toggleMine" :class="{'active': newProject.mine}">
-          {{ newProject.mine ? '是' : '否' }}
-        </button>
       </div>
       <div class="tags">
         <span v-for="(tag, index) in newProject.tags" :key="index" class="tag">
@@ -132,22 +120,22 @@ export default {
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
 }
 
 input, textarea {
   width: 100%;
-  padding: 0.5rem;
-  margin: 0.5rem 0 1rem 0;
+  padding: 0.8rem;
+  margin-top: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-label {
-  display: block;
+.toggle-row {
   margin-top: 1rem;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .tags {
@@ -174,16 +162,20 @@ label {
   line-height: 1;
   color: #ff5e57;
   border-radius: 50%;
-  padding: 0.2rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: background-color 0.3s ease;
 }
 
 .tag-remove:hover {
-  background-color: #ff5e574d;
+  background-color: #ffcdd2;
 }
 
 button {
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1.5rem;
   background-color: #0070f3;
   color: white;
   border: none;
@@ -201,14 +193,18 @@ button.active {
   background-color: #28a745;
 }
 
-.mine-section {
+button.active:hover {
+  background-color: #218838;
+}
+
+label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-top: 1rem;
 }
 
-.mine-section label {
-  margin-top: 0;
+input[type="text"]::placeholder,
+textarea::placeholder {
+  color: #999;
 }
 </style>
