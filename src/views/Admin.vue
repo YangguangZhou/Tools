@@ -3,7 +3,7 @@
     <div v-if="!auth" class="auth-form">
       <h1>请输入密码</h1>
       <input type="password" v-model="password" @keyup.enter="handleAuth" />
-      <button @click="handleAuth">提交</button>
+      <button @click="handleAuth">登录</button>
     </div>
     <div v-else class="project-form">
       <h1>新增项目</h1>
@@ -52,7 +52,133 @@
 </template>
 
 <script>
-// Script 部分保持不变
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      auth: false,
+      password: '',
+      projects: [],
+      newProject: {
+        title: '',
+        description: '',
+        icon: '',
+        tags: [],
+        url: '',
+        mine: false
+      },
+      newTag: '',
+      isSubmitting: false
+    };
+  },
+  async created() {
+    this.checkAuth();
+    try {
+      const res = await axios.get(
+        'https://cdn.jsdelivr.net/gh/YangguangZhou/Tools@main/public/projects.json'
+      );
+      this.projects = res.data;
+    } catch (error) {
+      console.error('Failed to fetch projects:', error);
+      alert('获取项目列表失败，请刷新页面重试');
+    }
+  },
+  methods: {
+    checkAuth() {
+      const authStatus = localStorage.getItem('authStatus');
+      if (authStatus === 'true') {
+        this.auth = true;
+      }
+    },
+    handleAuth() {
+      if (this.password === process.env.VUE_APP_PASSWD) {
+        this.auth = true;
+        localStorage.setItem('authStatus', 'true');
+      } else {
+        alert('密码错误');
+      }
+    },
+    handleAddTag() {
+      if (this.newTag && !this.newProject.tags.includes(this.newTag)) {
+        this.newProject.tags.push(this.newTag);
+        this.newTag = '';
+      }
+    },
+    handleRemoveTag(index) {
+      this.newProject.tags.splice(index, 1);
+    },
+    toggleMine() {
+      this.newProject.mine = !this.newProject.mine;
+    },
+    async handleSubmit() {
+      if (this.isSubmitting) return;
+      
+      this.isSubmitting = true;
+      const newId = (parseInt(this.projects[this.projects.length - 1].id) + 1).toString();
+      const updatedProject = { ...this.newProject, id: newId };
+      const updatedProjects = [...this.projects, updatedProject];
+      const githubToken = process.env.VUE_APP_GITHUB_TOKEN;
+
+      try {
+        const currentFileContent = await this.getCurrentFileContent();
+        const response = await axios.put(
+          'https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json',
+          {
+            message: 'Add new project',
+            content: btoa(JSON.stringify(updatedProjects, null, 2)),
+            sha: currentFileContent.sha
+          },
+          {
+            headers: {
+              Authorization: `Bearer $${githubToken}`
+            }
+          }
+        );
+        
+        if (response.status === 200) {
+          alert('项目添加成功');
+          this.resetForm();
+        } else {
+          throw new Error('Unexpected response status');
+        }
+      } catch (error) {
+        console.error('Failed to add project:', error);
+        alert('添加项目失败，请重试');
+      } finally {
+        this.isSubmitting = false;
+      }
+    },
+    async getCurrentFileContent() {
+      const githubToken = process.env.VUE_APP_GITHUB_TOKEN;
+      try {
+        const response = await axios.get(
+          'https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json',
+          {
+            headers: {
+              Authorization: `Bearer $${githubToken}`
+            }
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.error('Failed to get current file content:', error);
+        throw error;
+      }
+    },
+    resetForm() {
+      this.newProject = {
+        title: '',
+        description: '',
+        icon: '',
+        tags: [],
+        url: '',
+        mine: false
+      };
+      this.newTag = '';
+    }
+  }
+};
 </script>
 
 <style scoped>
