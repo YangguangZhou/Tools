@@ -1,49 +1,52 @@
 <template>
   <div class="container">
-    <div v-if="!auth">
+    <div v-if="!auth" class="auth-form">
       <h1>请输入密码</h1>
-      <input type="password" v-model="password" />
+      <input type="password" v-model="password" @keyup.enter="handleAuth" />
       <button @click="handleAuth">提交</button>
     </div>
-    <div v-else>
+    <div v-else class="project-form">
       <h1>新增项目</h1>
-      <label>
-        标题
-        <input type="text" placeholder="标题" v-model="newProject.title" />
-      </label>
-      <label>
-        简介
-        <textarea placeholder="简介" v-model="newProject.description"></textarea>
-      </label>
-      <label>
-        图标
-        <input type="text" placeholder="图标" v-model="newProject.icon" />
-      </label>
-      <label>
-        URL
-        <input type="text" placeholder="URL" v-model="newProject.url" />
-      </label>
-      <div class="mine-section">
-        <label>
-          自建项目
-        </label>
-        <button @click="toggleMine" :class="{'active': newProject.mine}">
+      <div class="form-group">
+        <label for="title">标题</label>
+        <input id="title" type="text" placeholder="标题" v-model="newProject.title" />
+      </div>
+      <div class="form-group">
+        <label for="description">简介</label>
+        <textarea id="description" placeholder="简介" v-model="newProject.description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="icon">图标</label>
+        <input id="icon" type="text" placeholder="图标" v-model="newProject.icon" />
+      </div>
+      <div class="form-group">
+        <label for="url">URL</label>
+        <input id="url" type="text" placeholder="URL" v-model="newProject.url" />
+      </div>
+      <div class="form-group mine-section">
+        <label for="mine">自建项目</label>
+        <button id="mine" @click="toggleMine" :class="{'active': newProject.mine}">
           {{ newProject.mine ? '是' : '否' }}
         </button>
       </div>
-      <div class="tags">
-        <span v-for="(tag, index) in newProject.tags" :key="index" class="tag">
-          {{ tag }}
-          <span class="tag-remove" @click="handleRemoveTag(index)">✖</span>
-        </span>
-        <input
-          type="text"
-          placeholder="添加标签"
-          v-model="newTag"
-          @keydown.enter.prevent="handleAddTag"
-        />
+      <div class="form-group">
+        <label>标签</label>
+        <div class="tags">
+          <span v-for="(tag, index) in newProject.tags" :key="index" class="tag">
+            {{ tag }}
+            <span class="tag-remove" @click="handleRemoveTag(index)">✖</span>
+          </span>
+          <input
+            type="text"
+            placeholder="添加标签"
+            v-model="newTag"
+            @keydown.enter.prevent="handleAddTag"
+          />
+        </div>
       </div>
-      <button @click="handleSubmit">新增项目</button>
+      <button @click="handleSubmit" :disabled="isSubmitting">
+        {{ isSubmitting ? '提交中...' : '新增项目' }}
+      </button>
     </div>
   </div>
 </template>
@@ -65,14 +68,20 @@ export default {
         url: '',
         mine: false
       },
-      newTag: ''
+      newTag: '',
+      isSubmitting: false
     };
   },
   async created() {
-    const res = await axios.get(
-      'https://cdn.jsdelivr.net/gh/YangguangZhou/Tools@main/public/projects.json'
-    );
-    this.projects = res.data;
+    try {
+      const res = await axios.get(
+        'https://cdn.jsdelivr.net/gh/YangguangZhou/Tools@main/public/projects.json'
+      );
+      this.projects = res.data;
+    } catch (error) {
+      console.error('Failed to fetch projects:', error);
+      alert('获取项目列表失败，请刷新页面重试');
+    }
   },
   methods: {
     handleAuth() {
@@ -83,7 +92,7 @@ export default {
       }
     },
     handleAddTag() {
-      if (this.newTag) {
+      if (this.newTag && !this.newProject.tags.includes(this.newTag)) {
         this.newProject.tags.push(this.newTag);
         this.newTag = '';
       }
@@ -95,74 +104,137 @@ export default {
       this.newProject.mine = !this.newProject.mine;
     },
     async handleSubmit() {
-      const newId = parseInt(this.projects[this.projects.length - 1].id) + 1;
-      const updatedProject = { ...this.newProject, id: newId.toString() };
+      if (this.isSubmitting) return;
+      
+      this.isSubmitting = true;
+      const newId = (parseInt(this.projects[this.projects.length - 1].id) + 1).toString();
+      const updatedProject = { ...this.newProject, id: newId };
       const updatedProjects = [...this.projects, updatedProject];
       const githubToken = process.env.VUE_APP_GITHUB_TOKEN;
 
       try {
-        await axios.put(
+        const currentFileContent = await this.getCurrentFileContent();
+        const response = await axios.put(
           'https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json',
           {
             message: 'Add new project',
             content: btoa(JSON.stringify(updatedProjects, null, 2)),
-            sha: 'your_sha_value' // Replace with the SHA value of the file
+            sha: currentFileContent.sha
           },
           {
             headers: {
-              Authorization: `Bearer ${githubToken}`
+              Authorization: `Bearer $${githubToken}`
             }
           }
         );
-        alert('项目添加成功');
+        
+        if (response.status === 200) {
+          alert('项目添加成功');
+          this.resetForm();
+        } else {
+          throw new Error('Unexpected response status');
+        }
       } catch (error) {
-        console.error(error);
-        alert('添加项目失败');
+        console.error('Failed to add project:', error);
+        alert('添加项目失败，请重试');
+      } finally {
+        this.isSubmitting = false;
       }
+    },
+    async getCurrentFileContent() {
+      const githubToken = process.env.VUE_APP_GITHUB_TOKEN;
+      try {
+        const response = await axios.get(
+          'https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json',
+          {
+            headers: {
+              Authorization: `Bearer $${githubToken}`
+            }
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.error('Failed to get current file content:', error);
+        throw error;
+      }
+    },
+    resetForm() {
+      this.newProject = {
+        title: '',
+        description: '',
+        icon: '',
+        tags: [],
+        url: '',
+        mine: false
+      };
+      this.newTag = '';
     }
   }
 };
 </script>
 
-<style>
+<style scoped>
 .container {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 2rem auto;
   padding: 2rem;
-  border: 1px solid #ccc;
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 }
 
-input, textarea {
-  width: 100%;
-  padding: 0.5rem;
-  margin: 0.5rem 0 1rem 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+h1 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
 }
 
 label {
   display: block;
-  margin-top: 1rem;
+  margin-bottom: 0.5rem;
   font-weight: bold;
+  color: #555;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #0070f3;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .tag {
   background-color: #e0f7fa;
-  padding: 0.3rem 0.5rem;
-  border-radius: 12px;
+  color: #00838f;
+  padding: 0.4rem 0.8rem;
+  border-radius: 16px;
   display: flex;
   align-items: center;
+  font-size: 0.9rem;
 }
 
 .tag-remove {
@@ -171,44 +243,58 @@ label {
   margin-left: 0.5rem;
   cursor: pointer;
   font-size: 1rem;
-  line-height: 1;
   color: #ff5e57;
-  border-radius: 50%;
-  padding: 0.2rem;
-  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 .tag-remove:hover {
-  background-color: #ff5e574d;
+  color: #ff3b30;
 }
 
 button {
-  padding: 0.5rem 1rem;
+  width: 100%;
+  padding: 0.75rem;
   background-color: #0070f3;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-top: 1rem;
+  font-size: 1rem;
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   background-color: #005bb5;
 }
 
-button.active {
-  background-color: #28a745;
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .mine-section {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
+  gap: 1rem;
 }
 
-.mine-section label {
-  margin-top: 0;
+.mine-section button {
+  width: auto;
+  padding: 0.5rem 1rem;
+}
+
+.mine-section button.active {
+  background-color: #28a745;
+}
+
+.auth-form input {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
 }
 </style>
