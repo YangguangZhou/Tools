@@ -118,7 +118,7 @@ export default {
       
       this.isSubmitting = true;
       const newId = (parseInt(this.projects[this.projects.length - 1].id) + 1).toString();
-      const updatedProject = { ...this.newProject, id: newId };
+      const updatedProject = { id: newId, ...this.newProject };
       const updatedProjects = [...this.projects, updatedProject];
       const githubToken = process.env.VUE_APP_GITHUB_TOKEN;
 
