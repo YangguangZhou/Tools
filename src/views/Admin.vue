@@ -64,7 +64,7 @@
     },
     methods: {
       handleAuth() {
-        if (this.password === process.env.PASSWD) {
+        if (this.password === process.env.VUE_APP_PASSWD) {
           this.auth = true;
         } else {
           alert('Incorrect password');
@@ -83,7 +83,7 @@
         const newId = parseInt(this.projects[this.projects.length - 1].id) + 1;
         const updatedProject = { ...this.newProject, id: newId.toString() };
         const updatedProjects = [...this.projects, updatedProject];
-        const githubToken = process.env.GITHUB_TOKEN;
+        const githubToken = process.env.VUE_APP_GITHUB_TOKEN;
   
         try {
           await axios.put(
