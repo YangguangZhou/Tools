@@ -47,10 +47,12 @@
           </span>
         </div>
       </div>
-      <button @click="handleSubmit" :disabled="isSubmitting">
-        {{ isSubmitting ? '提交中...' : '新增项目' }}
-      </button>
-      <button @click="goHome" class="go-home-button">回到主页</button>
+      <div class="button-container">
+        <button @click="handleSubmit" :disabled="isSubmitting">
+          {{ isSubmitting ? '提交中...' : '新增项目' }}
+        </button>
+        <button @click="goHome" class="go-home-button">回到主页</button>
+      </div>
       <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>
   </div>
@@ -137,7 +139,6 @@ export default {
       }
 
       try {
-        // Re-fetch the current file content and its SHA before submitting
         const currentFileContent = await this.getCurrentFileContent();
         console.log('Current file content fetched:', currentFileContent);
 
@@ -151,7 +152,7 @@ export default {
           },
           {
             headers: {
-              Authorization: `Bearer ${githubToken}`
+              Authorization: `Bearer $${githubToken}`
             }
           }
         );
@@ -159,14 +160,13 @@ export default {
         if (response.status === 200) {
           alert('项目添加成功');
           this.resetForm();
-          // Update the local projects array with the new project
           this.projects = updatedProjects;
         } else {
           throw new Error('Unexpected response status');
         }
       } catch (error) {
         console.error('Failed to add project:', error);
-        this.errorMessage = `添加项目失败，请重试: ${error.message}`;
+        this.errorMessage = `添加项目失败，请重试: $${error.message}`;
       } finally {
         this.isSubmitting = false;
       }
@@ -178,14 +178,14 @@ export default {
           'https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json',
           {
             headers: {
-              Authorization: `Bearer ${githubToken}`
+              Authorization: `Bearer $${githubToken}`
             }
           }
         );
         return response.data;
       } catch (error) {
         console.error('Failed to get current file content:', error);
-        this.errorMessage = `获取当前文件内容失败: ${error.message}`;
+        this.errorMessage = `获取当前文件内容失败: $${error.message}`;
         throw error;
       }
     },
@@ -231,6 +231,7 @@ body {
 
 .container {
   width: 90%;
+  max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
   border: 1px solid var(--border-color);
@@ -287,4 +288,147 @@ textarea {
 
 .tags {
   display: flex;
-  flex-wrap:
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  background-color: #e1f5fe;
+  color: #0288d1;
+  padding: 0.4rem 0.8rem;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9rem;
+  line-height: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+.tag:hover {
+  background-color: #b3e5fc;
+}
+
+.tag-remove {
+  background: none;
+  border: none;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #0288d1;
+  transition: color 0.3s ease;
+}
+
+.tag-remove:hover {
+  color: #01579b;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+}
+
+button:hover:not(:disabled) {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(39, 156, 255, 0.3);
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.mine-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mine-section button {
+  width: auto;
+  padding: 0.5rem 1rem;
+}
+
+.mine-section button.active {
+  background-color: #4CAF50;
+}
+
+.auth-form input {
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  color: #ff4d4d;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--primary-color);
+  transition: opacity 0.2s;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+.copyright {
+  text-align: center;
+  margin: 2rem 0 1rem 0;
+  color: #999;
+  font-size: 14px;
+}
+
+.copyright a {
+  text-decoration: none;
+  font-weight: bold;
+  color: var(--primary-color);
+  transition: opacity 0.2s;
+}
+
+.copyright a:hover {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 680px) {
+  .container {
+    width: 95%;
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .button-container button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (min-width: 680px) {
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button-container button {
+    width: 350px;
+    margin-bottom: 10px;
+  }
+}
+</style>
