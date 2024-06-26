@@ -389,5 +389,17 @@
     "tags": [],
     "url": "https://checker.top",
     "mine": false
+  },
+  {
+    "id": "31",
+    "title": "ITDOG",
+    "description": "网站在线测速/Ping",
+    "icon": "fas fa-gauge-high",
+    "tags": [
+      "测速",
+      "Ping"
+    ],
+    "url": "https://www.itdog.cn/",
+    "mine": false
   }
 ]
