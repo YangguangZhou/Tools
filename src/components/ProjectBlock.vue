@@ -79,9 +79,9 @@ export default {
   },
   methods: {
     async incrementCounter() {
-      const url = "https://g3rvbpemgm.us.aircode.run/counter";
-      const name = "tools-" + this.project.id;
-      await axios.post(url, { name });
+      // const url = "https://g3rvbpemgm.us.aircode.run/counter";
+      // const name = "tools-" + this.project.id;
+     // await axios.post(url, { name });
       // this.views++;
     },
     isFontAwesomeIcon(icon) {
@@ -95,7 +95,7 @@ export default {
     async goToProjectUrl() {
       this.showPreview = false;
       clearTimeout(this.previewTimeout);
-      await this.incrementCounter();
+      //await this.incrementCounter();
       this.$nextTick(() => {
         window.location.href = this.project.url;
       });
