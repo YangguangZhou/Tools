@@ -401,5 +401,18 @@
     ],
     "url": "https://www.itdog.cn/",
     "mine": false
+  },
+  {
+    "id": "32",
+    "title": "FileDiff",
+    "description": "在线文本差异比对和字数统计",
+    "icon": "fas fa-file-pen",
+    "tags": [
+      "HTML",
+      "小工具",
+      "文本"
+    ],
+    "url": "https://diff.jerryz.com.cn",
+    "mine": true
   }
 ]
