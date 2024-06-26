@@ -1,282 +1,381 @@
 <template>
-    <div class="app-container">
-      <div class="header">
-        <h1>Tools & Projects</h1>
-        <h2>一些有趣的工具和项目</h2>
-        <p>边框为蓝色表示是Jerry Zhou自己搭建或部署的项目</p>
-      </div>
-      <div class="content">
-        <input type="text" placeholder="搜索项目" v-model="searchText" />
-        <div class="sort-container">
-          <select
-            id="sort"
-            class="sort-select"
-            v-model="sortMethod"
-            @change="sortProjects"
-          >
-            <option value="recommended">推荐排序</option>
-            <option value="random">随机排序</option>
-            <!-- <option value="views">按访问量排序</option> -->
-          </select>
-        </div>
-        <div v-if="isLoading" class="isLoading">加载中...</div>
-        <div v-else>
-          <div class="projects">
-            <ProjectBlock
-              v-for="project in filteredProjects"
-              :key="project.id"
-              :project="project"
-              @tag-clicked="tagClicked"
-            />
-            <div v-if="filteredProjects.length === 0" class="no-results">
-              未找到匹配的项目
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="container">
+    <div v-if="!auth" class="auth-form">
+      <h1>请输入密码</h1>
+      <input type="password" v-model="password" @keyup.enter="handleAuth" />
+      <button @click="handleAuth">登录</button>
     </div>
-    <div class="counter">
-      <span id="busuanzi_value_page_pv"><i class="el-icon-loading"></i></span>
-      Views |
-      <span id="busuanzi_value_site_uv"><i class="el-icon-loading"></i></span>
-      Viewers
-    </div>
-    <div class="copyright">
-      <p>点击项目可以直接跳转到对应的网站</p>
-      <p>鼠标在方框上停留可以预览项目网站</p>
-      <p>点击标签可以查找相同标签的内容</p>
-      <a href="https://github.com/YangguangZhou/Tools/issues" target="_blank"
-        >申请收录</a
-      >
-      |
-      <a href="https://github.com/YangguangZhou/Tools" target="_blank">GitHub</a>
+    <div v-else class="project-form">
+      <h1>新增项目</h1>
+      <div class="form-group">
+        <label for="title">标题</label>
+        <input id="title" type="text" placeholder="标题" v-model="newProject.title" />
+      </div>
+      <div class="form-group">
+        <label for="description">简介</label>
+        <textarea id="description" placeholder="简介" v-model="newProject.description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="icon">
+          图标
+          <a href="https://fontawesome.com/search" target="_blank">Font Awesome</a>
+        </label>
+        <input id="icon" type="text" placeholder="图标" v-model="newProject.icon" />
+      </div>
+      <div class="form-group">
+        <label for="url">URL</label>
+        <input id="url" type="text" placeholder="URL" v-model="newProject.url" />
+      </div>
+      <div class="form-group mine-section">
+        <label for="mine">自建项目</label>
+        <button id="mine" @click="toggleMine" :class="{'active': newProject.mine}">
+          {{ newProject.mine ? '是' : '否' }}
+        </button>
+      </div>
+      <div class="form-group">
+        <label>标签</label>
+        <input
+          type="text"
+          placeholder="添加标签"
+          v-model="newTag"
+          @keydown.enter.prevent="handleAddTag"
+        />
+        <div class="tags">
+          <span v-for="(tag, index) in newProject.tags" :key="index" class="tag">
+            {{ tag }}
+            <i class="fas fa-xmark tag-remove" @click="handleRemoveTag(index)"></i>
+          </span>
+        </div>
+      </div>
+      <button @click="handleSubmit" :disabled="isSubmitting">
+        {{ isSubmitting ? '提交中...' : '新增项目' }}
+      </button>
+      <button class="home-button" @click="goHome">回到主页</button>
+      <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>
     <div class="copyright">
       Copyright &copy; 2023-2024
       <a href="https://jerryz.com.cn" target="_blank">Jerry Zhou</a>
     </div>
-  </template>
-  
-  <script>
-  import axios from "axios";
-  import ProjectBlock from "../components/ProjectBlock.vue"; // 更新路径
-  
-  function shuffle(array) {
-    let currentIndex = array.length,
-      temporaryValue,
-      randomIndex;
-    while (0 !== currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+  data() {
+    return {
+      auth: false,
+      password: '',
+      projects: [],
+      newProject: {
+        title: '',
+        description: '',
+        icon: '',
+        tags: [],
+        url: '',
+        mine: false
+      },
+      newTag: '',
+      isSubmitting: false,
+      errorMessage: ''
+    };
+  },
+  async created() {
+    this.checkAuth();
+    try {
+      const res = await axios.get(
+        'https://cdn.jsdelivr.net/gh/YangguangZhou/Tools@main/public/projects.json'
+      );
+      this.projects = res.data;
+    } catch (error) {
+      console.error('Failed to fetch projects:', error);
+      alert('获取项目列表失败，请刷新页面重试');
     }
-  
-    return array;
-  }
-  
-  export default {
-    name: "Home",
-    components: {
-      ProjectBlock,
-    },
-    data() {
-      return {
-        searchText: "",
-        projects: [],
-        sortMethod: "random",
-        originalProjects: [],
-        isLoading: true,
-      };
-    },
-    async created() {
-      try {
-        const response = await axios.get("./projects.json");
-        this.originalProjects = response.data;
-        // for (let project of this.originalProjects) {
-        //   const url = "https://g3rvbpemgm.us.aircode.run/view";
-        //   const name = "tools-" + project.id;
-        //   const res = await axios.post(url, { name });
-        //   project.views = res.data.times;
-        // }
-        this.projects = [...this.originalProjects];
-        this.sortProjects();
-        this.isLoading = false;
-      } catch (error) {
-        console.error(error);
+  },
+  methods: {
+    checkAuth() {
+      const authStatus = localStorage.getItem('authStatus');
+      if (authStatus === 'true') {
+        this.auth = true;
       }
     },
-    computed: {
-      filteredProjects() {
-        const lowerSearchText = this.searchText.toLowerCase();
-        return this.projects.filter((project) => {
-          const titleMatch = project.title
-            .toLowerCase()
-            .includes(lowerSearchText);
-          const descriptionMatch = project.description
-            .toLowerCase()
-            .includes(lowerSearchText);
-          const urlMatch = project.url.toLowerCase().includes(lowerSearchText);
-          const tagsMatch = project.tags.some((tag) =>
-            tag.toLowerCase().includes(lowerSearchText)
-          );
-          return titleMatch || descriptionMatch || tagsMatch || urlMatch;
-        });
-      },
+    handleAuth() {
+      if (this.password === process.env.VUE_APP_PASSWD) {
+        this.auth = true;
+        localStorage.setItem('authStatus', 'true');
+      } else {
+        alert('密码错误');
+      }
     },
-    methods: {
-      tagClicked(tag) {
-        this.searchText = tag;
-      },
-      sortProjects() {
-        if (this.sortMethod === "random") {
-          this.projects = shuffle([...this.originalProjects]);
-        } 
-          // else if (this.sortMethod === "views") {
-          // this.projects = [...this.originalProjects];
-          // this.projects.sort((a, b) => b.views - a.views);
-        // } 
-        else {
-          this.projects = [...this.originalProjects];
-          this.projects.sort((a, b) => b.recommended - a.recommended);
+    handleAddTag() {
+      if (this.newTag && !this.newProject.tags.includes(this.newTag)) {
+        this.newProject.tags.push(this.newTag);
+        this.newTag = '';
+      }
+    },
+    handleRemoveTag(index) {
+      this.newProject.tags.splice(index, 1);
+    },
+    toggleMine() {
+      this.newProject.mine = !this.newProject.mine;
+    },
+    async handleSubmit() {
+      if (this.isSubmitting) return;
+
+      this.isSubmitting = true;
+      const newId = (parseInt(this.projects[this.projects.length - 1].id) + 1).toString();
+      const updatedProject = { id: newId, ...this.newProject };
+      const githubToken = process.env.VUE_APP_GITHUB_TOKEN;
+
+      if (!githubToken) {
+        this.errorMessage = 'GitHub token is not set';
+        console.error('GitHub token is not set');
+        this.isSubmitting = false;
+        return;
+      }
+
+      try {
+        // Re-fetch the current file content and its SHA before submitting
+        const currentFileContent = await this.getCurrentFileContent();
+        console.log('Current file content fetched:', currentFileContent);
+
+        const updatedProjects = [...this.projects, updatedProject];
+        const response = await axios.put(
+          'https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json',
+          {
+            message: 'Add new project',
+            content: btoa(unescape(encodeURIComponent(JSON.stringify(updatedProjects, null, 2)))),
+            sha: currentFileContent.sha
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${githubToken}`
+            }
+          }
+        );
+
+        if (response.status === 200) {
+          alert('项目添加成功');
+          this.resetForm();
+          // Update the local projects array with the new project
+          this.projects = updatedProjects;
+        } else {
+          throw new Error('Unexpected response status');
         }
-      },
+      } catch (error) {
+        console.error('Failed to add project:', error);
+        this.errorMessage = `添加项目失败，请重试: ${error.message}`;
+      } finally {
+        this.isSubmitting = false;
+      }
     },
-  };
-  </script>
-  
-  <style>
-  /* 保留现有样式 */
-  @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap");
-  
-  * {
-    font-family: "EB Garamond", "Noto Serif SC", "simsun", songti sc,
-      microsoft yahei, serif;
-  }
-  
-  .app-container {
-    font-family: "Segoe UI", Arial, sans-serif;
-    color: #333;
-    margin: 30px auto;
-    max-width: 1200px;
-    padding: 20px;
-  }
-  
-  .header {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .header h1 {
-    color: #279cff;
-    margin-bottom: 15px;
-  }
-  
-  .header h2 {
-    color: #6c757d;
-    font-weight: normal;
-  }
-  
-  .header p {
-    color: #888;
-    font-weight: normal;
-  }
-  
-  input {
-    padding: 12px;
-    border: 1px solid #ced4da;
-    border-radius: 8px;
-    width: 100%;
-    box-sizing: border-box;
-    outline-color: #279cff;
-  }
-  
-  .content {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-  }
-  
-  .projects {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
-  }
-  
-  .isLoading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px; /* 你可以根据需要调整这个值 */
-  }
-  
-  .no-results {
-    text-align: center;
-    width: 100%;
-    margin-top: 15px;
-    color: #f17162;
-  }
-  
-  .copyright {
-    text-align: center;
-    margin: 7px 0;
-    color: #999;
-    font-size: 14px;
-  }
-  
-  .copyright a {
-    text-decoration: none;
-    font-weight: bold;
-    color: unset;
-    transition: opacity 0.2s;
-  }
-  
-  .copyright a:hover {
-    opacity: 0.5;
-  }
-  
-  .counter {
-    text-align: center;
-    margin-top: 10px;
-    color: #999;
-    font-size: 14px;
-  }
-  
-  .sort-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-    align-items: center;
-  }
-  
-  .sort-select {
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    background-color: #f2f2f2;
-    color: #333;
-    font-size: 16px;
-    outline: none;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
-  }
-  
-  .sort-select:focus {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .sort-select:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  @media (max-width: 768px) {
-    .projects {
-      align-items: center;
+    async getCurrentFileContent() {
+      const githubToken = process.env.VUE_APP_GITHUB_TOKEN;
+      try {
+        const response = await axios.get(
+          'https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json',
+          {
+            headers: {
+              Authorization: `Bearer ${githubToken}`
+            }
+          }
+        );
+        return response.data;
+      } catch (error) {
+        console.error('Failed to get current file content:', error);
+        this.errorMessage = `获取当前文件内容失败: ${error.message}`;
+        throw error;
+      }
+    },
+    resetForm() {
+      this.newProject = {
+        title: '',
+        description: '',
+        icon: '',
+        tags: [],
+        url: '',
+        mine: false
+      };
+      this.newTag = '';
+      this.errorMessage = '';
+    },
+    goHome() {
+      window.location.href = '/';
     }
   }
-  </style>
-  
+};
+</script>
+
+<style scoped>
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #279cff;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.5;
+  box-sizing: border-box; /* Ensures the padding and border are included in the element's total width and height */
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  background-color: #e1f5fe;
+  color: #0288d1;
+  padding: 0.4rem 0.8rem;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.9rem;
+  line-height: 1.1rem; /* Ensures vertical alignment */
+  transition: background-color 0.3s ease;
+}
+
+.tag:hover {
+  background-color: #b3e5fc;
+}
+
+.tag-remove {
+  background: none;
+  border: none;
+  margin-left: 0.5rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #0288d1;
+  transition: color 0.3s ease;
+}
+
+.tag-remove:hover {
+  color: #01579b;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #279cff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+button:hover:not(:disabled) {
+  background-color: #2180d8;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.home-button {
+  margin-top: 1rem;
+  background-color: #4CAF50;
+}
+
+.home-button:hover:not(:disabled) {
+  background-color: #45A049;
+}
+
+.mine-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.mine-section button {
+  width: auto;
+  padding: 0.5rem 1rem;
+}
+
+.mine-section button.active {
+  background-color: #4CAF50;
+}
+
+.auth-form input {
+  margin-bottom: 1rem;
+}
+
+input[type="text"] {
+  margin-bottom: 0.5rem;
+}
+
+.error-message {
+  color: red;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.copyright {
+  text-align: center;
+  margin: 7px 0;
+  color: #999;
+  font-size: 14px;
+}
+
+.copyright a {
+  text-decoration: none;
+  font-weight: bold;
+  color: unset;
+  transition: opacity 0.2s;
+}
+
+.copyright a:hover {
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+</style>
