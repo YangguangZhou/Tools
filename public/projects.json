@@ -15,12 +15,12 @@
     "id": "2",
     "title": "博客",
     "description": "Jerry Zhou的个人博客，记录有趣的信息学、IT和个人内容",
-    "icon": "fas fa-newspaper",
+    "icon": "fas fa-blog",
     "tags": [
       "博客",
-      "RSS",
       "Hexo",
-      "Butterfly"
+      "RSS",
+      "Anzhiyu"
     ],
     "url": "https://blog.jerryz.com.cn",
     "mine": true
@@ -55,7 +55,7 @@
   {
     "id": "5",
     "title": "Cards",
-    "description": "可以显示社交信息、倒数日、访问统计的个人身份卡片",
+    "description": "显示社交信息、倒数日、访问统计的个人身份卡片",
     "icon": "fas fa-address-card",
     "tags": [
       "名片",
@@ -75,7 +75,7 @@
       "友链",
       "HTML"
     ],
-    "url": "https://links.jerryz.com.cn",
+    "url": "https://links.jerryz.com.cn/",
     "mine": true
   },
   {
@@ -109,7 +109,7 @@
     "id": "9",
     "title": "RandomName",
     "description": "随机点名器，电教必备",
-    "icon": "fas fa-dice",
+    "icon": "fas fa-random",
     "tags": [
       "随机",
       "点名",
@@ -121,8 +121,8 @@
   {
     "id": "10",
     "title": "ChatGPT Next Web",
-    "description": "可以国内访问的ChatGPT，需要搭配OpenAI API Key使用",
-    "icon": "./assets/chatgpt.svg",
+    "description": "国内可访问的ChatGPT，需OpenAI API Key",
+    "icon": "fas fa-comments",
     "tags": [
       "ChatGPT",
       "AI",
@@ -134,8 +134,8 @@
   {
     "id": "11",
     "title": "Lobe Chat",
-    "description": "可以国内访问的ChatGPT，需要搭配OpenAI API Key使用，有丰富的提示词预设和插件",
-    "icon": "./assets/chatgpt.svg",
+    "description": "国内可访问的ChatGPT，有提示词预设和插件",
+    "icon": "fas fa-comment-dots",
     "tags": [
       "ChatGPT",
       "AI",
@@ -187,7 +187,7 @@
     "id": "15",
     "title": "Stable Audio",
     "description": "用AI创造音乐",
-    "icon": "fas fa-file-audio",
+    "icon": "fas fa-music",
     "tags": [
       "音乐",
       "AI"
@@ -199,7 +199,7 @@
     "id": "16",
     "title": "How To Cook",
     "description": "程序员做饭指南",
-    "icon": "fas fa-kitchen-set",
+    "icon": "fas fa-utensils",
     "tags": [
       "文档",
       "生活",
@@ -212,7 +212,7 @@
     "id": "17",
     "title": "疯狂星期X",
     "description": "向朋友开口要钱神器",
-    "icon": "fas fa-money-bills",
+    "icon": "fas fa-dollar-sign",
     "tags": [
       "社交",
       "小工具",
@@ -224,8 +224,8 @@
   {
     "id": "18",
     "title": "Favicon Finder",
-    "description": "在网站上查找图标",
-    "icon": "fas fa-icons",
+    "description": "获取并下载网站Favicon",
+    "icon": "fas fa-search",
     "tags": [
       "网站",
       "图标",
@@ -238,7 +238,7 @@
     "id": "19",
     "title": "Tiny PNG",
     "description": "智能WebP、PNG和JPEG压缩",
-    "icon": "fas fa-file-image",
+    "icon": "fas fa-compress",
     "tags": [
       "图片",
       "压缩",
@@ -251,7 +251,7 @@
     "id": "20",
     "title": "原神点名器",
     "description": "随机点名器，模仿原神抽卡的画面，电教必备",
-    "icon": "/assets/genshin.svg",
+    "icon": "./assets/genshin.svg",
     "tags": [
       "原神",
       "二次元",
@@ -266,7 +266,7 @@
     "id": "21",
     "title": "计数器",
     "description": "可以插入Markdown文件或HTML网页的计数器",
-    "icon": "fas fa-6",
+    "icon": "fas fa-hashtag",
     "tags": [
       "网站",
       "计数",
@@ -279,13 +279,12 @@
   {
     "id": "22",
     "title": "v0.dev",
-    "description": "AI页面设计助手，可以从文字到页面或图片到页面",
-    "icon": "/assets/v0.svg",
+    "description": "AI页面设计助手，从文字或图片生成页面",
+    "icon": "./assets/v0.svg",
     "tags": [
       "网站",
       "AI",
-      "React",
-      "HTML"
+      "设计"
     ],
     "url": "https://v0.dev/",
     "mine": false
@@ -293,7 +292,7 @@
   {
     "id": "23",
     "title": "万能付款码",
-    "description": "支持微信、支付宝、QQ的万能付款码，可以在线制作",
+    "description": "支持微信、支付宝、QQ的万能付款码",
     "icon": "fas fa-qrcode",
     "tags": [
       "付款",
@@ -308,8 +307,8 @@
   {
     "id": "24",
     "title": "Hexo Theme Solitude",
-    "description": "一款优雅的 Hexo 主题，支持懒加载、PWA、Latex以及多种评论系统",
-    "icon": "fas fa-brush",
+    "description": "优雅的 Hexo 主题，支持懒加载、PWA、Latex和多种评论系统",
+    "icon": "fas fa-paint-roller",
     "tags": [
       "Hexo",
       "博客",
@@ -322,7 +321,7 @@
     "id": "25",
     "title": "OpenAI Refresh Token to Access/Share Token",
     "description": "通过 OpenAI Refresh Token 自动获取 Access/Share Token",
-    "icon": "./assets/chatgpt.svg",
+    "icon": "fas fa-key",
     "tags": [
       "ChatGPT",
       "AI",
@@ -335,7 +334,7 @@
     "id": "26",
     "title": "OpenAI Chat2API",
     "description": "OpenAI Chat2API，支持多账号负载均衡和通过 Refresh Token 请求",
-    "icon": "./assets/chatgpt.svg",
+    "icon": "fas fa-network-wired",
     "tags": [
       "ChatGPT",
       "AI",
@@ -376,13 +375,51 @@
     "description": "随机测试信用卡号码生成器",
     "icon": "fas fa-credit-card",
     "tags": [
-      "C卡"
+      "C卡",
+      "测试"
     ],
     "url": "https://namso-gen.com/",
     "mine": false
   },
   {
     "id": "30",
+    "title": "Free Credit Card Checker",
+    "description": "信用卡验活测试器",
+    "icon": "fas fa-check",
+    "tags": [
+      "C卡",
+      "测试"
+    ],
+    "url": "https://checker.top",
+    "mine": false
+  },
+  {
+    "id": "31",
+    "title": "ITDOG",
+    "description": "网站在线测速/Ping",
+    "icon": "fas fa-tachometer-alt",
+    "tags": [
+      "测速",
+      "Ping"
+    ],
+    "url": "https://www.itdog.cn/",
+    "mine": false
+  },
+  {
+    "id": "32",
+    "title": "FileDiff",
+    "description": "在线文本差异比对和字数统计",
+    "icon": "fas fa-file-alt",
+    "tags": [
+      "HTML",
+      "小工具",
+      "文本"
+    ],
+    "url": "https://diff.jerryz.com.cn",
+    "mine": true
+  },
+  {
+    "id": "33",
     "title": "Umami",
     "description": "快速高效的网站分析，谷歌分析的开源替代",
     "icon": "fas fa-bowl-rice",
