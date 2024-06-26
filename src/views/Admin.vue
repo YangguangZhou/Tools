@@ -16,7 +16,10 @@
         <textarea id="description" placeholder="简介" v-model="newProject.description"></textarea>
       </div>
       <div class="form-group">
-        <label for="icon">图标</label>
+        <label for="icon">
+          图标
+          <a href="https://fontawesome.com/search" target="_blank">Font Awesome</a>
+        </label>
         <input id="icon" type="text" placeholder="图标" v-model="newProject.icon" />
       </div>
       <div class="form-group">
@@ -47,7 +50,12 @@
       <button @click="handleSubmit" :disabled="isSubmitting">
         {{ isSubmitting ? '提交中...' : '新增项目' }}
       </button>
+      <button class="home-button" @click="goHome">回到主页</button>
       <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </div>
+    <div class="copyright">
+      Copyright &copy; 2023-2024
+      <a href="https://jerryz.com.cn" target="_blank">Jerry Zhou</a>
     </div>
   </div>
 </template>
@@ -192,6 +200,9 @@ export default {
       };
       this.newTag = '';
       this.errorMessage = '';
+    },
+    goHome() {
+      window.location.href = '/';
     }
   }
 };
@@ -236,7 +247,7 @@ input, textarea {
 
 input:focus, textarea:focus {
   outline: none;
-  border-color: #0070f3;
+  border-color: #279cff;
 }
 
 textarea {
@@ -287,7 +298,7 @@ textarea {
 button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #0070f3;
+  background-color: #279cff;
   color: white;
   border: none;
   border-radius: 4px;
@@ -297,12 +308,21 @@ button {
 }
 
 button:hover:not(:disabled) {
-  background-color: #005bb5;
+  background-color: #2180d8;
 }
 
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.home-button {
+  margin-top: 1rem;
+  background-color: #4CAF50;
+}
+
+.home-button:hover:not(:disabled) {
+  background-color: #45A049;
 }
 
 .mine-section {
@@ -317,7 +337,7 @@ button:disabled {
 }
 
 .mine-section button.active {
-  background-color: #28a745;
+  background-color: #4CAF50;
 }
 
 .auth-form input {
@@ -332,6 +352,24 @@ input[type="text"] {
   color: red;
   margin-top: 1rem;
   text-align: center;
+}
+
+.copyright {
+  text-align: center;
+  margin: 7px 0;
+  color: #999;
+  font-size: 14px;
+}
+
+.copyright a {
+  text-decoration: none;
+  font-weight: bold;
+  color: unset;
+  transition: opacity 0.2s;
+}
+
+.copyright a:hover {
+  opacity: 0.5;
 }
 
 @media (max-width: 768px) {
