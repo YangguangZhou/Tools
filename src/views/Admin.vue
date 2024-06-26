@@ -50,7 +50,7 @@
       <button @click="handleSubmit" :disabled="isSubmitting">
         {{ isSubmitting ? '提交中...' : '新增项目' }}
       </button>
-      <button class="home-button" @click="goHome">回到主页</button>
+      <button @click="goHome">回到主页</button>
       <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>
     <div class="copyright">
@@ -314,15 +314,6 @@ button:hover:not(:disabled) {
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
-}
-
-.home-button {
-  margin-top: 1rem;
-  background-color: #4CAF50;
-}
-
-.home-button:hover:not(:disabled) {
-  background-color: #45A049;
 }
 
 .mine-section {
