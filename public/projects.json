@@ -380,5 +380,14 @@
     ],
     "url": "https://namso-gen.com/",
     "mine": false
+  },
+  {
+    "id": "30",
+    "title": "Free Credit Card Checker",
+    "description": "信用卡验活测试器",
+    "icon": "fas fa-credit-card",
+    "tags": [],
+    "url": "https://checker.top",
+    "mine": false
   }
 ]
