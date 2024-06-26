@@ -209,6 +209,11 @@ export default {
 </script>
 
 <style scoped>
+  @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap");
+  
+  * {
+    font-family: "EB Garamond", "Noto Serif SC", "simsun", songti sc, microsoft yahei, serif;
+  }
 :root {
   --primary-color: #279cff;
   --secondary-color: #2180d8;
@@ -218,7 +223,7 @@ export default {
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "EB Garamond", "Noto Serif SC", "simsun", songti sc, microsoft yahei, serif;
   background-color: var(--background-color);
   margin: 0;
   padding: 0;
