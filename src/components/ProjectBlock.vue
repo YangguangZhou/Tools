@@ -23,13 +23,12 @@
         <span
           v-for="tag in project.tags"
           :key="tag"
-          @click="tagClicked($event, tag)"
+          @click="tagClicked($$event, tag)"
           :title="tag"
         >
           {{ tag }}
         </span>
       </div>
-      <!-- <div class="views">访问量: {{ project.views }}</div> -->
     </div>
     <transition name="fade">
       <div
@@ -82,15 +81,14 @@ export default {
       const url = "https://g3rvbpemgm.us.aircode.run/counter";
       const name = "tools-" + this.project.id;
       await axios.post(url, { name });
-      // this.views++;
     },
     isFontAwesomeIcon(icon) {
       return icon.startsWith("fa");
     },
     tagClicked(event, tag) {
-      event.stopPropagation(); // 阻止事件冒泡
+      event.stopPropagation();
       event.preventDefault();
-      this.$emit("tag-clicked", tag);
+      this.$$emit("tag-clicked", tag);
     },
     async goToProjectUrl() {
       this.showPreview = false;
@@ -126,13 +124,18 @@ export default {
       this.showPreview = false;
     },
   },
-  // mounted() {
-  //   this.fetchTimes();
-  // },
 };
 </script>
 
 <style scoped>
+:root {
+  --primary-color: #279cff;
+  --secondary-color: #2180d8;
+  --background-color: #f5f5f5;
+  --text-color: #333;
+  --border-color: #e0e0e0;
+}
+
 .project-container {
   margin: 10px;
   cursor: pointer;
@@ -145,80 +148,78 @@ export default {
 
 .project-block {
   background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   width: 300px;
   max-width: 100%;
   margin: auto;
-  transition: box-shadow 0.3s ease, transform 0.3s ease; /* 添加过渡效果 */
+  transition: all 0.3s ease;
 }
 
 .project-block:hover,
 .project-block:focus {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 鼠标悬停或聚焦时增加阴影效果 */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
 .project-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 15px;
+  gap: 15px;
+  margin-bottom: 1rem;
 }
 
 .project-image {
-  width: 30px;
+  width: 40px;
   height: auto;
-  /* border-radius: 50%; */
 }
 
 .project-block h3 {
-  color: #279cff;
+  color: var(--primary-color);
   margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .project-block p {
-  color: #6c757d;
+  color: var(--text-color);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
 }
 
 .mine-border {
-  border-radius: 10px;
-  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); */
-  border: 2px solid #c0e2ff;
+  border: 2px solid var(--primary-color);
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
 }
 
 .tags span {
-  margin: 5px;
-  padding: 5px 10px;
-  background-color: #41a8ff;
-  color: #fff;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, transform 0.3s ease,
-    box-shadow 0.3s ease; /* 添加过渡效果 */
+  padding: 0.5rem 1rem;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 .tags span:hover,
 .tags span:focus {
-  background-color: #279cff;
-  transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* 鼠标悬停或聚焦时增加阴影效果 */
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(39, 156, 255, 0.3);
 }
 
-.views {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #888;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 680px) {
   .project-block {
-    max-width: 75%;
+    width: 95%;
+    padding: 1rem;
   }
   .preview-window {
     display: none;
@@ -233,34 +234,51 @@ export default {
 .fade-leave-to {
   opacity: 0;
 }
+
 .preview-window {
   position: absolute;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  background: #fff;
-  padding: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-  transition: width 0.3s ease, height 0.3s ease;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: white;
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
+
 .preview-window iframe {
   width: 100%;
   height: 100%;
-  border-radius: 10px;
+  border-radius: 8px;
 }
+
 .preview-actions {
   position: absolute;
-  top: 15px;
-  right: 30px;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
 }
+
 .preview-actions button {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
   border: none;
-  border-radius: 5px;
-  margin-left: 5px;
-  padding: 5px;
+  border-radius: 8px;
+  padding: 0.5rem;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
+
+.preview-actions button:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(39, 156, 255, 0.3);
+}
+
 .preview-actions button i {
-  color: #666;
+  color: var(--text-color);
+}
+
+.preview-actions button:hover i {
+  color: white;
 }
 </style>
