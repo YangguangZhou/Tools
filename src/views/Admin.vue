@@ -355,7 +355,7 @@ input[type="text"] {
 a {
   text-decoration: none;
   font-weight: bold;
-  color: unset;
+  color: #999;
   transition: opacity 0.2s;
 }
 
