@@ -47,12 +47,10 @@
           </span>
         </div>
       </div>
-      <div class="button-container">
-        <button @click="handleSubmit" :disabled="isSubmitting">
-          {{ isSubmitting ? '提交中...' : '新增项目' }}
-        </button>
-        <button @click="goHome" class="go-home-button">回到主页</button>
-      </div>
+      <button @click="handleSubmit" :disabled="isSubmitting">
+        {{ isSubmitting ? '提交中...' : '新增项目' }}
+      </button>
+      <button @click="goHome" class="go-home-button">回到主页</button>
       <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>
   </div>
@@ -139,6 +137,7 @@ export default {
       }
 
       try {
+        // Re-fetch the current file content and its SHA before submitting
         const currentFileContent = await this.getCurrentFileContent();
         console.log('Current file content fetched:', currentFileContent);
 
@@ -152,7 +151,7 @@ export default {
           },
           {
             headers: {
-              Authorization: `Bearer $${githubToken}`
+              Authorization: `Bearer ${githubToken}`
             }
           }
         );
@@ -160,13 +159,14 @@ export default {
         if (response.status === 200) {
           alert('项目添加成功');
           this.resetForm();
+          // Update the local projects array with the new project
           this.projects = updatedProjects;
         } else {
           throw new Error('Unexpected response status');
         }
       } catch (error) {
         console.error('Failed to add project:', error);
-        this.errorMessage = `添加项目失败，请重试: $${error.message}`;
+        this.errorMessage = `添加项目失败，请重试: ${error.message}`;
       } finally {
         this.isSubmitting = false;
       }
@@ -178,14 +178,14 @@ export default {
           'https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json',
           {
             headers: {
-              Authorization: `Bearer $${githubToken}`
+              Authorization: `Bearer ${githubToken}`
             }
           }
         );
         return response.data;
       } catch (error) {
         console.error('Failed to get current file content:', error);
-        this.errorMessage = `获取当前文件内容失败: $${error.message}`;
+        this.errorMessage = `获取当前文件内容失败: ${error.message}`;
         throw error;
       }
     },
@@ -209,49 +209,20 @@ export default {
 </script>
 
 <style scoped>
-  @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap");
-  
-  * {
-    font-family: "EB Garamond", "Noto Serif SC", "simsun", songti sc, microsoft yahei, serif;
-  }
-:root {
-  --primary-color: #279cff;
-  --secondary-color: #2180d8;
-  --background-color: #f5f5f5;
-  --text-color: #333;
-  --border-color: #e0e0e0;
-}
-
-body {
-  font-family: "EB Garamond", "Noto Serif SC", "simsun", songti sc, microsoft yahei, serif;
-  background-color: var(--background-color);
-  margin: 0;
-  padding: 0;
-  color: var(--text-color);
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
 .container {
-  width: 90%;
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  box-sizing: border-box;
 }
 
 h1 {
-  color: var(--primary-color);
-  margin-bottom: 2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
   text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
 }
 
 .form-group {
@@ -261,27 +232,24 @@ h1 {
 label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: var(--text-color);
+  font-weight: bold;
+  color: #555;
 }
 
 input,
 textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 2px solid var(--border-color);
-  border-radius: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
   font-size: 1rem;
-  transition: all 0.3s ease;
-  box-sizing: border-box;
-  background-color: #fff;
+  transition: border-color 0.3s ease;
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(39, 156, 255, 0.2);
+  border-color: #279cff;
 }
 
 textarea {
@@ -289,6 +257,7 @@ textarea {
   resize: vertical;
   font-family: inherit;
   line-height: 1.5;
+  box-sizing: border-box; /* Ensures the padding and border are included in the element's total width and height */
 }
 
 .tags {
@@ -306,7 +275,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   font-size: 0.9rem;
-  line-height: 1.1rem;
+  line-height: 1.1rem; /* Ensures vertical alignment */
   transition: background-color 0.3s ease;
 }
 
@@ -331,26 +300,27 @@ textarea {
 button {
   width: 100%;
   padding: 0.75rem;
-  background-color: var(--primary-color);
+  background-color: #279cff;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: pointer;
   font-size: 1rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  margin-bottom: 0.5rem;
+  transition: background-color 0.3s ease;
+  margin-bottom: 0.5rem; /* Added to separate buttons */
 }
 
 button:hover:not(:disabled) {
-  background-color: var(--secondary-color);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(39, 156, 255, 0.3);
+  background-color: #2180d8;
 }
 
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.go-home-button {
+  margin-top: 0; /* Remove extra margin from the go-home button */
 }
 
 .mine-section {
@@ -372,24 +342,35 @@ button:disabled {
   margin-bottom: 1rem;
 }
 
+input[type="text"] {
+  margin-bottom: 0.5rem;
+}
+
 .error-message {
-  color: #ff4d4d;
+  color: red;
   margin-top: 1rem;
   text-align: center;
-  font-weight: 600;
 }
 
 a {
   text-decoration: none;
   font-weight: bold;
-  color: var(--primary-color);
+  color: #999;
   transition: opacity 0.2s;
 }
 
 a:hover {
-  opacity: 0.7;
+  opacity: 0.5;
 }
 
+@media (max-width: 768px) {
+  .container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Added styles for copyright section */
 .copyright {
   text-align: center;
   margin: 2rem 0 1rem 0;
@@ -400,40 +381,11 @@ a:hover {
 .copyright a {
   text-decoration: none;
   font-weight: bold;
-  color: var(--primary-color);
+  color: unset;
   transition: opacity 0.2s;
 }
 
 .copyright a:hover {
-  opacity: 0.7;
-}
-
-@media screen and (max-width: 680px) {
-  .container {
-    width: 95%;
-    padding: 1.5rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  .button-container button {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-}
-
-@media screen and (min-width: 680px) {
-  .button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .button-container button {
-    width: 350px;
-    margin-bottom: 10px;
-  }
+  opacity: 0.5;
 }
 </style>
