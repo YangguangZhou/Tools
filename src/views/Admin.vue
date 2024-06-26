@@ -50,13 +50,13 @@
       <button @click="handleSubmit" :disabled="isSubmitting">
         {{ isSubmitting ? '提交中...' : '新增项目' }}
       </button>
-      <button @click="goHome">回到主页</button>
+      <button @click="goHome" class="go-home-button">回到主页</button>
       <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
     </div>
-    <div class="copyright">
-      Copyright &copy; 2023-2024
-      <a href="https://jerryz.com.cn" target="_blank">Jerry Zhou</a>
-    </div>
+  </div>
+  <div class="copyright">
+    Copyright &copy; 2023-2024
+    <a href="https://jerryz.com.cn" target="_blank">Jerry Zhou</a>
   </div>
 </template>
 
@@ -236,7 +236,8 @@ label {
   color: #555;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ccc;
@@ -245,7 +246,8 @@ input, textarea {
   transition: border-color 0.3s ease;
 }
 
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   outline: none;
   border-color: #279cff;
 }
@@ -305,6 +307,7 @@ button {
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
+  margin-bottom: 0.5rem; /* Added to separate buttons */
 }
 
 button:hover:not(:disabled) {
@@ -314,6 +317,10 @@ button:hover:not(:disabled) {
 button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.go-home-button {
+  margin-top: 0; /* Remove extra margin from the go-home button */
 }
 
 .mine-section {
@@ -345,24 +352,6 @@ input[type="text"] {
   text-align: center;
 }
 
-.copyright {
-  text-align: center;
-  margin: 7px 0;
-  color: #999;
-  font-size: 14px;
-}
-
-.copyright a {
-  text-decoration: none;
-  font-weight: bold;
-  color: unset;
-  transition: opacity 0.2s;
-}
-
-.copyright a:hover {
-  opacity: 0.5;
-}
-
 a {
   text-decoration: none;
   font-weight: bold;
@@ -379,5 +368,24 @@ a:hover {
     margin: 1rem;
     padding: 1.5rem;
   }
+}
+
+/* Added styles for copyright section */
+.copyright {
+  text-align: center;
+  margin: 2rem 0 1rem 0;
+  color: #999;
+  font-size: 14px;
+}
+
+.copyright a {
+  text-decoration: none;
+  font-weight: bold;
+  color: unset;
+  transition: opacity 0.2s;
+}
+
+.copyright a:hover {
+  opacity: 0.5;
 }
 </style>
