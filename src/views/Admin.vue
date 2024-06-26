@@ -209,20 +209,43 @@ export default {
 </script>
 
 <style scoped>
+:root {
+  --primary-color: #279cff;
+  --secondary-color: #2180d8;
+  --background-color: #f5f5f5;
+  --text-color: #333;
+  --border-color: #e0e0e0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .container {
-  max-width: 600px;
+  width: 90%;
   margin: 2rem auto;
   padding: 2rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  box-sizing: border-box;
 }
 
 h1 {
-  color: #333;
-  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
   text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
 }
 
 .form-group {
@@ -232,24 +255,27 @@ h1 {
 label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #555;
+  font-weight: 600;
+  color: var(--text-color);
 }
 
 input,
 textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  background-color: #fff;
 }
 
 input:focus,
 textarea:focus {
   outline: none;
-  border-color: #279cff;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(39, 156, 255, 0.2);
 }
 
 textarea {
@@ -257,7 +283,6 @@ textarea {
   resize: vertical;
   font-family: inherit;
   line-height: 1.5;
-  box-sizing: border-box; /* Ensures the padding and border are included in the element's total width and height */
 }
 
 .tags {
@@ -275,7 +300,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   font-size: 0.9rem;
-  line-height: 1.1rem; /* Ensures vertical alignment */
+  line-height: 1.1rem;
   transition: background-color 0.3s ease;
 }
 
@@ -300,18 +325,21 @@ textarea {
 button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #279cff;
+  background-color: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
-  margin-bottom: 0.5rem; /* Added to separate buttons */
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
 }
 
 button:hover:not(:disabled) {
-  background-color: #2180d8;
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(39, 156, 255, 0.3);
 }
 
 button:disabled {
@@ -320,7 +348,7 @@ button:disabled {
 }
 
 .go-home-button {
-  margin-top: 0; /* Remove extra margin from the go-home button */
+  margin-top: 0;
 }
 
 .mine-section {
@@ -347,9 +375,10 @@ input[type="text"] {
 }
 
 .error-message {
-  color: red;
+  color: #ff4d4d;
   margin-top: 1rem;
   text-align: center;
+  font-weight: 600;
 }
 
 a {
@@ -368,9 +397,30 @@ a:hover {
     margin: 1rem;
     padding: 1.5rem;
   }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .button-container button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
 
-/* Added styles for copyright section */
+@media (min-width: 768px) {
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .button-container button {
+    width: 350px;
+    margin-bottom: 10px;
+  }
+}
+
 .copyright {
   text-align: center;
   margin: 2rem 0 1rem 0;
@@ -381,11 +431,11 @@ a:hover {
 .copyright a {
   text-decoration: none;
   font-weight: bold;
-  color: unset;
+  color: var(--primary-color);
   transition: opacity 0.2s;
 }
 
 .copyright a:hover {
-  opacity: 0.5;
+  opacity: 0.7;
 }
 </style>
