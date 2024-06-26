@@ -363,6 +363,17 @@ input[type="text"] {
   opacity: 0.5;
 }
 
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: unset;
+  transition: opacity 0.2s;
+}
+
+a:hover {
+  opacity: 0.5;
+}
+
 @media (max-width: 768px) {
   .container {
     margin: 1rem;
