@@ -430,5 +430,17 @@
     ],
     "url": "https://umami.is/",
     "mine": false
+  },
+  {
+    "id": "34",
+    "title": "Pandora",
+    "description": "经典Pandora服务，支持通过Access Token、Share Token访问ChatGPT，支持 普号和Plus号",
+    "icon": "fas fa-wand-magic-sparkles",
+    "tags": [
+      "ChatGPT",
+      "AI"
+    ],
+    "url": "https://new.oaifree.com",
+    "mine": false
   }
 ]
