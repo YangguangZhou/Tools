@@ -442,5 +442,18 @@
     ],
     "url": "https://new.oaifree.com",
     "mine": false
+  },
+  {
+    "id": "35",
+    "title": "Get Models",
+    "description": "获取OpenAI格式API的可用模型",
+    "icon": "fas fa-brain",
+    "tags": [
+      "AI",
+      "小工具",
+      "OpenAI"
+    ],
+    "url": "https://models.jerryz.com.cn/",
+    "mine": true
   }
 ]
