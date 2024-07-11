@@ -333,7 +333,7 @@
   {
     "id": "26",
     "title": "OpenAI Chat2API",
-    "description": "OpenAI Chat2API，支持多账号负载均衡和通过 Refresh Token 请求，需要 Plus 账号",
+    "description": "OpenAI Chat2API，支持多账号负载均衡和通过 Refresh Token 请求",
     "icon": "fas fa-network-wired",
     "tags": [
       "ChatGPT",
@@ -434,7 +434,7 @@
   {
     "id": "34",
     "title": "Pandora",
-    "description": "经典Pandora服务，支持通过Access Token、Share Token访问ChatGPT，支持普号和Plus号",
+    "description": "经典Pandora服务，支持通过Access Token、Share Token访问ChatGPT，支持 普号和Plus号",
     "icon": "fas fa-wand-magic-sparkles",
     "tags": [
       "ChatGPT",
@@ -458,14 +458,14 @@
   },
   {
     "id": "36",
-    "title": "Fuclaude",
-    "description": "通过 Session Key 访问 Claude 的服务",
-    "icon": "fas fa-wand-magic-sparkles",
+    "title": "Pandora Helper",
+    "description": "轻松使用 Pandora 并在网页中管理所有 Token",
+    "icon": "fas fa-hammer",
     "tags": [
       "AI",
-      "Claude"
+      "ChatGPT"
     ],
-    "url": "https://github.com/wozulong/fuclaude",
+    "url": "https://github.com/nianhua99/PandoraHelper",
     "mine": false
   }
 ]
