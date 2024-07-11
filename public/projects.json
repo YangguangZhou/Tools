@@ -320,7 +320,7 @@
   {
     "id": "25",
     "title": "OpenAI Refresh Token to Access/Share Token",
-    "description": "通过 OpenAI Refresh Token 自动获取 Access/Share Token",
+    "description": "通过 OpenAI Refresh Token 自动获取 Access/Share Token，支持通过 API 访问 ChatGPT",
     "icon": "fas fa-key",
     "tags": [
       "ChatGPT",
