@@ -455,5 +455,17 @@
     ],
     "url": "https://models.jerryz.com.cn/",
     "mine": true
+  },
+  {
+    "id": "36",
+    "title": "Fuclaude",
+    "description": "通过 Session Key 访问 Claude 的服务",
+    "icon": "fas fa-wand-magic-sparkles",
+    "tags": [
+      "AI",
+      "Claude"
+    ],
+    "url": "https://github.com/wozulong/fuclaude",
+    "mine": false
   }
 ]
