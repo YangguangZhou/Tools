@@ -533,15 +533,15 @@
   },
   {
     "id": "42",
-    "title": "Umami",
-    "description": "一个自托管、注重隐私的开源网页分析解决方案，提供有关您网站性能的详细见解。",
-    "icon": "fas fa-eye",
+    "title": "Zeabur",
+    "description": "用于轻松部署和管理应用程序的云平台。",
+    "icon": "fas fa-rocket",
     "tags": [
-      "分析",
-      "开源",
-      "隐私"
+      "部署",
+      "云",
+      "应用管理"
     ],
-    "url": "https://umami.is/",
+    "url": "https://zeabur.com/",
     "mine": false
   },
   {
@@ -757,19 +757,6 @@
       "Severless"
     ],
     "url": "https://vercel.com/",
-    "mine": false
-  },
-  {
-    "id": "59",
-    "title": "Zeabur",
-    "description": "用于轻松部署和管理应用程序的云平台。",
-    "icon": "fas fa-rocket",
-    "tags": [
-      "部署",
-      "云",
-      "应用管理"
-    ],
-    "url": "https://zeabur.com/",
     "mine": false
   }
 ]
