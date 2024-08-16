@@ -482,27 +482,14 @@
   },
   {
     "id": "38",
-    "title": "长度单位转换和显示",
-    "description": "显示不同数值不同单位的具体长度并可以进行粗略的转换",
-    "icon": "fas fa-ruler-vertical",
+    "title": "Dev Toolset",
+    "description": "开发工具导航站",
+    "icon": "fas fa-location-arrow",
     "tags": [
-      "长度",
-      "转换",
-      "Material You"
+      "导航",
+      "开发工具"
     ],
-    "url": "https://g.jerryz.com.cn/length",
-    "mine": true
-  },
-  {
-    "id": "39",
-    "title": "主色提取",
-    "description": "从图片中提取主色",
-    "icon": "fas fa-crosshairs",
-    "tags": [
-      "颜色",
-      "Material You"
-    ],
-    "url": "https://g.jerryz.com.cn/color",
-    "mine": true
+    "url": "https://devtoolset.net/",
+    "mine": false
   }
 ]
