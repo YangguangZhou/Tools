@@ -645,7 +645,7 @@
     "id": "50",
     "title": "Dokploy",
     "description": "简单、快速且安全的基于 Docker 的 PaaS，用于部署您的应用程序。",
-    "icon": "fas fa-docker",
+    "icon": "fab fa-docker",
     "tags": [
       "部署",
       "开源",
