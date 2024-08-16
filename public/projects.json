@@ -491,5 +491,17 @@
     ],
     "url": "https://g.jerryz.com.cn/length",
     "mine": true
+  },
+  {
+    "id": "39",
+    "title": "主色提取",
+    "description": "从图片中提取主色",
+    "icon": "fas fa-crosshairs",
+    "tags": [
+      "颜色",
+      "Material You"
+    ],
+    "url": "https://g.jerryz.com.cn/color",
+    "mine": true
   }
 ]
