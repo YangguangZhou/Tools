@@ -347,10 +347,11 @@
   {
     "id": "27",
     "title": "CNChat",
-    "description": "ChatGPT 官网共享镜像站",
+    "description": "ChatGPT＆Claude 官网共享镜像站",
     "icon": "./assets/chatgpt.svg",
     "tags": [
       "ChatGPT",
+      "Claude",
       "AI",
       "LLM"
     ],
