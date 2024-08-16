@@ -543,5 +543,75 @@
     ],
     "url": "https://umami.is/",
     "mine": false
+  },
+  {
+    "id": "43",
+    "title": "Amazon RDS",
+    "description": "AWS 提供的托管关系型数据库服务，支持多种数据库引擎如 MySQL、PostgreSQL 和 MariaDB。",
+    "icon": "fas fa-database",
+    "tags": [
+      "数据库",
+      "关系型",
+      "多引擎",
+      "AWS"
+    ],
+    "url": "https://aws.amazon.com/rds/",
+    "mine": false
+  },
+  {
+    "id": "44",
+    "title": "MongoDB Atlas",
+    "description": "MongoDB 提供的全托管云数据库服务，具备高级安全性、可扩展性和灵活性。",
+    "icon": "fas fa-server",
+    "tags": [
+      "数据库",
+      "NoSQL",
+      "可扩展性",
+      "灵活性"
+    ],
+    "url": "https://www.mongodb.com/cloud/atlas",
+    "mine": false
+  },
+  {
+    "id": "45",
+    "title": "PlanetScale",
+    "description": "一个与 MySQL 兼容的无服务器数据库平台，专为需要可扩展性和性能的开发者设计。",
+    "icon": "fas fa-cloud",
+    "tags": [
+      "数据库",
+      "无服务器",
+      "MySQL",
+      "可扩展性"
+    ],
+    "url": "https://planetscale.com/",
+    "mine": false
+  },
+  {
+    "id": "46",
+    "title": "Redis",
+    "description": "一种内存中的数据结构存储，用作数据库、缓存和消息代理，具有高性能和可扩展性。",
+    "icon": "fas fa-memory",
+    "tags": [
+      "数据库",
+      "NoSQL",
+      "键值对",
+      "高性能"
+    ],
+    "url": "https://redis.io/",
+    "mine": false
+  },
+  {
+    "id": "47",
+    "title": "Supabase",
+    "description": "一个开源的 Firebase 替代方案，提供实时数据库、身份验证和存储服务。",
+    "icon": "fas fa-fire",
+    "tags": [
+      "数据库",
+      "开源",
+      "PostgreSQL",
+      "实时"
+    ],
+    "url": "https://supabase.com/",
+    "mine": false
   }
 ]
