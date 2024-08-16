@@ -613,5 +613,163 @@
     ],
     "url": "https://supabase.com/",
     "mine": false
+  },
+  {
+    "id": "48",
+    "title": "Cloudflare Pages",
+    "description": "Cloudflare 的 JAMstack 平台，供前端开发人员协作和全球部署网站。",
+    "icon": "fas fa-globe",
+    "tags": [
+      "部署",
+      "JAMstack",
+      "前端"
+    ],
+    "url": "https://pages.cloudflare.com/",
+    "mine": false
+  },
+  {
+    "id": "49",
+    "title": "Coolify",
+    "description": "自托管和开源的 PaaS，用于部署应用程序和数据库。",
+    "icon": "fas fa-server",
+    "tags": [
+      "部署",
+      "开源",
+      "PaaS"
+    ],
+    "url": "https://coolify.io/",
+    "mine": false
+  },
+  {
+    "id": "50",
+    "title": "Dokploy",
+    "description": "简单、快速且安全的基于 Docker 的 PaaS，用于部署您的应用程序。",
+    "icon": "fas fa-docker",
+    "tags": [
+      "部署",
+      "开源",
+      "Docker"
+    ],
+    "url": "https://dokploy.com/",
+    "mine": false
+  },
+  {
+    "id": "51",
+    "title": "Dokku",
+    "description": "Docker 驱动的迷你 Heroku，帮助您构建和管理应用程序。",
+    "icon": "fas fa-box-open",
+    "tags": [
+      "部署",
+      "开源",
+      "PaaS",
+      "Docker"
+    ],
+    "url": "https://dokku.com/",
+    "mine": false
+  },
+  {
+    "id": "52",
+    "title": "Firebase",
+    "description": "Google 的移动平台，帮助您快速开发高质量应用程序。",
+    "icon": "fas fa-fire",
+    "tags": [
+      "部署",
+      "移动",
+      "开发"
+    ],
+    "url": "https://firebase.google.com/",
+    "mine": false
+  },
+  {
+    "id": "53",
+    "title": "Heroku",
+    "description": "平台即服务，使开发人员能够完全在云中构建、运行和操作应用程序。",
+    "icon": "fas fa-cloud",
+    "tags": [
+      "部署",
+      "PaaS",
+      "云"
+    ],
+    "url": "https://www.heroku.com/",
+    "mine": false
+  },
+  {
+    "id": "54",
+    "title": "Netlify",
+    "description": "用于部署静态网站和现代 Web 应用的平台。",
+    "icon": "fas fa-code",
+    "tags": [
+      "部署",
+      "静态网站",
+      "Web 应用"
+    ],
+    "url": "https://www.netlify.com/",
+    "mine": false
+  },
+  {
+    "id": "55",
+    "title": "Railway",
+    "description": "云基础设施平台，使部署变得简单快捷。",
+    "icon": "fas fa-train",
+    "tags": [
+      "部署",
+      "云",
+      "基础设施"
+    ],
+    "url": "https://railway.app/",
+    "mine": false
+  },
+  {
+    "id": "56",
+    "title": "Render",
+    "description": "统一的云平台，用于构建和运行所有的应用程序和网站。",
+    "icon": "fas fa-layer-group",
+    "tags": [
+      "部署",
+      "云",
+      "平台"
+    ],
+    "url": "https://render.com/",
+    "mine": false
+  },
+  {
+    "id": "57",
+    "title": "SST",
+    "description": "Serverless Stack (SST) 是一个框架，使构建无服务器应用程序变得容易。",
+    "icon": "fas fa-code-branch",
+    "tags": [
+      "部署",
+      "开源",
+      "Severless",
+      "框架"
+    ],
+    "url": "https://sst.dev/",
+    "mine": false
+  },
+  {
+    "id": "58",
+    "title": "Vercel",
+    "description": "用于静态站点和无服务器功能的云平台。",
+    "icon": "fas fa-cloud-upload-alt",
+    "tags": [
+      "部署",
+      "静态站点",
+      "Severless"
+    ],
+    "url": "https://vercel.com/",
+    "mine": false
+  },
+  {
+    "id": "59",
+    "title": "Zeabur",
+    "description": "用于轻松部署和管理应用程序的云平台。",
+    "icon": "fas fa-rocket",
+    "tags": [
+      "部署",
+      "云",
+      "应用管理"
+    ],
+    "url": "https://zeabur.com/",
+    "mine": false
   }
 ]
