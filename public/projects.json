@@ -491,5 +491,57 @@
     ],
     "url": "https://devtoolset.net/",
     "mine": false
+  },
+  {
+    "id": "39",
+    "title": "Google Analytics",
+    "description": "谷歌提供的强大网站分析服务，跟踪和报告网站流量、用户行为和转化率。",
+    "icon": "fas fa-chart-line",
+    "tags": [
+      "分析",
+      "网站",
+      "跟踪"
+    ],
+    "url": "https://analytics.google.com/",
+    "mine": false
+  },
+  {
+    "id": "40",
+    "title": "PostHog",
+    "description": "一个开源的产品分析平台，允许您跟踪和分析网站和应用中的用户行为。",
+    "icon": "fas fa-cogs",
+    "tags": [
+      "分析",
+      "开源",
+      "产品"
+    ],
+    "url": "https://posthog.com/",
+    "mine": false
+  },
+  {
+    "id": "41",
+    "title": "Plausible",
+    "description": "一个简单、注重隐私且开源的网页分析工具，旨在跟踪基本的网页指标，而不侵犯用户隐私。",
+    "icon": "fas fa-shield-alt",
+    "tags": [
+      "分析",
+      "隐私",
+      "开源"
+    ],
+    "url": "https://plausible.io/",
+    "mine": false
+  },
+  {
+    "id": "42",
+    "title": "Umami",
+    "description": "一个自托管、注重隐私的开源网页分析解决方案，提供有关您网站性能的详细见解。",
+    "icon": "fas fa-eye",
+    "tags": [
+      "分析",
+      "开源",
+      "隐私"
+    ],
+    "url": "https://umami.is/",
+    "mine": false
   }
 ]
