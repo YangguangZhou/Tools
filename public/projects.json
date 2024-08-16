@@ -479,5 +479,17 @@
     ],
     "url": "https://github.com/wozulong/fuclaude",
     "mine": false
+  },
+  {
+    "id": "38",
+    "title": "长度单位转换和显示",
+    "description": "显示不同数值不同单位的具体长度并可以进行粗略的转换",
+    "icon": "fas fa-ruler-vertical",
+    "tags": [
+      "长度",
+      "转换"
+    ],
+    "url": "https://g.jerryz.com.cn/length",
+    "mine": true
   }
 ]
