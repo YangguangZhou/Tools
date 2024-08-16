@@ -896,5 +896,133 @@
     ],
     "url": "https://www.cloudflare.com/",
     "mine": false
+  },
+    {
+    "id": "69",
+    "title": "Brandmark.io",
+    "description": "一个基于 AI 的平台，用于生成独特且专业的品牌标志。",
+    "icon": "fas fa-paint-brush",
+    "tags": [
+      "设计",
+      "AI",
+      "品牌"
+    ],
+    "url": "https://brandmark.io/",
+    "mine": false
+  },
+  {
+    "id": "70",
+    "title": "Favicon.io",
+    "description": "一个免费的工具，用于生成图标，包括文本、图像和表情符号选项。",
+    "icon": "fas fa-icons",
+    "tags": [
+      "设计",
+      "图标",
+      "图形"
+    ],
+    "url": "https://favicon.io/",
+    "mine": false
+  },
+  {
+    "id": "71",
+    "title": "Ideogram",
+    "description": "一个 AI 驱动的工具，可以快速轻松地创建标志和品牌资产。",
+    "icon": "fas fa-lightbulb",
+    "tags": [
+      "设计",
+      "AI",
+      "品牌"
+    ],
+    "url": "https://ideogram.ai/",
+    "mine": false
+  },
+  {
+    "id": "72",
+    "title": "Logo.surf",
+    "description": "一个用于轻松创建简约和现代标志的工具。",
+    "icon": "fas fa-pen-nib",
+    "tags": [
+      "设计",
+      "简约",
+      "品牌"
+    ],
+    "url": "https://logo.surf/",
+    "mine": false
+  },
+  {
+    "id": "73",
+    "title": "Buy Me a Coffee",
+    "description": "一个简单而有效的方式，让创作者通过一次性支付获得支持和打赏。",
+    "icon": "fas fa-coffee",
+    "tags": [
+      "打赏",
+      "支持",
+      "支付"
+    ],
+    "url": "https://www.buymeacoffee.com/",
+    "mine": false
+  },
+  {
+    "id": "74",
+    "title": "Stripe",
+    "description": "一个全面的在线支付处理平台，帮助企业在全球范围内接受支付。",
+    "icon": "fas fa-money-bill-wave",
+    "tags": [
+      "支付",
+      "API"
+    ],
+    "url": "https://stripe.com/",
+    "mine": false
+  },
+  {
+    "id": "75",
+    "title": "AITDK",
+    "description": "免费的 AI SEO 工具，提供 SEO 生成器。",
+    "icon": "fas fa-robot",
+    "tags": [
+      "插件",
+      "SEO"
+    ],
+    "url": "https://aitdk.com/",
+    "mine": false
+  },
+  {
+    "id": "76",
+    "title": "Google Search Console",
+    "description": "谷歌提供的免费工具，帮助您监控、维护和排查网站在谷歌搜索结果中的表现。",
+    "icon": "fas fa-search",
+    "tags": [
+      "搜索",
+      "网站",
+      "监控"
+    ],
+    "url": "https://search.google.com/search-console",
+    "mine": false
+  },
+  {
+    "id": "77",
+    "title": "Microsoft Clarity",
+    "description": "一个免费的分析工具，通过热图、会话录制和高级数据分析提供用户行为的见解。",
+    "icon": "fas fa-chart-pie",
+    "tags": [
+      "分析",
+      "SEO",
+      "用户行为"
+    ],
+    "url": "https://clarity.microsoft.com/",
+    "mine": false
+  },
+  {
+    "id": "78",
+    "title": "SimilarWeb",
+    "description": "一个提供网站流量、用户参与度和竞争分析的工具，帮助您了解并提升您的数字存在。",
+    "icon": "fas fa-chart-line",
+    "tags": [
+      "网站流量",
+      "分析",
+      "SEO"
+    ],
+    "url": "https://www.similarweb.com/",
+    "mine": false
   }
 ]
