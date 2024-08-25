@@ -94,17 +94,12 @@
       try {
         const response = await axios.get("./projects.json");
         this.originalProjects = response.data;
-        
-        const updatePromises = this.originalProjects.map(async (project) => {
+        for (let project of this.originalProjects) {
           const url = "https://counter-sever.jerryz.com.cn/view";
           const name = "tools-" + project.id;
           const res = await axios.post(url, { name });
           project.views = res.data.times;
-          return project;
-        });
-
-        await Promise.all(updatePromises);
-
+        }
         this.projects = [...this.originalProjects];
         this.sortProjects();
         this.isLoading = false;
