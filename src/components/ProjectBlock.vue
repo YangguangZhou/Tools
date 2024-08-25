@@ -95,7 +95,7 @@ export default {
     async goToProjectUrl() {
       this.showPreview = false;
       clearTimeout(this.previewTimeout);
-      //await this.incrementCounter();
+      await this.incrementCounter();
       this.$nextTick(() => {
         window.location.href = this.project.url;
       });
