@@ -16,7 +16,7 @@
           >
             <option value="recommended">推荐排序</option>
             <option value="random">随机排序</option>
-            <option value="views">按访问量排序</option>
+            <!-- <option value="views">按访问量排序</option> -->
           </select>
         </div>
         <div v-if="isLoading" class="isLoading">加载中...</div>
@@ -94,12 +94,12 @@
       try {
         const response = await axios.get("./projects.json");
         this.originalProjects = response.data;
-        for (let project of this.originalProjects) {
-          const url = "https://counter-sever.jerryz.com.cn/view";
-          const name = "tools-" + project.id;
-          const res = await axios.post(url, { name });
-          project.views = res.data.times;
-        }
+        // for (let project of this.originalProjects) {
+        //   const url = "https://g3rvbpemgm.us.aircode.run/view";
+        //   const name = "tools-" + project.id;
+        //   const res = await axios.post(url, { name });
+        //   project.views = res.data.times;
+        // }
         this.projects = [...this.originalProjects];
         this.sortProjects();
         this.isLoading = false;
@@ -133,10 +133,10 @@
         if (this.sortMethod === "random") {
           this.projects = shuffle([...this.originalProjects]);
         } 
-          else if (this.sortMethod === "views") {
-          this.projects = [...this.originalProjects];
-          this.projects.sort((a, b) => b.views - a.views);
-        } 
+          // else if (this.sortMethod === "views") {
+          // this.projects = [...this.originalProjects];
+          // this.projects.sort((a, b) => b.views - a.views);
+        // } 
         else {
           this.projects = [...this.originalProjects];
           this.projects.sort((a, b) => b.recommended - a.recommended);
