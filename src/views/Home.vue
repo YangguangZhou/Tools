@@ -91,27 +91,31 @@
       };
     },
     async created() {
-      try {
-        const response = await axios.get("./projects.json");
-        this.originalProjects = response.data;
-        
-        const updatePromises = this.originalProjects.map(async (project) => {
-          const url = "https://counter-sever.jerryz.com.cn/view";
-          const name = "tools-" + project.id;
-          const res = await axios.post(url, { name });
-          project.views = res.data.times;
-          return project;
-        });
-
-        await Promise.all(updatePromises);
-
-        this.projects = [...this.originalProjects];
-        this.sortProjects();
-        this.isLoading = false;
-      } catch (error) {
-        console.error(error);
-      }
-    },
+    try {
+      const projectsResponse = await axios.get("./projects.json");
+      this.originalProjects = projectsResponse.data;
+      
+      const viewsResponse = await axios.get("https://counter-sever.jerryz.com.cn/json");
+      const viewsData = viewsResponse.data;
+      
+      // this.projects = this.originalProjects.map(project => {
+      //   const viewInfo = viewsData.find(item => item.name === `tools-${project.id}`);
+      //   project.views = viewInfo ? viewInfo.times : 0;
+      //   return project;
+      // });
+      const updatePromises = this.originalProjects.map(async (project) => {
+        const viewInfo = viewsData.find(item => item.name === `tools-${project.id}`);
+        project.views = viewInfo ? viewInfo.times : 0;
+        return project;
+      });
+      
+      await Promise.all(updatePromises);
+      this.sortProjects();
+      this.isLoading = false;
+    } catch (error) {
+      console.error(error);
+    }
+  },
     computed: {
       filteredProjects() {
         const lowerSearchText = this.searchText.toLowerCase();
