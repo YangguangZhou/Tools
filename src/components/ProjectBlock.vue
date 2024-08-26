@@ -117,8 +117,6 @@ export default {
       this.previewTimeout = setTimeout(() => {
         if (this.isMouseOver) {
           this.showPreview = true;
-          // 预览框计入访问量
-          this.incrementCounter();
         }
       }, this.hoverDelay);
     },
@@ -126,6 +124,8 @@ export default {
       this.isMouseOver = false;
       clearTimeout(this.previewTimeout);
       this.showPreview = false;
+      // 预览框计入访问量
+      this.incrementCounter();
     },
   },
   // mounted() {
