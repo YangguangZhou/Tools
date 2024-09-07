@@ -1028,15 +1028,15 @@
   },
   {
     "id": "79",
-    "title": "随机选择器",
-    "description": "Material You风格的随机选择器，用于随机选择一个或多个选项，帮你作出决定",
-    "icon": "fas fa-list-check",
+    "title": "主色提取",
+    "description": "Material You风格的图片主色提取器",
+    "icon": "fas fa-crosshairs",
     "tags": [
-      "随机",
-      "选择",
-      "Material You"
+      "Material You",
+      "颜色",
+      "提取"
     ],
-    "url": "https://md.jerryz.com.cn/choice",
+    "url": "https://md.jerryz.com.cn/color",
     "mine": true
   }
 ]
