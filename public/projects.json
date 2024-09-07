@@ -147,14 +147,14 @@
   {
     "id": "12",
     "title": "综合计算器",
-    "description": "一个简单的综合计算器",
+    "description": "一个Materiel You风格的简单综合计算器",
     "icon": "fas fa-calculator",
     "tags": [
       "计算器",
       "小工具",
       "HTML"
     ],
-    "url": "https://cal.jerryz.com.cn",
+    "url": "https://md.jerryz.com.cn/cal",
     "mine": true
   },
   {
@@ -218,7 +218,7 @@
       "小工具",
       "KFC"
     ],
-    "url": "https://cal.jerryz.com.cn/crazy",
+    "url": "https://md.jerryz.com.cn/crazy",
     "mine": true
   },
   {
@@ -898,7 +898,7 @@
     "url": "https://www.cloudflare.com/",
     "mine": false
   },
-  {
+    {
     "id": "69",
     "title": "Brandmark.io",
     "description": "一个基于 AI 的平台，用于生成独特且专业的品牌标志。",
@@ -1025,18 +1025,5 @@
     ],
     "url": "https://www.similarweb.com/",
     "mine": false
-  },
-  {
-    "id": "79",
-    "title": "随机选择器",
-    "description": "Material You风格的随机选择器，用于随机选择一个或多个选项，帮你作出决定",
-    "icon": "fas fa-list-check",
-    "tags": [
-      "随机",
-      "选择",
-      "Material You"
-    ],
-    "url": "https://md.jerryz.com.cn/choice",
-    "mine": true
   }
 ]
