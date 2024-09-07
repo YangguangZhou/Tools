@@ -147,14 +147,14 @@
   {
     "id": "12",
     "title": "综合计算器",
-    "description": "一个简单的综合计算器",
+    "description": "一个Materiel You风格的简单综合计算器",
     "icon": "fas fa-calculator",
     "tags": [
       "计算器",
       "小工具",
       "HTML"
     ],
-    "url": "https://cal.jerryz.com.cn",
+    "url": "https://md.jerryz.com.cn/cal",
     "mine": true
   },
   {
@@ -218,7 +218,7 @@
       "小工具",
       "KFC"
     ],
-    "url": "https://cal.jerryz.com.cn/crazy",
+    "url": "https://md.jerryz.com.cn/crazy",
     "mine": true
   },
   {
