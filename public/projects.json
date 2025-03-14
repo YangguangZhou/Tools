@@ -434,15 +434,15 @@
   },
   {
     "id": "34",
-    "title": "Pandora",
-    "description": "经典Pandora服务，支持通过Access Token、Share Token访问ChatGPT，支持普号和Plus号",
-    "icon": "fas fa-wand-magic-sparkles",
+    "title": "Poems",
+    "description": "包含所有高中新课标古诗词，便于背诵",
+    "icon": "fas fa-newpaper",
     "tags": [
-      "ChatGPT",
-      "AI"
+      "古诗词",
+      "学习"
     ],
-    "url": "https://new.oaifree.com",
-    "mine": false
+    "url": "https://poems.jerryz.com.cn",
+    "mine": true
   },
   {
     "id": "35",
