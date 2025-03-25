@@ -1,10 +1,19 @@
 <template>
-  <div class="container">
+  <div class="dashboard-container">
     <!-- 登录表单 -->
-    <div v-if="!auth" class="auth-form">
-      <h1>管理员登录</h1>
-      <input type="password" v-model="password" @keyup.enter="handleAuth" placeholder="请输入密码" />
-      <button @click="handleAuth" class="primary-btn">登录</button>
+    <div v-if="!auth" class="auth-form-container">
+      <div class="auth-form">
+        <div class="auth-header">
+          <i class="fas fa-lock"></i>
+          <h1>管理员登录</h1>
+        </div>
+        <div class="input-group">
+          <input type="password" v-model="password" @keyup.enter="handleAuth" placeholder="请输入密码" />
+          <button @click="handleAuth" class="primary-btn btn-with-icon">
+            <i class="fas fa-sign-in-alt"></i> 登录
+          </button>
+        </div>
+      </div>
     </div>
 
     <!-- 管理界面 -->
@@ -29,10 +38,16 @@
       
       <!-- 项目列表视图 -->
       <div v-if="activeView === 'list'" class="project-list">
-        <h1>项目管理</h1>
-        <div v-if="isLoading" class="loading">加载中...</div>
+        <div class="panel-header">
+          <h1><i class="fas fa-tasks"></i> 项目管理</h1>
+        </div>
         
-        <div v-else class="projects-table">
+        <div v-if="isLoading" class="loading">
+          <div class="spinner"></div>
+          <p>加载中...</p>
+        </div>
+        
+        <div v-else class="projects-table-container">
           <table>
             <thead>
               <tr>
@@ -49,17 +64,19 @@
                 <td>{{ project.title }}</td>
                 <td class="description">{{ project.description }}</td>
                 <td>
-                  <span :class="{'tag': true, 'tag-primary': project.mine}">
+                  <span :class="{'tag': true, 'tag-primary': project.mine, 'tag-secondary': !project.mine}">
                     {{ project.mine ? '自建项目' : '外部项目' }}
                   </span>
                 </td>
                 <td>
-                  <button class="btn-small btn-edit" @click="editProject(project)">
-                    <i class="fas fa-edit"></i> 编辑
-                  </button>
-                  <button class="btn-small btn-delete" @click="confirmDelete(project)">
-                    <i class="fas fa-trash"></i> 删除
-                  </button>
+                  <div class="action-buttons">
+                    <button class="btn-small btn-edit" @click="editProject(project)" title="编辑">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn-small btn-delete" @click="confirmDelete(project)" title="删除">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -68,67 +85,96 @@
       </div>
       
       <!-- 添加/编辑项目表单 -->
-      <div v-else-if="activeView === 'form'" class="project-form">
-        <h1>{{ isEditing ? '编辑项目' : '新增项目' }}</h1>
-        <div class="form-group">
-          <label for="title">标题</label>
-          <input id="title" type="text" placeholder="标题" v-model="currentProject.title" />
+      <div v-else-if="activeView === 'form'" class="project-form panel">
+        <div class="panel-header">
+          <h1>
+            <i :class="isEditing ? 'fas fa-edit' : 'fas fa-plus-circle'"></i>
+            {{ isEditing ? '编辑项目' : '新增项目' }}
+          </h1>
         </div>
-        <div class="form-group">
-          <label for="description">简介</label>
-          <textarea id="description" placeholder="简介" v-model="currentProject.description"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="icon">
-            图标
-            <a href="https://fontawesome.com/search" target="_blank">Font Awesome</a>
-          </label>
-          <div class="icon-preview">
-            <i v-if="currentProject.icon" :class="currentProject.icon"></i>
-            <span v-else class="no-icon">无图标</span>
+        
+        <div class="form-content">
+          <div class="form-group">
+            <label for="title">标题</label>
+            <input id="title" type="text" placeholder="请输入项目标题" v-model="currentProject.title" />
           </div>
-          <input id="icon" type="text" placeholder="图标" v-model="currentProject.icon" />
-        </div>
-        <div class="form-group">
-          <label for="url">URL</label>
-          <input id="url" type="text" placeholder="URL" v-model="currentProject.url" />
-        </div>
-        <div class="form-group mine-section">
-          <label for="mine">自建项目</label>
-          <button id="mine" @click="toggleMine" :class="{'active': currentProject.mine}">
-            {{ currentProject.mine ? '是' : '否' }}
-          </button>
-        </div>
-        <div class="form-group">
-          <label>标签</label>
-          <div class="tag-input">
-            <input
-              type="text"
-              placeholder="添加标签"
-              v-model="newTag"
-              @keydown.enter.prevent="handleAddTag"
-            />
-            <button @click="handleAddTag" class="tag-add-btn">添加</button>
+          
+          <div class="form-group">
+            <label for="description">简介</label>
+            <textarea id="description" placeholder="请输入项目简介" v-model="currentProject.description"></textarea>
           </div>
-          <div class="tags">
-            <span v-for="(tag, index) in currentProject.tags" :key="index" class="tag">
-              {{ tag }}
-              <i class="fas fa-xmark tag-remove" @click="handleRemoveTag(index)"></i>
-            </span>
-            <span v-if="currentProject.tags.length === 0" class="no-tags">暂无标签</span>
+          
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="icon">
+                图标
+                <a href="https://fontawesome.com/search" target="_blank" class="external-link">
+                  Font Awesome <i class="fas fa-external-link-alt"></i>
+                </a>
+              </label>
+              <div class="icon-preview-container">
+                <div class="icon-preview">
+                  <i v-if="currentProject.icon" :class="currentProject.icon"></i>
+                  <span v-else class="no-icon">无图标</span>
+                </div>
+                <input id="icon" type="text" placeholder="例如: fas fa-star" v-model="currentProject.icon" />
+              </div>
+            </div>
+            
+            <div class="form-group flex-1">
+              <label for="url">URL</label>
+              <input id="url" type="text" placeholder="https://example.com" v-model="currentProject.url" />
+            </div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group mine-section flex-1">
+              <label for="mine">自建项目</label>
+              <div class="toggle-switch">
+                <button id="mine" @click="toggleMine" :class="{'toggle-on': currentProject.mine, 'toggle-off': !currentProject.mine}">
+                  <span class="toggle-indicator"></span>
+                  <span class="toggle-text">{{ currentProject.mine ? '是' : '否' }}</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>标签</label>
+            <div class="tag-input">
+              <input
+                type="text"
+                placeholder="添加标签"
+                v-model="newTag"
+                @keydown.enter.prevent="handleAddTag"
+              />
+              <button @click="handleAddTag" class="tag-add-btn">
+                <i class="fas fa-plus"></i> 添加
+              </button>
+            </div>
+            <div class="tags-container">
+              <div class="tags">
+                <span v-for="(tag, index) in currentProject.tags" :key="index" class="tag tag-interactive">
+                  {{ tag }}
+                  <i class="fas fa-times tag-remove" @click="handleRemoveTag(index)"></i>
+                </span>
+                <span v-if="currentProject.tags.length === 0" class="no-tags">暂无标签</span>
+              </div>
+            </div>
           </div>
         </div>
+        
         <div class="form-buttons">
-          <button @click="resetForm" class="secondary-btn">
+          <button @click="resetForm" class="secondary-btn btn-with-icon">
             <i class="fas fa-redo"></i> 重置
           </button>
-          <button @click="activeView = 'list'" class="secondary-btn">
+          <button @click="activeView = 'list'" class="secondary-btn btn-with-icon">
             <i class="fas fa-arrow-left"></i> 返回
           </button>
           <button 
             @click="handleSubmit" 
             :disabled="isSubmitting || !isFormValid" 
-            class="primary-btn"
+            :class="{'primary-btn': true, 'btn-with-icon': true, 'disabled': isSubmitting || !isFormValid}"
           >
             <i class="fas fa-save"></i> 
             {{ isSubmitting ? '提交中...' : (isEditing ? '更新项目' : '新增项目') }}
@@ -136,11 +182,12 @@
         </div>
       </div>
       
+      <!-- 底部操作区 -->
       <div class="admin-actions">
-        <button @click="goHome" class="secondary-btn">
+        <button @click="goHome" class="secondary-btn btn-with-icon">
           <i class="fas fa-home"></i> 返回主页
         </button>
-        <button @click="logout" class="warning-btn">
+        <button @click="logout" class="warning-btn btn-with-icon">
           <i class="fas fa-sign-out-alt"></i> 退出管理
         </button>
       </div>
@@ -148,13 +195,22 @@
     
     <!-- 确认删除对话框 -->
     <div v-if="deleteDialogVisible" class="modal">
+      <div class="modal-overlay" @click="deleteDialogVisible = false"></div>
       <div class="modal-content">
-        <h3>确认删除</h3>
-        <p>确定要删除项目 "{{ projectToDelete?.title || '' }}" 吗？此操作不可逆!</p>
+        <div class="modal-header">
+          <i class="fas fa-exclamation-triangle warning-icon"></i>
+          <h3>确认删除</h3>
+        </div>
+        <div class="modal-body">
+          <p>确定要删除项目 "<strong>{{ projectToDelete?.title || '' }}</strong>" 吗？</p>
+          <p class="warning-text">此操作不可逆!</p>
+        </div>
         <div class="modal-buttons">
-          <button @click="deleteDialogVisible = false" class="secondary-btn">取消</button>
-          <button @click="deleteProject" :disabled="isDeletingProject" class="danger-btn">
-            {{ isDeletingProject ? '删除中...' : '确认删除' }}
+          <button @click="deleteDialogVisible = false" class="secondary-btn btn-with-icon">
+            <i class="fas fa-times"></i> 取消
+          </button>
+          <button @click="deleteProject" :disabled="isDeletingProject" class="danger-btn btn-with-icon">
+            <i class="fas fa-trash"></i> {{ isDeletingProject ? '删除中...' : '确认删除' }}
           </button>
         </div>
       </div>
@@ -168,6 +224,7 @@
 </template>
 
 <script>
+// Script remains unchanged
 import axios from 'axios';
 
 export default {
@@ -459,100 +516,219 @@ export default {
 };
 </script>
 
-<style scoped>
-.container {
-  max-width: 900px;
+<style>
+:root {
+  --primary-color: #3a86ff;
+  --primary-hover: #2667cc;
+  --secondary-color: #8338ec;
+  --success-color: #06d6a0;
+  --warning-color: #ffbe0b;
+  --danger-color: #ef476f;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+  --gray-color: #6c757d;
+  --light-gray: #e9ecef;
+  --border-radius: 8px;
+  --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: #f5f7fa;
+  color: var(--dark-color);
+  line-height: 1.6;
+}
+
+.dashboard-container {
+  max-width: 1000px;
   margin: 2rem auto;
-  padding: 1rem;
+  padding: 0;
   position: relative;
 }
 
-h1 {
-  color: #333;
-  margin-bottom: 1.5rem;
-  text-align: center;
+h1, h2, h3, h4 {
+  color: var(--dark-color);
+  font-weight: 600;
+  line-height: 1.2;
 }
 
-/* 认证表单样式 */
+h1 {
+  margin-bottom: 0;
+  font-size: 1.8rem;
+}
+
+/* ===== 认证表单样式 ===== */
+.auth-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh;
+}
+
 .auth-form {
-  max-width: 400px;
-  margin: 4rem auto;
-  padding: 2rem;
+  width: 400px;
+  padding: 2.5rem;
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.auth-header {
+  margin-bottom: 2rem;
+}
+
+.auth-header i {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+
+.auth-form h1 {
+  color: var(--dark-color);
+  margin-bottom: 0.5rem;
+}
+
+.input-group {
+  margin-top: 1.5rem;
 }
 
 .auth-form input {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 1rem;
+  padding: 12px 15px;
+  margin-bottom: 1.5rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: var(--transition);
 }
 
-/* 管理容器样式 */
+.auth-form input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(58, 134, 255, 0.2);
+  outline: none;
+}
+
+/* ===== 管理容器样式 ===== */
 .management-container {
   background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
   overflow: hidden;
-  padding: 1rem;
+  margin-bottom: 2rem;
 }
 
-/* 视图切换按钮 */
+/* ===== 视图切换按钮 ===== */
 .view-toggle {
   display: flex;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 1.5rem;
+  background: #f8fafc;
+  border-bottom: 1px solid #eaedf2;
 }
 
 .toggle-btn {
   flex: 1;
-  padding: 0.75rem;
+  padding: 1rem 1.25rem;
   background: transparent;
   border: none;
   cursor: pointer;
-  font-size: 16px;
-  color: #666;
-  transition: all 0.2s;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--gray-color);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
 }
 
 .toggle-btn.active {
-  color: #279cff;
-  border-bottom: 2px solid #279cff;
+  color: var(--primary-color);
+  background-color: white;
 }
 
-.toggle-btn:hover {
-  background-color: #f9f9f9;
+.toggle-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary-color);
 }
 
-/* 项目表格样式 */
-.projects-table {
-  width: 100%;
+.toggle-btn:hover:not(.active) {
+  background-color: #edf2f7;
+  color: var(--dark-color);
+}
+
+.toggle-btn i {
+  margin-right: 8px;
+}
+
+/* ===== 面板标题样式 ===== */
+.panel-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #eaedf2;
+  display: flex;
+  align-items: center;
+}
+
+.panel-header h1 {
+  font-weight: 600;
+  color: var(--dark-color);
+  margin: 0;
+}
+
+.panel-header h1 i {
+  margin-right: 10px;
+  color: var(--primary-color);
+}
+
+.panel {
+  border-radius: var(--border-radius);
+  background-color: white;
+}
+
+/* ===== 项目表格样式 ===== */
+.projects-table-container {
+  padding: 0 1.5rem 1.5rem;
   overflow-x: auto;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
 }
 
 th, td {
-  padding: 0.75rem;
+  padding: 1rem 0.75rem;
   text-align: left;
-  border-bottom: 1px solid #eee;
+  vertical-align: middle;
 }
 
 th {
-  background-color: #f8f8f8;
-  font-weight: bold;
+  color: var(--gray-color);
+  font-weight: 600;
+  background-color: #f9fafc;
+  border-bottom: 2px solid #eaedf2;
+  white-space: nowrap;
+}
+
+td {
+  border-bottom: 1px solid #eaedf2;
 }
 
 tr:hover {
-  background-color: #f5f5f5;
+  background-color: #f7fafc;
 }
 
 .description {
@@ -560,81 +736,207 @@ tr:hover {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: var(--gray-color);
 }
 
-/* 标签样式 */
+/* ===== 标签样式 ===== */
 .tag {
   display: inline-block;
-  padding: 4px 8px;
+  padding: 0.35rem 0.8rem;
   margin: 3px;
-  background-color: #e1f5fe;
-  color: #0288d1;
-  border-radius: 16px;
-  font-size: 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1;
 }
 
 .tag-primary {
-  background-color: #e3f2fd;
-  color: #1976d2;
+  background-color: rgba(58, 134, 255, 0.15);
+  color: var(--primary-color);
+}
+
+.tag-secondary {
+  background-color: rgba(108, 117, 125, 0.15);
+  color: var(--gray-color);
+}
+
+.tag-interactive {
+  display: flex;
+  align-items: center;
+  padding-right: 0.4rem;
 }
 
 .tag-remove {
-  margin-left: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  transition: var(--transition);
+  font-size: 0.8rem;
+}
+
+.tag-remove:hover {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .no-tags {
-  color: #999;
+  color: #aab0b7;
   font-style: italic;
+  display: inline-block;
+  padding: 0.5rem 0;
 }
 
-/* 表单样式 */
+/* ===== 表单样式 ===== */
+.form-content {
+  padding: 1.5rem;
+}
+
 .form-group {
   margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.flex-1 {
+  flex: 1;
 }
 
 label {
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: bold;
-  color: #555;
+  font-weight: 500;
+  color: #495057;
+  font-size: 0.95rem;
 }
 
-input, textarea {
+.external-link {
+  font-size: 0.85rem;
+  color: var(--primary-color);
+  margin-left: 0.5rem;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: var(--transition);
+}
+
+.external-link:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+input, textarea, select {
   width: 100%;
-  padding: 10px;
+  padding: 0.75rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
+  border-radius: var(--border-radius);
+  font-size: 0.95rem;
+  transition: var(--transition);
+  background-color: #f9fafc;
+  color: var(--dark-color);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(58, 134, 255, 0.15);
+  outline: none;
+  background-color: white;
 }
 
 textarea {
-  min-height: 100px;
+  min-height: 120px;
   resize: vertical;
 }
 
-.mine-section {
+/* 开关按钮 */
+.toggle-switch {
   display: flex;
   align-items: center;
 }
 
-.mine-section label {
-  margin-right: 1rem;
-  margin-bottom: 0;
+.toggle-switch button {
+  position: relative;
+  width: 100px;
+  height: 38px;
+  border-radius: 19px;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+  font-weight: 500;
+  transition: var(--transition);
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
-.mine-section button {
-  width: auto;
-  padding: 8px 16px;
+.toggle-off {
+  background: #eaedf2;
+  color: #90949a;
 }
 
-.mine-section button.active {
-  background-color: #4CAF50;
+.toggle-on {
+  background: var(--success-color);
+  color: white;
 }
 
+.toggle-indicator {
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50%;
+  transition: var(--transition);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toggle-on .toggle-indicator {
+  left: calc(100% - 34px);
+}
+
+.toggle-text {
+  margin-left: 10px;
+  font-size: 0.9rem;
+  transition: var(--transition);
+}
+
+/* 图标预览 */
+.icon-preview-container {
+  position: relative;
+}
+
+.icon-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+  margin: 0.5rem 0;
+  border-radius: var(--border-radius);
+  background: #f9fafc;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+
+.no-icon {
+  color: #aab0b7;
+  font-size: 0.85rem;
+}
+
+/* 标签输入 */
 .tag-input {
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .tag-input input {
@@ -642,120 +944,175 @@ textarea {
 }
 
 .tag-add-btn {
-  padding: 8px 16px;
-  background: #279cff;
+  padding: 0.75rem 1rem;
+  background: var(--primary-color);
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: pointer;
+  font-size: 0.9rem;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+}
+
+.tag-add-btn i {
+  margin-right: 0.25rem;
+}
+
+.tag-add-btn:hover {
+  background: var(--primary-hover);
+}
+
+.tags-container {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: var(--border-radius);
+  background: #f9fafc;
+  min-height: 80px;
 }
 
 .tags {
-  margin-top: 10px;
-  min-height: 40px;
-  padding: 8px;
-  border: 1px dashed #ddd;
-  border-radius: 4px;
-}
-
-.icon-preview {
-  margin: 10px 0;
-  font-size: 24px;
-  color: #279cff;
-}
-
-.no-icon {
-  color: #999;
-  font-size: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 /* 按钮样式 */
 .form-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 0.75rem;
   margin-top: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid #eaedf2;
 }
 
 button {
-  padding: 10px 16px;
+  padding: 0.75rem 1.25rem;
   border: none;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: var(--transition);
 }
 
 button:disabled {
-  opacity: 0.6;
+  opacity: 0.65;
   cursor: not-allowed;
 }
 
+.btn-with-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
 .primary-btn {
-  background-color: #279cff;
+  background-color: var(--primary-color);
   color: white;
 }
 
 .primary-btn:hover:not(:disabled) {
-  background-color: #2180d8;
+  background-color: var(--primary-hover);
 }
 
 .secondary-btn {
-  background-color: #f2f2f2;
-  color: #333;
+  background-color: #edf2f7;
+  color: #4a5568;
 }
 
-.secondary-btn:hover {
-  background-color: #e6e6e6;
+.secondary-btn:hover:not(:disabled) {
+  background-color: #e2e8f0;
+  color: #2d3748;
 }
 
 .danger-btn, .btn-delete {
-  background-color: #ff4d4f;
+  background-color: var(--danger-color);
   color: white;
 }
 
-.danger-btn:hover:not(:disabled), .btn-delete:hover {
-  background-color: #d9363e;
+.danger-btn:hover:not(:disabled), .btn-delete:hover:not(:disabled) {
+  background-color: #d93a5d;
 }
 
 .warning-btn {
-  background-color: #faad14;
+  background-color: var(--warning-color);
   color: white;
 }
 
-.warning-btn:hover {
-  background-color: #d48806;
+.warning-btn:hover:not(:disabled) {
+  background-color: #e8ac0a;
 }
 
 .btn-small {
-  padding: 4px 8px;
-  font-size: 14px;
-  margin-right: 4px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 0.5rem;
 }
 
 .btn-edit {
-  background-color: #279cff;
+  background-color: var(--primary-color);
   color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
 }
 
 .btn-edit:hover {
-  background-color: #2180d8;
+  background-color: var(--primary-hover);
+}
+
+.btn-delete {
+  background-color: var(--danger-color);
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
 }
 
 /* 管理操作区域 */
 .admin-actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 2rem;
-  padding-top: 1rem;
-  border-top: 1px solid #eee;
+  padding: 1.5rem;
+  margin-top: 0;
+  border-top: 1px solid #eaedf2;
 }
 
 /* 加载状态 */
 .loading {
-  text-align: center;
-  padding: 2rem;
-  color: #999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  color: var(--gray-color);
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(58, 134, 255, 0.3);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* 模态框样式 */
@@ -765,71 +1122,149 @@ button:disabled {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
 }
 
-.modal-content {
-  background: white;
-  padding: 1.5rem;
-  border-radius: 8px;
-  max-width: 400px;
-  width: 100%;
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
 }
 
-.modal-content h3 {
-  margin-top: 0;
-  color: #333;
+.modal-content {
+  background: white;
+  border-radius: var(--border-radius);
+  max-width: 450px;
+  width: 100%;
+  z-index: 1001;
+  overflow: hidden;
+  animation: modalFade 0.3s ease;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background: #f9fafc;
+  border-bottom: 1px solid #eaedf2;
+}
+
+.modal-header .warning-icon {
+  font-size: 1.5rem;
+  color: var(--warning-color);
+  margin-right: 0.75rem;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.warning-text {
+  color: var(--danger-color);
+  font-weight: 500;
+  margin-top: 0.75rem;
 }
 
 .modal-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 1.5rem;
+  gap: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid #eaedf2;
+}
+
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* 版权信息 */
 .copyright {
   text-align: center;
-  margin: 2rem 0 1rem 0;
-  color: #999;
-  font-size: 14px;
+  margin: 2rem 0 1.5rem;
+  color: #a0aec0;
+  font-size: 0.9rem;
 }
 
 .copyright a {
+  color: #718096;
   text-decoration: none;
-  font-weight: bold;
-  color: unset;
-  transition: opacity 0.2s;
+  font-weight: 500;
+  transition: var(--transition);
 }
 
 .copyright a:hover {
-  opacity: 0.5;
+  color: var(--primary-color);
 }
 
 /* 响应式样式 */
 @media (max-width: 768px) {
-  .container {
+  .dashboard-container {
     margin: 1rem;
-    padding: 0.5rem;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 1rem;
   }
   
   .form-buttons, .admin-actions {
-    flex-direction: column;
-    gap: 8px;
+    flex-direction: column-reverse;
+    gap: 0.75rem;
   }
   
-  .form-buttons button, .admin-actions button {
+  .form-buttons button, .admin-actions button, .modal-buttons button {
     width: 100%;
   }
   
   .toggle-btn {
-    padding: 8px;
-    font-size: 14px;
+    padding: 0.75rem 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .toggle-btn i {
+    margin-right: 4px;
+  }
+  
+  .auth-form {
+    width: 90%;
+    max-width: 400px;
+    padding: 2rem 1.5rem;
+  }
+  
+  .modal-content {
+    width: 90%;
+    margin: 0 1rem;
   }
 }
 </style>
