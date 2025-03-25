@@ -1,205 +1,164 @@
 <template>
-  <div class="admin-container">
-    <!-- 认证区域 -->
-    <el-card v-if="!auth" class="auth-card" shadow="hover">
-      <template #header>
-        <div class="card-header">
-          <h2><i class="fas fa-lock"></i> 管理员登录</h2>
-        </div>
-      </template>
-      <el-form>
-        <el-form-item>
-          <el-input
-            type="password"
-            v-model="password"
-            placeholder="请输入密码"
-            show-password
-            prefix-icon="el-icon-lock"
-            @keyup.enter="handleAuth"
-          ></el-input>
-        </el-form-item>
-        <el-button type="primary" @click="handleAuth" class="full-width-btn">
-          <i class="fas fa-sign-in-alt"></i> 登录
-        </el-button>
-      </el-form>
-    </el-card>
-
-    <!-- 管理界面 -->
-    <div v-else class="admin-dashboard">
-      <el-tabs v-model="activeTab" type="border-card">
-        <!-- 项目列表选项卡 -->
-        <el-tab-pane label="项目管理" name="projects">
-          <div class="tab-header">
-            <h2><i class="fas fa-project-diagram"></i> 项目管理</h2>
-            <el-button type="primary" size="small" @click="activeTab = 'add'">
-              <i class="fas fa-plus"></i> 新增项目
-            </el-button>
-          </div>
-          
-          <el-table
-            :data="projects"
-            style="width: 100%"
-            border
-            stripe
-            v-loading="isLoading"
-            row-key="id"
-          >
-            <el-table-column prop="id" label="ID" width="70"></el-table-column>
-            <el-table-column label="图标" width="70">
-              <template #default="scope">
-                <i :class="scope.row.icon"></i>
-              </template>
-            </el-table-column>
-            <el-table-column prop="title" label="标题"></el-table-column>
-            <el-table-column prop="description" label="简介" show-overflow-tooltip></el-table-column>
-            <el-table-column label="类型" width="100">
-              <template #default="scope">
-                <el-tag :type="scope.row.mine ? 'success' : 'info'">
-                  {{ scope.row.mine ? '自建项目' : '外部项目' }}
-                </el-tag>
-              </template>
-            </el-table-column>
-            <el-table-column label="操作" width="150">
-              <template #default="scope">
-                <el-button
-                  type="primary"
-                  size="small"
-                  @click="editProject(scope.row)"
-                  icon="el-icon-edit"
-                  circle
-                ></el-button>
-                <el-button
-                  type="danger"
-                  size="small"
-                  @click="confirmDelete(scope.row)"
-                  icon="el-icon-delete"
-                  circle
-                ></el-button>
-              </template>
-            </el-table-column>
-          </el-table>
-        </el-tab-pane>
-
-        <!-- 添加项目选项卡 -->
-        <el-tab-pane :label="isEditing ? '编辑项目' : '新增项目'" name="add">
-          <h2 class="tab-title">
-            <i :class="isEditing ? 'fas fa-edit' : 'fas fa-plus-circle'"></i>
-            {{ isEditing ? '编辑项目' : '新增项目' }}
-          </h2>
-          
-          <el-form ref="projectForm" :model="currentProject" label-position="top">
-            <el-form-item label="标题" required>
-              <el-input v-model="currentProject.title" placeholder="项目标题"></el-input>
-            </el-form-item>
-            
-            <el-form-item label="简介" required>
-              <el-input
-                type="textarea"
-                v-model="currentProject.description"
-                rows="4"
-                placeholder="项目简介"
-              ></el-input>
-            </el-form-item>
-            
-            <el-form-item label="图标">
-              <div class="icon-input-group">
-                <el-input v-model="currentProject.icon" placeholder="Font Awesome 图标类名">
-                  <template #prepend>
-                    <i :class="currentProject.icon || 'fas fa-question'"></i>
-                  </template>
-                </el-input>
-                <a href="https://fontawesome.com/search" target="_blank" class="icon-link">
-                  <i class="fas fa-external-link-alt"></i> 浏览图标
-                </a>
-              </div>
-            </el-form-item>
-            
-            <el-form-item label="URL" required>
-              <el-input v-model="currentProject.url" placeholder="项目链接"></el-input>
-            </el-form-item>
-            
-            <el-form-item label="项目类型">
-              <el-switch
-                v-model="currentProject.mine"
-                active-text="自建项目"
-                inactive-text="外部项目"
-                active-color="#13ce66"
-                inactive-color="#909399"
-              ></el-switch>
-            </el-form-item>
-            
-            <el-form-item label="标签">
-              <div class="tag-input-group">
-                <el-input
-                  v-model="newTag"
-                  placeholder="输入标签后按Enter添加"
-                  @keydown.enter.prevent="handleAddTag"
-                >
-                  <template #append>
-                    <el-button @click="handleAddTag">添加</el-button>
-                  </template>
-                </el-input>
-              </div>
-              
-              <div class="tags-container">
-                <el-tag
-                  v-for="(tag, index) in currentProject.tags"
-                  :key="index"
-                  closable
-                  @close="handleRemoveTag(index)"
-                  class="project-tag"
-                >
-                  {{ tag }}
-                </el-tag>
-                <div v-if="currentProject.tags.length === 0" class="no-tags">
-                  暂无标签，请添加
-                </div>
-              </div>
-            </el-form-item>
-            
-            <div class="form-actions">
-              <el-button @click="resetForm" plain>重置</el-button>
-              <el-button @click="activeTab = 'projects'">返回列表</el-button>
-              <el-button
-                type="primary"
-                @click="handleSubmit"
-                :loading="isSubmitting"
-                :disabled="!isFormValid"
-              >
-                {{ isSubmitting ? '提交中...' : (isEditing ? '更新项目' : '新增项目') }}
-              </el-button>
-            </div>
-          </el-form>
-        </el-tab-pane>
-      </el-tabs>
-      
-      <div class="admin-footer">
-        <el-button type="info" @click="goHome" plain icon="el-icon-s-home">
-          返回首页
-        </el-button>
-        <el-button type="warning" @click="logout" plain icon="el-icon-switch-button">
-          退出管理
-        </el-button>
-      </div>
+  <div class="container">
+    <!-- 登录表单 -->
+    <div v-if="!auth" class="auth-form">
+      <h1>管理员登录</h1>
+      <input type="password" v-model="password" @keyup.enter="handleAuth" placeholder="请输入密码" />
+      <button @click="handleAuth" class="primary-btn">登录</button>
     </div>
 
+    <!-- 管理界面 -->
+    <div v-else class="management-container">
+      <!-- 切换视图按钮 -->
+      <div class="view-toggle">
+        <button 
+          @click="activeView = 'list'" 
+          :class="{'active': activeView === 'list'}" 
+          class="toggle-btn"
+        >
+          <i class="fas fa-list"></i> 项目列表
+        </button>
+        <button 
+          @click="switchToAddView()" 
+          :class="{'active': activeView === 'form'}"
+          class="toggle-btn"
+        >
+          <i class="fas fa-plus"></i> {{ isEditing ? '编辑项目' : '新增项目' }}
+        </button>
+      </div>
+      
+      <!-- 项目列表视图 -->
+      <div v-if="activeView === 'list'" class="project-list">
+        <h1>项目管理</h1>
+        <div v-if="isLoading" class="loading">加载中...</div>
+        
+        <div v-else class="projects-table">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>标题</th>
+                <th>简介</th>
+                <th>类型</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="project in projects" :key="project.id">
+                <td>{{ project.id }}</td>
+                <td>{{ project.title }}</td>
+                <td class="description">{{ project.description }}</td>
+                <td>
+                  <span :class="{'tag': true, 'tag-primary': project.mine}">
+                    {{ project.mine ? '自建项目' : '外部项目' }}
+                  </span>
+                </td>
+                <td>
+                  <button class="btn-small btn-edit" @click="editProject(project)">
+                    <i class="fas fa-edit"></i> 编辑
+                  </button>
+                  <button class="btn-small btn-delete" @click="confirmDelete(project)">
+                    <i class="fas fa-trash"></i> 删除
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      
+      <!-- 添加/编辑项目表单 -->
+      <div v-else-if="activeView === 'form'" class="project-form">
+        <h1>{{ isEditing ? '编辑项目' : '新增项目' }}</h1>
+        <div class="form-group">
+          <label for="title">标题</label>
+          <input id="title" type="text" placeholder="标题" v-model="currentProject.title" />
+        </div>
+        <div class="form-group">
+          <label for="description">简介</label>
+          <textarea id="description" placeholder="简介" v-model="currentProject.description"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="icon">
+            图标
+            <a href="https://fontawesome.com/search" target="_blank">Font Awesome</a>
+          </label>
+          <div class="icon-preview">
+            <i v-if="currentProject.icon" :class="currentProject.icon"></i>
+            <span v-else class="no-icon">无图标</span>
+          </div>
+          <input id="icon" type="text" placeholder="图标" v-model="currentProject.icon" />
+        </div>
+        <div class="form-group">
+          <label for="url">URL</label>
+          <input id="url" type="text" placeholder="URL" v-model="currentProject.url" />
+        </div>
+        <div class="form-group mine-section">
+          <label for="mine">自建项目</label>
+          <button id="mine" @click="toggleMine" :class="{'active': currentProject.mine}">
+            {{ currentProject.mine ? '是' : '否' }}
+          </button>
+        </div>
+        <div class="form-group">
+          <label>标签</label>
+          <div class="tag-input">
+            <input
+              type="text"
+              placeholder="添加标签"
+              v-model="newTag"
+              @keydown.enter.prevent="handleAddTag"
+            />
+            <button @click="handleAddTag" class="tag-add-btn">添加</button>
+          </div>
+          <div class="tags">
+            <span v-for="(tag, index) in currentProject.tags" :key="index" class="tag">
+              {{ tag }}
+              <i class="fas fa-xmark tag-remove" @click="handleRemoveTag(index)"></i>
+            </span>
+            <span v-if="currentProject.tags.length === 0" class="no-tags">暂无标签</span>
+          </div>
+        </div>
+        <div class="form-buttons">
+          <button @click="resetForm" class="secondary-btn">
+            <i class="fas fa-redo"></i> 重置
+          </button>
+          <button @click="activeView = 'list'" class="secondary-btn">
+            <i class="fas fa-arrow-left"></i> 返回
+          </button>
+          <button 
+            @click="handleSubmit" 
+            :disabled="isSubmitting || !isFormValid" 
+            class="primary-btn"
+          >
+            <i class="fas fa-save"></i> 
+            {{ isSubmitting ? '提交中...' : (isEditing ? '更新项目' : '新增项目') }}
+          </button>
+        </div>
+      </div>
+      
+      <div class="admin-actions">
+        <button @click="goHome" class="secondary-btn">
+          <i class="fas fa-home"></i> 返回主页
+        </button>
+        <button @click="logout" class="warning-btn">
+          <i class="fas fa-sign-out-alt"></i> 退出管理
+        </button>
+      </div>
+    </div>
+    
     <!-- 确认删除对话框 -->
-    <el-dialog
-      title="确认删除"
-      v-model="deleteDialogVisible"
-      width="30%"
-      :close-on-click-modal="false"
-    >
-      <span>确定要删除项目 "{{ projectToDelete?.title || '' }}" 吗？此操作不可逆!</span>
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="deleteDialogVisible = false">取消</el-button>
-          <el-button type="danger" @click="deleteProject" :loading="isDeletingProject">
-            确认删除
-          </el-button>
-        </span>
-      </template>
-    </el-dialog>
+    <div v-if="deleteDialogVisible" class="modal">
+      <div class="modal-content">
+        <h3>确认删除</h3>
+        <p>确定要删除项目 "{{ projectToDelete?.title || '' }}" 吗？此操作不可逆!</p>
+        <div class="modal-buttons">
+          <button @click="deleteDialogVisible = false" class="secondary-btn">取消</button>
+          <button @click="deleteProject" :disabled="isDeletingProject" class="danger-btn">
+            {{ isDeletingProject ? '删除中...' : '确认删除' }}
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
   
   <div class="copyright">
@@ -210,7 +169,6 @@
 
 <script>
 import axios from 'axios';
-import { ElMessage, ElMessageBox } from 'element-plus';
 
 export default {
   data() {
@@ -218,7 +176,7 @@ export default {
       auth: false,
       password: '',
       projects: [],
-      activeTab: 'projects',
+      activeView: 'list',
       currentProject: {
         title: '',
         description: '',
@@ -243,9 +201,11 @@ export default {
       return this.currentProject.title && this.currentProject.description && this.currentProject.url;
     }
   },
-  async created() {
+  created() {
     this.checkAuth();
-    await this.fetchProjects();
+    if (this.auth) {
+      this.fetchProjects();
+    }
   },
   methods: {
     // 认证相关
@@ -259,15 +219,22 @@ export default {
       if (this.password === process.env.VUE_APP_PASSWD) {
         this.auth = true;
         localStorage.setItem('authStatus', 'true');
-        ElMessage.success('登录成功');
+        this.fetchProjects();
+        this.showMessage('登录成功', 'success');
       } else {
-        ElMessage.error('密码错误');
+        this.showMessage('密码错误', 'error');
       }
     },
     logout() {
       localStorage.removeItem('authStatus');
       this.auth = false;
-      ElMessage.info('已退出管理界面');
+      this.showMessage('已退出管理界面');
+    },
+    
+    // 显示消息提示
+    showMessage(message, type = 'info') {
+      this.errorMessage = message;
+      alert(message);
     },
 
     // 获取项目列表
@@ -280,10 +247,18 @@ export default {
         this.projects = res.data;
       } catch (error) {
         console.error('Failed to fetch projects:', error);
-        ElMessage.error('获取项目列表失败，请刷新页面重试');
+        this.showMessage('获取项目列表失败，请刷新页面重试', 'error');
       } finally {
         this.isLoading = false;
       }
+    },
+
+    // 切换到添加视图
+    switchToAddView() {
+      if (!this.isEditing) {
+        this.resetForm();
+      }
+      this.activeView = 'form';
     },
 
     // 标签相关方法
@@ -296,19 +271,24 @@ export default {
     handleRemoveTag(index) {
       this.currentProject.tags.splice(index, 1);
     },
+    toggleMine() {
+      this.currentProject.mine = !this.currentProject.mine;
+    },
 
     // 编辑项目
     editProject(project) {
       this.isEditing = true;
       this.originalProject = { ...project };
-      this.currentProject = JSON.parse(JSON.stringify(project)); // 深拷贝
-      this.activeTab = 'add';
+      // 深拷贝确保不直接修改原对象
+      this.currentProject = JSON.parse(JSON.stringify(project));
+      this.activeView = 'form';
     },
 
     // 重置表单
     resetForm() {
       if (this.isEditing) {
-        this.currentProject = JSON.parse(JSON.stringify(this.originalProject)); // 恢复到原始值
+        // 恢复到原始值
+        this.currentProject = JSON.parse(JSON.stringify(this.originalProject));
       } else {
         this.currentProject = {
           title: '',
@@ -371,13 +351,13 @@ export default {
 
         if (response.status === 200) {
           this.projects = reorderedProjects;
-          ElMessage.success('项目删除成功');
+          this.showMessage('项目删除成功', 'success');
         } else {
           throw new Error('Unexpected response status');
         }
       } catch (error) {
         console.error('Failed to delete project:', error);
-        ElMessage.error(`删除项目失败: ${error.message}`);
+        this.showMessage(`删除项目失败: ${error.message}`, 'error');
       } finally {
         this.isDeletingProject = false;
         this.deleteDialogVisible = false;
@@ -394,7 +374,7 @@ export default {
 
       if (!githubToken) {
         this.errorMessage = 'GitHub token is not set';
-        ElMessage.error('GitHub token未设置');
+        this.showMessage('GitHub token未设置', 'error');
         this.isSubmitting = false;
         return;
       }
@@ -432,20 +412,20 @@ export default {
         );
 
         if (response.status === 200) {
-          ElMessage.success(this.isEditing ? '项目更新成功' : '项目添加成功');
+          this.showMessage(this.isEditing ? '项目更新成功' : '项目添加成功', 'success');
           this.projects = updatedProjects;
           
           // 重置状态和表单
           this.resetForm();
           this.isEditing = false;
           this.originalProject = null;
-          this.activeTab = 'projects';
+          this.activeView = 'list';
         } else {
           throw new Error('Unexpected response status');
         }
       } catch (error) {
         console.error('Failed to submit project:', error);
-        ElMessage.error(`${this.isEditing ? '更新' : '添加'}项目失败: ${error.message}`);
+        this.showMessage(`${this.isEditing ? '更新' : '添加'}项目失败: ${error.message}`, 'error');
       } finally {
         this.isSubmitting = false;
       }
@@ -466,7 +446,7 @@ export default {
         return response.data;
       } catch (error) {
         console.error('Failed to get current file content:', error);
-        ElMessage.error(`获取当前文件内容失败: ${error.message}`);
+        this.showMessage(`获取当前文件内容失败: ${error.message}`, 'error');
         throw error;
       }
     },
@@ -480,104 +460,339 @@ export default {
 </script>
 
 <style scoped>
-.admin-container {
+.container {
   max-width: 900px;
   margin: 2rem auto;
-  padding: 0 1rem;
+  padding: 1rem;
+  position: relative;
 }
 
-.auth-card {
+h1 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* 认证表单样式 */
+.auth-form {
   max-width: 400px;
   margin: 4rem auto;
+  padding: 2rem;
+  background: white;
   border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-}
-
-.auth-card .card-header {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   text-align: center;
 }
 
-.auth-card h2 {
-  margin: 0;
-  color: #409EFF;
-}
-
-.full-width-btn {
+.auth-form input {
   width: 100%;
-  padding: 12px 0;
-  font-size: 16px;
-  margin-top: 10px;
-}
-
-.admin-dashboard {
-  animation: fadeIn 0.5s ease-out;
-}
-
-.tab-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 10px;
   margin-bottom: 1rem;
-}
-
-.tab-title {
-  text-align: center;
-  color: #409EFF;
-  margin-bottom: 2rem;
-}
-
-.icon-input-group {
-  display: flex;
-  align-items: center;
-}
-
-.icon-link {
-  margin-left: 10px;
-  color: #409EFF;
-  font-size: 0.9rem;
-}
-
-.tag-input-group {
-  margin-bottom: 10px;
-}
-
-.tags-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-  min-height: 32px;
-  padding: 5px;
-  border: 1px dashed #dcdfe6;
+  border: 1px solid #ddd;
   border-radius: 4px;
+  font-size: 16px;
 }
 
-.project-tag {
-  margin-right: 0;
+/* 管理容器样式 */
+.management-container {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  overflow: hidden;
+  padding: 1rem;
+}
+
+/* 视图切换按钮 */
+.view-toggle {
+  display: flex;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 1.5rem;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 0.75rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+  transition: all 0.2s;
+}
+
+.toggle-btn.active {
+  color: #279cff;
+  border-bottom: 2px solid #279cff;
+}
+
+.toggle-btn:hover {
+  background-color: #f9f9f9;
+}
+
+/* 项目表格样式 */
+.projects-table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background-color: #f8f8f8;
+  font-weight: bold;
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+.description {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 标签样式 */
+.tag {
+  display: inline-block;
+  padding: 4px 8px;
+  margin: 3px;
+  background-color: #e1f5fe;
+  color: #0288d1;
+  border-radius: 16px;
+  font-size: 14px;
+}
+
+.tag-primary {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.tag-remove {
+  margin-left: 4px;
+  cursor: pointer;
 }
 
 .no-tags {
-  color: #909399;
-  font-size: 0.9rem;
-  padding: 5px;
+  color: #999;
+  font-style: italic;
 }
 
-.form-actions {
+/* 表单样式 */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.mine-section {
+  display: flex;
+  align-items: center;
+}
+
+.mine-section label {
+  margin-right: 1rem;
+  margin-bottom: 0;
+}
+
+.mine-section button {
+  width: auto;
+  padding: 8px 16px;
+}
+
+.mine-section button.active {
+  background-color: #4CAF50;
+}
+
+.tag-input {
+  display: flex;
+  gap: 8px;
+}
+
+.tag-input input {
+  flex: 1;
+}
+
+.tag-add-btn {
+  padding: 8px 16px;
+  background: #279cff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tags {
+  margin-top: 10px;
+  min-height: 40px;
+  padding: 8px;
+  border: 1px dashed #ddd;
+  border-radius: 4px;
+}
+
+.icon-preview {
+  margin: 10px 0;
+  font-size: 24px;
+  color: #279cff;
+}
+
+.no-icon {
+  color: #999;
+  font-size: 14px;
+}
+
+/* 按钮样式 */
+.form-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
-.admin-footer {
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.primary-btn {
+  background-color: #279cff;
+  color: white;
+}
+
+.primary-btn:hover:not(:disabled) {
+  background-color: #2180d8;
+}
+
+.secondary-btn {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+.secondary-btn:hover {
+  background-color: #e6e6e6;
+}
+
+.danger-btn, .btn-delete {
+  background-color: #ff4d4f;
+  color: white;
+}
+
+.danger-btn:hover:not(:disabled), .btn-delete:hover {
+  background-color: #d9363e;
+}
+
+.warning-btn {
+  background-color: #faad14;
+  color: white;
+}
+
+.warning-btn:hover {
+  background-color: #d48806;
+}
+
+.btn-small {
+  padding: 4px 8px;
+  font-size: 14px;
+  margin-right: 4px;
+}
+
+.btn-edit {
+  background-color: #279cff;
+  color: white;
+}
+
+.btn-edit:hover {
+  background-color: #2180d8;
+}
+
+/* 管理操作区域 */
+.admin-actions {
   display: flex;
   justify-content: space-between;
   margin-top: 2rem;
   padding-top: 1rem;
-  border-top: 1px solid #ebeef5;
+  border-top: 1px solid #eee;
 }
 
-/* Copyright section */
+/* 加载状态 */
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #999;
+}
+
+/* 模态框样式 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 1.5rem;
+}
+
+/* 版权信息 */
 .copyright {
   text-align: center;
   margin: 2rem 0 1rem 0;
@@ -596,29 +811,25 @@ export default {
   opacity: 0.5;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Responsive styling */
+/* 响应式样式 */
 @media (max-width: 768px) {
-  .admin-container {
+  .container {
     margin: 1rem;
-    padding: 0;
+    padding: 0.5rem;
   }
   
-  .form-actions {
+  .form-buttons, .admin-actions {
     flex-direction: column;
+    gap: 8px;
   }
   
-  .form-actions button {
-    margin-bottom: 10px;
+  .form-buttons button, .admin-actions button {
+    width: 100%;
   }
   
-  .admin-footer {
-    flex-direction: column;
-    gap: 10px;
+  .toggle-btn {
+    padding: 8px;
+    font-size: 14px;
   }
 }
 </style>
