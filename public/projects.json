@@ -41,7 +41,7 @@
   {
     "id": "4",
     "title": "Luogu User Card",
-    "description": "洛谷用户信息卡片",
+    "description": "洛谷用户信息卡片以及生成器",
     "icon": "./assets/luogu.svg",
     "tags": [
       "洛谷",
