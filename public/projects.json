@@ -319,20 +319,6 @@
   },
   {
     "id": "25",
-    "title": "OpenAI Chat2API",
-    "description": "OpenAI Chat2API，支持多账号负载均衡和通过 Refresh Token 请求，需要 Plus 账号",
-    "icon": "fas fa-network-wired",
-    "tags": [
-      "ChatGPT",
-      "AI",
-      "LLM",
-      "API"
-    ],
-    "url": "https://blog.jerryz.com.cn/article/chat2api/",
-    "mine": true
-  },
-  {
-    "id": "26",
     "title": "CNChat",
     "description": "ChatGPT＆Claude 官网共享镜像站",
     "icon": "./assets/chatgpt.svg",
@@ -346,7 +332,7 @@
     "mine": true
   },
   {
-    "id": "27",
+    "id": "26",
     "title": "Some Stars",
     "description": "Jerry Zhou 的 GitHub Stars 列表，每周自动更新",
     "icon": "fas fa-star",
@@ -358,7 +344,7 @@
     "mine": true
   },
   {
-    "id": "28",
+    "id": "27",
     "title": "Namsogen",
     "description": "随机测试信用卡号码生成器",
     "icon": "fas fa-credit-card",
@@ -370,7 +356,7 @@
     "mine": false
   },
   {
-    "id": "29",
+    "id": "28",
     "title": "Free Credit Card Checker",
     "description": "信用卡验活测试器",
     "icon": "fas fa-check",
@@ -382,7 +368,7 @@
     "mine": false
   },
   {
-    "id": "30",
+    "id": "29",
     "title": "ITDOG",
     "description": "网站在线测速/Ping",
     "icon": "fas fa-tachometer-alt",
@@ -394,7 +380,7 @@
     "mine": false
   },
   {
-    "id": "31",
+    "id": "30",
     "title": "FileDiff",
     "description": "在线文本差异比对和字数统计",
     "icon": "fas fa-file-alt",
@@ -407,7 +393,7 @@
     "mine": true
   },
   {
-    "id": "32",
+    "id": "31",
     "title": "Umami",
     "description": "快速高效的网站分析，谷歌分析的开源替代",
     "icon": "fas fa-bowl-rice",
@@ -420,7 +406,7 @@
     "mine": false
   },
   {
-    "id": "33",
+    "id": "32",
     "title": "Poems",
     "description": "包含所有高中新课标古诗词，便于背诵",
     "icon": "fas fa-newpaper",
@@ -432,7 +418,7 @@
     "mine": true
   },
   {
-    "id": "34",
+    "id": "33",
     "title": "Get Models",
     "description": "获取OpenAI格式API的可用模型",
     "icon": "fas fa-brain",
@@ -445,7 +431,7 @@
     "mine": true
   },
   {
-    "id": "35",
+    "id": "34",
     "title": "Pandora Helper",
     "description": "轻松使用 Pandora 并在网页中管理所有 Token",
     "icon": "fas fa-hammer",
@@ -457,7 +443,7 @@
     "mine": false
   },
   {
-    "id": "36",
+    "id": "35",
     "title": "Fuclaude",
     "description": "通过 Session Key 访问 Claude 的服务",
     "icon": "fas fa-wand-magic-sparkles",
@@ -469,7 +455,7 @@
     "mine": false
   },
   {
-    "id": "37",
+    "id": "36",
     "title": "Dev Toolset",
     "description": "开发工具导航站",
     "icon": "fas fa-location-arrow",
@@ -481,7 +467,7 @@
     "mine": false
   },
   {
-    "id": "38",
+    "id": "37",
     "title": "Google Analytics",
     "description": "谷歌提供的强大网站分析服务，跟踪和报告网站流量、用户行为和转化率。",
     "icon": "fas fa-chart-line",
@@ -494,7 +480,7 @@
     "mine": false
   },
   {
-    "id": "39",
+    "id": "38",
     "title": "PostHog",
     "description": "一个开源的产品分析平台，允许您跟踪和分析网站和应用中的用户行为。",
     "icon": "fas fa-cogs",
@@ -507,7 +493,7 @@
     "mine": false
   },
   {
-    "id": "40",
+    "id": "39",
     "title": "Plausible",
     "description": "一个简单、注重隐私且开源的网页分析工具，旨在跟踪基本的网页指标，而不侵犯用户隐私。",
     "icon": "fas fa-shield-alt",
@@ -520,7 +506,7 @@
     "mine": false
   },
   {
-    "id": "41",
+    "id": "40",
     "title": "Zeabur",
     "description": "用于轻松部署和管理应用程序的云平台。",
     "icon": "fas fa-rocket",
@@ -533,7 +519,7 @@
     "mine": false
   },
   {
-    "id": "42",
+    "id": "41",
     "title": "Amazon RDS",
     "description": "AWS 提供的托管关系型数据库服务，支持多种数据库引擎如 MySQL、PostgreSQL 和 MariaDB。",
     "icon": "fas fa-database",
@@ -547,7 +533,7 @@
     "mine": false
   },
   {
-    "id": "43",
+    "id": "42",
     "title": "MongoDB Atlas",
     "description": "MongoDB 提供的全托管云数据库服务，具备高级安全性、可扩展性和灵活性。",
     "icon": "fas fa-server",
@@ -561,7 +547,7 @@
     "mine": false
   },
   {
-    "id": "44",
+    "id": "43",
     "title": "PlanetScale",
     "description": "一个与 MySQL 兼容的无服务器数据库平台，专为需要可扩展性和性能的开发者设计。",
     "icon": "fas fa-cloud",
@@ -575,7 +561,7 @@
     "mine": false
   },
   {
-    "id": "45",
+    "id": "44",
     "title": "Redis",
     "description": "一种内存中的数据结构存储，用作数据库、缓存和消息代理，具有高性能和可扩展性。",
     "icon": "fas fa-memory",
@@ -589,7 +575,7 @@
     "mine": false
   },
   {
-    "id": "46",
+    "id": "45",
     "title": "Supabase",
     "description": "一个开源的 Firebase 替代方案，提供实时数据库、身份验证和存储服务。",
     "icon": "fas fa-fire",
@@ -603,7 +589,7 @@
     "mine": false
   },
   {
-    "id": "47",
+    "id": "46",
     "title": "Cloudflare Pages",
     "description": "Cloudflare 的 JAMstack 平台，供前端开发人员协作和全球部署网站。",
     "icon": "fas fa-globe",
@@ -616,7 +602,7 @@
     "mine": false
   },
   {
-    "id": "48",
+    "id": "47",
     "title": "Coolify",
     "description": "自托管和开源的 PaaS，用于部署应用程序和数据库。",
     "icon": "fas fa-server",
@@ -629,7 +615,7 @@
     "mine": false
   },
   {
-    "id": "49",
+    "id": "48",
     "title": "Dokploy",
     "description": "简单、快速且安全的基于 Docker 的 PaaS，用于部署您的应用程序。",
     "icon": "fab fa-docker",
@@ -642,7 +628,7 @@
     "mine": false
   },
   {
-    "id": "50",
+    "id": "49",
     "title": "Dokku",
     "description": "Docker 驱动的迷你 Heroku，帮助您构建和管理应用程序。",
     "icon": "fas fa-box-open",
@@ -656,7 +642,7 @@
     "mine": false
   },
   {
-    "id": "51",
+    "id": "50",
     "title": "Firebase",
     "description": "Google 的移动平台，帮助您快速开发高质量应用程序。",
     "icon": "fas fa-fire",
@@ -669,7 +655,7 @@
     "mine": false
   },
   {
-    "id": "52",
+    "id": "51",
     "title": "Heroku",
     "description": "平台即服务，使开发人员能够完全在云中构建、运行和操作应用程序。",
     "icon": "fas fa-cloud",
@@ -682,7 +668,7 @@
     "mine": false
   },
   {
-    "id": "53",
+    "id": "52",
     "title": "Netlify",
     "description": "用于部署静态网站和现代 Web 应用的平台。",
     "icon": "fas fa-code",
@@ -695,7 +681,7 @@
     "mine": false
   },
   {
-    "id": "54",
+    "id": "53",
     "title": "Railway",
     "description": "云基础设施平台，使部署变得简单快捷。",
     "icon": "fas fa-train",
@@ -708,7 +694,7 @@
     "mine": false
   },
   {
-    "id": "55",
+    "id": "54",
     "title": "Render",
     "description": "统一的云平台，用于构建和运行所有的应用程序和网站。",
     "icon": "fas fa-layer-group",
@@ -721,7 +707,7 @@
     "mine": false
   },
   {
-    "id": "56",
+    "id": "55",
     "title": "SST",
     "description": "Serverless Stack (SST) 是一个框架，使构建无服务器应用程序变得容易。",
     "icon": "fas fa-code-branch",
@@ -735,7 +721,7 @@
     "mine": false
   },
   {
-    "id": "57",
+    "id": "56",
     "title": "Vercel",
     "description": "用于静态站点和无服务器功能的云平台。",
     "icon": "fas fa-cloud-upload-alt",
@@ -748,7 +734,7 @@
     "mine": false
   },
   {
-    "id": "58",
+    "id": "57",
     "title": "DNS Checker",
     "description": "用于检查 DNS 传播并在多个服务器上全局解析 DNS 记录的工具。",
     "icon": "fas fa-network-wired",
@@ -762,7 +748,7 @@
     "mine": false
   },
   {
-    "id": "59",
+    "id": "58",
     "title": "domainscore.ai",
     "description": "基于 AI 的平台，用于根据各种指标评估和评分域名。",
     "icon": "fas fa-brain",
@@ -775,7 +761,7 @@
     "mine": false
   },
   {
-    "id": "60",
+    "id": "59",
     "title": "Domainr",
     "description": "一个用于搜索域名的引擎，帮助查找可用域名并跟踪域名状态。",
     "icon": "fas fa-search",
@@ -789,7 +775,7 @@
     "mine": false
   },
   {
-    "id": "61",
+    "id": "60",
     "title": "GoDaddy",
     "description": "知名的域名注册商和网站托管公司，提供广泛的域名相关服务。",
     "icon": "fas fa-globe",
@@ -803,7 +789,7 @@
     "mine": false
   },
   {
-    "id": "62",
+    "id": "61",
     "title": "Name.com",
     "description": "提供多种域名后缀、托管服务和网站建设工具的域名注册商。",
     "icon": "fas fa-cube",
@@ -817,7 +803,7 @@
     "mine": false
   },
   {
-    "id": "63",
+    "id": "62",
     "title": "Namecheap",
     "description": "提供实惠的域名、托管和相关服务的热门域名注册商。",
     "icon": "fas fa-tag",
@@ -831,7 +817,7 @@
     "mine": false
   },
   {
-    "id": "64",
+    "id": "63",
     "title": "query.domains",
     "description": "通过全面的 WHOIS 数据和可用性检查来搜索和分析域名。",
     "icon": "fas fa-search-plus",
@@ -844,7 +830,7 @@
     "mine": false
   },
   {
-    "id": "65",
+    "id": "64",
     "title": "Spaceship",
     "description": "提供强大 DNS 管理功能的域名管理和注册平台。",
     "icon": "fas fa-rocket",
@@ -858,7 +844,7 @@
     "mine": false
   },
   {
-    "id": "66",
+    "id": "65",
     "title": "Whois Lookup",
     "description": "用于查询域名注册详情的工具，包括注册人的联系信息和域名状态。",
     "icon": "fas fa-search-location",
@@ -872,7 +858,7 @@
     "mine": false
   },
   {
-    "id": "67",
+    "id": "66",
     "title": "Cloudflare",
     "description": "提供安全性、性能和可靠性服务，包括域名注册和 DNS 管理。",
     "icon": "fas fa-shield-alt",
@@ -886,7 +872,7 @@
     "mine": false
   },
   {
-    "id": "68",
+    "id": "67",
     "title": "Brandmark.io",
     "description": "一个基于 AI 的平台，用于生成独特且专业的品牌标志。",
     "icon": "fas fa-paint-brush",
@@ -899,7 +885,7 @@
     "mine": false
   },
   {
-    "id": "69",
+    "id": "68",
     "title": "Favicon.io",
     "description": "一个免费的工具，用于生成图标，包括文本、图像和表情符号选项。",
     "icon": "fas fa-icons",
@@ -912,7 +898,7 @@
     "mine": false
   },
   {
-    "id": "70",
+    "id": "69",
     "title": "Ideogram",
     "description": "一个 AI 驱动的工具，可以快速轻松地创建标志和品牌资产。",
     "icon": "fas fa-lightbulb",
@@ -925,7 +911,7 @@
     "mine": false
   },
   {
-    "id": "71",
+    "id": "70",
     "title": "Logo.surf",
     "description": "一个用于轻松创建简约和现代标志的工具。",
     "icon": "fas fa-pen-nib",
@@ -938,7 +924,7 @@
     "mine": false
   },
   {
-    "id": "72",
+    "id": "71",
     "title": "Buy Me a Coffee",
     "description": "一个简单而有效的方式，让创作者通过一次性支付获得支持和打赏。",
     "icon": "fas fa-coffee",
@@ -951,7 +937,7 @@
     "mine": false
   },
   {
-    "id": "73",
+    "id": "72",
     "title": "Stripe",
     "description": "一个全面的在线支付处理平台，帮助企业在全球范围内接受支付。",
     "icon": "fas fa-money-bill-wave",
@@ -963,7 +949,7 @@
     "mine": false
   },
   {
-    "id": "74",
+    "id": "73",
     "title": "AITDK",
     "description": "免费的 AI SEO 工具，提供 SEO 生成器。",
     "icon": "fas fa-robot",
@@ -975,7 +961,7 @@
     "mine": false
   },
   {
-    "id": "75",
+    "id": "74",
     "title": "Google Search Console",
     "description": "谷歌提供的免费工具，帮助您监控、维护和排查网站在谷歌搜索结果中的表现。",
     "icon": "fas fa-search",
@@ -988,7 +974,7 @@
     "mine": false
   },
   {
-    "id": "76",
+    "id": "75",
     "title": "Microsoft Clarity",
     "description": "一个免费的分析工具，通过热图、会话录制和高级数据分析提供用户行为的见解。",
     "icon": "fas fa-chart-pie",
@@ -1001,7 +987,7 @@
     "mine": false
   },
   {
-    "id": "77",
+    "id": "76",
     "title": "SimilarWeb",
     "description": "一个提供网站流量、用户参与度和竞争分析的工具，帮助您了解并提升您的数字存在。",
     "icon": "fas fa-chart-line",
@@ -1014,7 +1000,7 @@
     "mine": false
   },
   {
-    "id": "78",
+    "id": "77",
     "title": "随机选择器",
     "description": "Material You风格的随机选择器，用于随机选择一个或多个选项，帮你作出决定",
     "icon": "fas fa-list-check",
@@ -1027,7 +1013,7 @@
     "mine": true
   },
   {
-    "id": "79",
+    "id": "78",
     "title": "主色提取",
     "description": "Material You风格的图片主色提取器",
     "icon": "fas fa-crosshairs",
@@ -1040,7 +1026,7 @@
     "mine": true
   },
   {
-    "id": "80",
+    "id": "79",
     "title": "24点游戏",
     "description": "使用四个数字和基本运算，计算得到24的益智游戏，采用Material You Design",
     "icon": "fas fa-gamepad",
