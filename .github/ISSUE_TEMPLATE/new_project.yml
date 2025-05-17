@@ -2,7 +2,8 @@ name: 申请收录新项目/工具
 description: 提交一个新的项目或工具以便收录到 Tools & Projects 网站。
 title: "[申请收录]: "
 labels: ["enhancement", "new-project"]
-assignees: ''
+assignees:
+  - YangguangZhou
 
 body:
   - type: markdown
