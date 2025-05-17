@@ -1063,5 +1063,17 @@
     ],
     "url": "https://md.jerryz.com.cn/24",
     "mine": true
+  },
+  {
+    "id": "82",
+    "title": "Caffeine Tracker",
+    "description": "一个使用 React 构建的现代 Web 应用（支持 Android），旨在帮助用户科学地追踪、管理和分析他们的咖啡因摄入量，并提供基于科学模型的代谢估算和健康建议。",
+    "icon": "fas fa-mug-hot",
+    "tags": [
+      "健康",
+      "咖啡"
+    ],
+    "url": "https://ct.jerryz.com.cn",
+    "mine": true
   }
 ]
