@@ -1075,5 +1075,16 @@
     ],
     "url": "https://ct.jerryz.com.cn",
     "mine": true
+  },
+  {
+    "id": "83",
+    "title": "LKs 网站推荐合集",
+    "description": "B站博主 -LKs- 《良心到难以置信的网站推荐》",
+    "icon": "fab fa-bilibili",
+    "tags": [
+      "工具集"
+    ],
+    "url": "https://lkssite.vip/",
+    "mine": false
   }
 ]
