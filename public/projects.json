@@ -1174,5 +1174,17 @@
     ],
     "url": "https://www.ysjf.com/material",
     "mine": false
+  },
+  {
+    "id": "82",
+    "title": "Emoji大全",
+    "description": "Emoji表情符号词典，收集了所有版本的Emoji",
+    "icon": "fas fa-face-smile",
+    "tags": [
+      "合集",
+      "Emoji"
+    ],
+    "url": "https://www.emojiall.com/zh-hans",
+    "mine": false
   }
 ]
