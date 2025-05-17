@@ -299,7 +299,7 @@ export default {
       this.isLoading = true;
       try {
         const res = await axios.get(
-          'https://cdn.jsdelivr.net/gh/YangguangZhou/Tools@main/public/projects.json'
+          'https://raw.githubusercontent.com/YangguangZhou/Tools/refs/heads/main/public/projects.json'
         );
         this.projects = res.data;
       } catch (error) {

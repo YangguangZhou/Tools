@@ -146,15 +146,16 @@
   },
   {
     "id": "12",
-    "title": "综合计算器",
-    "description": "一个Materiel You风格的简单综合计算器",
+    "title": "长度单位转换",
+    "description": "转换各种HTML常用的长度单位并且可视化地显示，Material You风格",
     "icon": "fas fa-calculator",
     "tags": [
-      "计算器",
+      "Material You",
+      "长度",
       "小工具",
       "HTML"
     ],
-    "url": "https://md.jerryz.com.cn/cal",
+    "url": "https://md.jerryz.com.cn/length",
     "mine": true
   },
   {
@@ -408,7 +409,7 @@
   {
     "id": "32",
     "title": "Poems",
-    "description": "包含所有高中新课标古诗词，便于背诵",
+    "description": "包含所有高中新课标古诗词，有翻译、注音和辅助背诵功能",
     "icon": "fas fa-newpaper",
     "tags": [
       "古诗词",
@@ -1036,5 +1037,28 @@
     ],
     "url": "https://md.jerryz.com.cn/24",
     "mine": true
+  },
+  {
+    "id": "80",
+    "title": "Caffeine Tracker",
+    "description": "一个使用 React 构建的现代 Web 应用（支持 Android），旨在帮助用户科学地追踪、管理和分析他们的咖啡因摄入量，并提供基于科学模型的代谢估算和健康建议。",
+    "icon": "fas fa-mug-hot",
+    "tags": [
+      "健康",
+      "咖啡"
+    ],
+    "url": "https://ct.jerryz.com.cn",
+    "mine": true
+  },
+  {
+    "id": "81",
+    "title": "LKs 网站推荐合集",
+    "description": "B站博主 -LKs- 《良心到难以置信的网站推荐》",
+    "icon": "fab fa-bilibili",
+    "tags": [
+      "工具集"
+    ],
+    "url": "https://lkssite.vip/",
+    "mine": false
   }
 ]

@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /admin
+
+Sitemap: https://tools.jerryz.com.cn/sitemap.xml
