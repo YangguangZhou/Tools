@@ -5,8 +5,9 @@
     "description": "Jerry Zhou的个人主页",
     "icon": "fas fa-house",
     "tags": [
-      "主页",
-      "Vue"
+      "个人主页",
+      "Vue.js",
+      "作品集"
     ],
     "url": "https://jerryz.com.cn",
     "mine": true
@@ -20,7 +21,7 @@
       "博客",
       "Hexo",
       "RSS",
-      "Anzhiyu"
+      "个人网站"
     ],
     "url": "https://blog.jerryz.com.cn",
     "mine": true
@@ -31,9 +32,10 @@
     "description": "Magisk 莫奈取色整合模块",
     "icon": "./assets/magisk.svg",
     "tags": [
-      "Magisk",
-      "Monet",
-      "Material You"
+      "Magisk模块",
+      "Android",
+      "Material You",
+      "定制化"
     ],
     "url": "https://monet.jerryz.com.cn",
     "mine": true
@@ -47,7 +49,8 @@
       "洛谷",
       "API",
       "Markdown",
-      "Serverless"
+      "Serverless",
+      "小工具"
     ],
     "url": "https://api.jerryz.com.cn",
     "mine": true
@@ -58,10 +61,11 @@
     "description": "显示社交信息、倒数日、访问统计的个人身份卡片",
     "icon": "fas fa-address-card",
     "tags": [
-      "名片",
+      "信息卡片",
       "API",
       "Markdown",
-      "Serverless"
+      "Serverless",
+      "小工具"
     ],
     "url": "https://cards.jerryz.com.cn",
     "mine": true
@@ -73,7 +77,8 @@
     "icon": "./assets/links.svg",
     "tags": [
       "友链",
-      "HTML"
+      "HTML",
+      "静态网站"
     ],
     "url": "https://links.jerryz.com.cn/",
     "mine": true
@@ -85,9 +90,11 @@
     "icon": "fab fa-html5",
     "tags": [
       "HTML",
+      "CSS",
+      "JavaScript",
       "编辑器",
-      "编程",
-      "预览"
+      "开发工具",
+      "在线工具"
     ],
     "url": "https://html.jerryz.com.cn/",
     "mine": true
@@ -98,9 +105,11 @@
     "description": "随机点名器，电教必备",
     "icon": "fas fa-random",
     "tags": [
-      "随机",
-      "点名",
-      "HTML"
+      "随机数",
+      "点名器",
+      "HTML",
+      "小工具",
+      "教育工具"
     ],
     "url": "https://github.com/YangguangZhou/RandomName",
     "mine": true
@@ -113,7 +122,8 @@
     "tags": [
       "ChatGPT",
       "AI",
-      "LLM"
+      "大语言模型",
+      "在线工具"
     ],
     "url": "https://gpt.jerryz.com.cn",
     "mine": true
@@ -126,7 +136,9 @@
     "tags": [
       "ChatGPT",
       "AI",
-      "LLM"
+      "大语言模型",
+      "在线工具",
+      "提示词"
     ],
     "url": "https://lobe.jerryz.com.cn",
     "mine": true
@@ -138,9 +150,11 @@
     "icon": "fas fa-calculator",
     "tags": [
       "Material You",
-      "长度",
+      "单位转换",
+      "CSS",
+      "HTML",
       "小工具",
-      "HTML"
+      "开发工具"
     ],
     "url": "https://md.jerryz.com.cn/length",
     "mine": true
@@ -151,9 +165,12 @@
     "description": "16进制色值与RGB色值的转换器",
     "icon": "fas fa-palette",
     "tags": [
-      "颜色",
+      "颜色转换",
+      "RGB",
+      "HEX",
+      "CSS",
       "小工具",
-      "HTML"
+      "开发工具"
     ],
     "url": "https://color.jerryz.com.cn",
     "mine": true
@@ -164,9 +181,11 @@
     "description": "生成福音战士风格的标题图片",
     "icon": "fas fa-image",
     "tags": [
-      "图片",
+      "图片生成",
       "二次元",
-      "小工具"
+      "EVA",
+      "小工具",
+      "趣味"
     ],
     "url": "https://lab.magiconch.com/eva-title/",
     "mine": false
@@ -177,7 +196,8 @@
     "description": "用AI创造音乐",
     "icon": "fas fa-music",
     "tags": [
-      "音乐",
+      "AI音乐",
+      "音频生成",
       "AI"
     ],
     "url": "https://www.stableaudio.com/",
@@ -189,9 +209,10 @@
     "description": "程序员做饭指南",
     "icon": "fas fa-utensils",
     "tags": [
-      "文档",
-      "生活",
-      "美食"
+      "菜谱",
+      "生活技能",
+      "开源项目",
+      "GitHub"
     ],
     "url": "https://cook.aiurs.co/",
     "mine": false
@@ -202,8 +223,9 @@
     "description": "向朋友开口要钱神器",
     "icon": "fas fa-dollar-sign",
     "tags": [
-      "社交",
+      "趣味",
       "小工具",
+      "生活",
       "KFC"
     ],
     "url": "https://md.jerryz.com.cn/crazy",
@@ -215,9 +237,10 @@
     "description": "获取并下载网站Favicon",
     "icon": "fas fa-search",
     "tags": [
-      "网站",
-      "图标",
-      "小工具"
+      "Favicon",
+      "图标提取",
+      "小工具",
+      "开发工具"
     ],
     "url": "https://besticon-demo.herokuapp.com/",
     "mine": false
@@ -228,9 +251,11 @@
     "description": "智能WebP、PNG和JPEG压缩",
     "icon": "fas fa-compress",
     "tags": [
-      "图片",
-      "压缩",
-      "小工具"
+      "图片压缩",
+      "WebP",
+      "PNG",
+      "JPEG",
+      "在线工具"
     ],
     "url": "https://tinypng.com/",
     "mine": false
@@ -243,9 +268,10 @@
     "tags": [
       "原神",
       "二次元",
-      "抽卡",
-      "随机",
-      "点名"
+      "点名器",
+      "小工具",
+      "教育工具",
+      "趣味"
     ],
     "url": "https://genshin.jerryz.com.cn/",
     "mine": true
@@ -256,10 +282,11 @@
     "description": "可以插入Markdown文件或HTML网页的计数器",
     "icon": "fas fa-hashtag",
     "tags": [
-      "网站",
-      "计数",
+      "访问计数",
       "Markdown",
-      "HTML"
+      "HTML",
+      "小工具",
+      "网站工具"
     ],
     "url": "https://counter.jerryz.com.cn/",
     "mine": true
@@ -270,9 +297,11 @@
     "description": "AI页面设计助手，从文字或图片生成页面",
     "icon": "./assets/v0.svg",
     "tags": [
-      "网站",
-      "AI",
-      "设计"
+      "AI设计",
+      "UI生成",
+      "前端开发",
+      "开发工具",
+      "AI"
     ],
     "url": "https://v0.dev/",
     "mine": false
@@ -284,8 +313,9 @@
     "icon": "fas fa-paint-roller",
     "tags": [
       "Hexo",
-      "博客",
-      "主题"
+      "博客主题",
+      "开源项目",
+      "PWA"
     ],
     "url": "https://github.com/valor-x/hexo-theme-solitude",
     "mine": false
@@ -299,7 +329,8 @@
       "ChatGPT",
       "Claude",
       "AI",
-      "LLM"
+      "大语言模型",
+      "镜像站"
     ],
     "url": "https://cn.jerryz.com.cn/",
     "mine": true
@@ -311,7 +342,9 @@
     "icon": "fas fa-star",
     "tags": [
       "GitHub",
-      "Stars"
+      "Stars",
+      "开源项目",
+      "自动化"
     ],
     "url": "https://stars.jerryz.com.cn/",
     "mine": true
@@ -322,8 +355,9 @@
     "description": "随机测试信用卡号码生成器",
     "icon": "fas fa-credit-card",
     "tags": [
-      "C卡",
-      "测试"
+      "信用卡生成",
+      "测试数据",
+      "开发工具"
     ],
     "url": "https://namso-gen.com/",
     "mine": false
@@ -334,8 +368,9 @@
     "description": "信用卡验活测试器",
     "icon": "fas fa-check",
     "tags": [
-      "C卡",
-      "测试"
+      "信用卡验证",
+      "测试工具",
+      "开发工具"
     ],
     "url": "https://checker.top",
     "mine": false
@@ -346,8 +381,10 @@
     "description": "网站在线测速/Ping",
     "icon": "fas fa-tachometer-alt",
     "tags": [
-      "测速",
-      "Ping"
+      "网站测速",
+      "Ping",
+      "DNS查询",
+      "网络工具"
     ],
     "url": "https://www.itdog.cn/",
     "mine": false
@@ -358,9 +395,11 @@
     "description": "在线文本差异比对和字数统计",
     "icon": "fas fa-file-alt",
     "tags": [
-      "HTML",
-      "小工具",
-      "文本"
+      "文本比较",
+      "Diff",
+      "字数统计",
+      "在线工具",
+      "开发工具"
     ],
     "url": "https://diff.jerryz.com.cn",
     "mine": true
@@ -371,9 +410,10 @@
     "description": "快速高效的网站分析，谷歌分析的开源替代",
     "icon": "fas fa-bowl-rice",
     "tags": [
-      "统计",
-      "分析",
-      "浏览量"
+      "网站统计",
+      "用户分析",
+      "开源项目",
+      "隐私友好"
     ],
     "url": "https://umami.is/",
     "mine": false
@@ -385,7 +425,9 @@
     "icon": "fas fa-newspaper",
     "tags": [
       "古诗词",
-      "学习"
+      "学习工具",
+      "教育",
+      "中华文化"
     ],
     "url": "https://poems.jerryz.com.cn",
     "mine": true
@@ -396,9 +438,11 @@
     "description": "获取OpenAI格式API的可用模型",
     "icon": "fas fa-brain",
     "tags": [
-      "AI",
-      "小工具",
-      "OpenAI"
+      "AI模型",
+      "OpenAI",
+      "API工具",
+      "开发工具",
+      "AI"
     ],
     "url": "https://models.jerryz.com.cn/",
     "mine": true
@@ -409,8 +453,10 @@
     "description": "轻松使用 Pandora 并在网页中管理所有 Token",
     "icon": "fas fa-hammer",
     "tags": [
-      "AI",
-      "ChatGPT"
+      "ChatGPT",
+      "Token管理",
+      "AI工具",
+      "开源项目"
     ],
     "url": "https://github.com/nianhua99/PandoraHelper",
     "mine": false
@@ -421,8 +467,10 @@
     "description": "通过 Session Key 访问 Claude 的服务",
     "icon": "fas fa-wand-magic-sparkles",
     "tags": [
-      "AI",
-      "Claude"
+      "Claude",
+      "AI工具",
+      "开源项目",
+      "AI"
     ],
     "url": "https://github.com/wozulong/fuclaude",
     "mine": false
@@ -433,8 +481,9 @@
     "description": "开发工具导航站",
     "icon": "fas fa-location-arrow",
     "tags": [
-      "导航",
-      "开发工具"
+      "开发工具",
+      "导航站",
+      "资源聚合"
     ],
     "url": "https://devtoolset.net/",
     "mine": false
@@ -445,9 +494,11 @@
     "description": "谷歌提供的强大网站分析服务，跟踪和报告网站流量、用户行为和转化率。",
     "icon": "fas fa-chart-line",
     "tags": [
-      "分析",
-      "网站",
-      "跟踪"
+      "网站分析",
+      "用户行为",
+      "流量跟踪",
+      "Google",
+      "数据分析"
     ],
     "url": "https://analytics.google.com/",
     "mine": false
@@ -458,9 +509,11 @@
     "description": "一个开源的产品分析平台，允许您跟踪和分析网站和应用中的用户行为。",
     "icon": "fas fa-cogs",
     "tags": [
-      "分析",
+      "产品分析",
+      "用户行为",
       "开源",
-      "产品"
+      "数据分析",
+      "A/B测试"
     ],
     "url": "https://posthog.com/",
     "mine": false
@@ -471,9 +524,11 @@
     "description": "一个简单、注重隐私且开源的网页分析工具，旨在跟踪基本的网页指标，而不侵犯用户隐私。",
     "icon": "fas fa-shield-alt",
     "tags": [
-      "分析",
-      "隐私",
-      "开源"
+      "网站分析",
+      "隐私友好",
+      "开源",
+      "轻量级",
+      "数据分析"
     ],
     "url": "https://plausible.io/",
     "mine": false
@@ -484,9 +539,10 @@
     "description": "用于轻松部署和管理应用程序的云平台。",
     "icon": "fas fa-rocket",
     "tags": [
-      "部署",
-      "云",
-      "应用管理"
+      "云平台",
+      "应用部署",
+      "PaaS",
+      "Serverless"
     ],
     "url": "https://zeabur.com/",
     "mine": false
@@ -498,9 +554,11 @@
     "icon": "fas fa-database",
     "tags": [
       "数据库",
-      "关系型",
-      "多引擎",
-      "AWS"
+      "RDS",
+      "AWS",
+      "MySQL",
+      "PostgreSQL",
+      "云服务"
     ],
     "url": "https://aws.amazon.com/rds/",
     "mine": false
@@ -513,8 +571,9 @@
     "tags": [
       "数据库",
       "NoSQL",
-      "可扩展性",
-      "灵活性"
+      "MongoDB",
+      "云服务",
+      "DaaS"
     ],
     "url": "https://www.mongodb.com/cloud/atlas",
     "mine": false
@@ -526,9 +585,10 @@
     "icon": "fas fa-cloud",
     "tags": [
       "数据库",
-      "Severless",
+      "Serverless",
       "MySQL",
-      "可扩展性"
+      "Vitess",
+      "DaaS"
     ],
     "url": "https://planetscale.com/",
     "mine": false
@@ -541,8 +601,10 @@
     "tags": [
       "数据库",
       "NoSQL",
-      "键值对",
-      "高性能"
+      "缓存",
+      "Redis",
+      "内存数据库",
+      "键值存储"
     ],
     "url": "https://redis.io/",
     "mine": false
@@ -553,10 +615,12 @@
     "description": "一个开源的 Firebase 替代方案，提供实时数据库、身份验证和存储服务。",
     "icon": "fas fa-fire",
     "tags": [
-      "数据库",
+      "后端即服务",
+      "BaaS",
       "开源",
       "PostgreSQL",
-      "实时"
+      "Firebase替代",
+      "实时数据库"
     ],
     "url": "https://supabase.com/",
     "mine": false
@@ -567,9 +631,11 @@
     "description": "Cloudflare 的 JAMstack 平台，供前端开发人员协作和全球部署网站。",
     "icon": "fas fa-globe",
     "tags": [
-      "部署",
+      "静态网站托管",
       "JAMstack",
-      "前端"
+      "前端部署",
+      "Serverless",
+      "Cloudflare"
     ],
     "url": "https://pages.cloudflare.com/",
     "mine": false
@@ -580,9 +646,11 @@
     "description": "自托管和开源的 PaaS，用于部署应用程序和数据库。",
     "icon": "fas fa-server",
     "tags": [
-      "部署",
+      "应用部署",
+      "PaaS",
+      "自托管",
       "开源",
-      "PaaS"
+      "Docker"
     ],
     "url": "https://coolify.io/",
     "mine": false
@@ -593,9 +661,11 @@
     "description": "简单、快速且安全的基于 Docker 的 PaaS，用于部署您的应用程序。",
     "icon": "fab fa-docker",
     "tags": [
-      "部署",
+      "应用部署",
+      "PaaS",
+      "Docker",
       "开源",
-      "Docker"
+      "自托管"
     ],
     "url": "https://dokploy.com/",
     "mine": false
@@ -606,10 +676,12 @@
     "description": "Docker 驱动的迷你 Heroku，帮助您构建和管理应用程序。",
     "icon": "fas fa-box-open",
     "tags": [
-      "部署",
-      "开源",
+      "应用部署",
       "PaaS",
-      "Docker"
+      "Docker",
+      "开源",
+      "Heroku替代",
+      "自托管"
     ],
     "url": "https://dokku.com/",
     "mine": false
@@ -620,9 +692,12 @@
     "description": "Google 的移动平台，帮助您快速开发高质量应用程序。",
     "icon": "fas fa-fire",
     "tags": [
-      "部署",
-      "移动",
-      "开发"
+      "后端即服务",
+      "BaaS",
+      "移动开发",
+      "Google",
+      "实时数据库",
+      "云服务"
     ],
     "url": "https://firebase.google.com/",
     "mine": false
@@ -633,9 +708,9 @@
     "description": "平台即服务，使开发人员能够完全在云中构建、运行和操作应用程序。",
     "icon": "fas fa-cloud",
     "tags": [
-      "部署",
+      "应用部署",
       "PaaS",
-      "云"
+      "云平台"
     ],
     "url": "https://www.heroku.com/",
     "mine": false
@@ -646,9 +721,11 @@
     "description": "用于部署静态网站和现代 Web 应用的平台。",
     "icon": "fas fa-code",
     "tags": [
-      "部署",
-      "静态网站",
-      "Web 应用"
+      "静态网站托管",
+      "JAMstack",
+      "前端部署",
+      "Serverless Functions",
+      "CI/CD"
     ],
     "url": "https://www.netlify.com/",
     "mine": false
@@ -659,9 +736,10 @@
     "description": "云基础设施平台，使部署变得简单快捷。",
     "icon": "fas fa-train",
     "tags": [
-      "部署",
-      "云",
-      "基础设施"
+      "应用部署",
+      "云平台",
+      "PaaS",
+      "基础设施即服务"
     ],
     "url": "https://railway.app/",
     "mine": false
@@ -672,9 +750,11 @@
     "description": "统一的云平台，用于构建和运行所有的应用程序和网站。",
     "icon": "fas fa-layer-group",
     "tags": [
-      "部署",
-      "云",
-      "平台"
+      "应用部署",
+      "云平台",
+      "PaaS",
+      "静态网站托管",
+      "数据库托管"
     ],
     "url": "https://render.com/",
     "mine": false
@@ -685,10 +765,12 @@
     "description": "Serverless Stack (SST) 是一个框架，使构建无服务器应用程序变得容易。",
     "icon": "fas fa-code-branch",
     "tags": [
-      "部署",
+      "Serverless",
+      "框架",
+      "AWS",
       "开源",
-      "Severless",
-      "框架"
+      "全栈应用",
+      "IaC"
     ],
     "url": "https://sst.dev/",
     "mine": false
@@ -699,9 +781,11 @@
     "description": "用于静态站点和无服务器功能的云平台。",
     "icon": "fas fa-cloud-upload-alt",
     "tags": [
-      "部署",
-      "静态站点",
-      "Severless"
+      "前端部署",
+      "静态网站托管",
+      "Serverless Functions",
+      "Next.js",
+      "JAMstack"
     ],
     "url": "https://vercel.com/",
     "mine": false
@@ -712,10 +796,10 @@
     "description": "用于检查 DNS 传播并在多个服务器上全局解析 DNS 记录的工具。",
     "icon": "fas fa-network-wired",
     "tags": [
-      "域名",
-      "DNS",
-      "传播",
-      "网络"
+      "DNS检查",
+      "网络工具",
+      "域名工具",
+      "DNS传播"
     ],
     "url": "https://dnschecker.org/",
     "mine": false
@@ -726,9 +810,10 @@
     "description": "基于 AI 的平台，用于根据各种指标评估和评分域名。",
     "icon": "fas fa-brain",
     "tags": [
-      "域名",
-      "评分",
-      "AI"
+      "域名评估",
+      "AI",
+      "域名工具",
+      "SEO"
     ],
     "url": "https://domainscore.ai/",
     "mine": false
@@ -739,10 +824,10 @@
     "description": "一个用于搜索域名的引擎，帮助查找可用域名并跟踪域名状态。",
     "icon": "fas fa-search",
     "tags": [
-      "域名",
-      "搜索",
-      "可用性",
-      "状态"
+      "域名搜索",
+      "域名工具",
+      "可用性检查",
+      "TLD"
     ],
     "url": "https://domainr.com/",
     "mine": false
@@ -753,10 +838,10 @@
     "description": "知名的域名注册商和网站托管公司，提供广泛的域名相关服务。",
     "icon": "fas fa-globe",
     "tags": [
-      "域名",
-      "注册商",
-      "托管",
-      "网络"
+      "域名注册",
+      "网站托管",
+      "GoDaddy",
+      "SSL证书"
     ],
     "url": "https://www.godaddy.com/",
     "mine": false
@@ -767,10 +852,10 @@
     "description": "提供多种域名后缀、托管服务和网站建设工具的域名注册商。",
     "icon": "fas fa-cube",
     "tags": [
-      "域名",
-      "注册商",
-      "托管",
-      "网络"
+      "域名注册",
+      "网站托管",
+      "Name.com",
+      "SSL证书"
     ],
     "url": "https://www.name.com/",
     "mine": false
@@ -781,10 +866,11 @@
     "description": "提供实惠的域名、托管和相关服务的热门域名注册商。",
     "icon": "fas fa-tag",
     "tags": [
-      "域名",
-      "注册商",
-      "托管",
-      "网络"
+      "域名注册",
+      "网站托管",
+      "Namecheap",
+      "SSL证书",
+      "VPN"
     ],
     "url": "https://www.namecheap.com/",
     "mine": false
@@ -795,9 +881,10 @@
     "description": "通过全面的 WHOIS 数据和可用性检查来搜索和分析域名。",
     "icon": "fas fa-search-plus",
     "tags": [
-      "域名",
-      "WHOIS",
-      "域名搜索"
+      "WHOIS查询",
+      "域名搜索",
+      "域名工具",
+      "可用性检查"
     ],
     "url": "https://query.domains/",
     "mine": false
@@ -808,10 +895,10 @@
     "description": "提供强大 DNS 管理功能的域名管理和注册平台。",
     "icon": "fas fa-rocket",
     "tags": [
-      "域名",
-      "注册商",
-      "域名管理",
-      "DNS"
+      "域名注册",
+      "DNS管理",
+      "Spaceship",
+      "域名工具"
     ],
     "url": "https://spaceship.com/",
     "mine": false
@@ -822,10 +909,9 @@
     "description": "用于查询域名注册详情的工具，包括注册人的联系信息和域名状态。",
     "icon": "fas fa-search-location",
     "tags": [
-      "域名",
-      "查询",
-      "WHOIS",
-      "搜索"
+      "WHOIS查询",
+      "域名工具",
+      "域名信息"
     ],
     "url": "https://whois.domaintools.com/",
     "mine": false
@@ -836,10 +922,12 @@
     "description": "提供安全性、性能和可靠性服务，包括域名注册和 DNS 管理。",
     "icon": "fas fa-shield-alt",
     "tags": [
-      "域名",
-      "DNS",
-      "域名管理",
-      "安全"
+      "CDN",
+      "DNS管理",
+      "网络安全",
+      "Cloudflare",
+      "WAF",
+      "DDoS防护"
     ],
     "url": "https://www.cloudflare.com/",
     "mine": false
@@ -850,9 +938,10 @@
     "description": "一个基于 AI 的平台，用于生成独特且专业的品牌标志。",
     "icon": "fas fa-paint-brush",
     "tags": [
-      "设计",
-      "AI",
-      "品牌"
+      "Logo设计",
+      "AI设计",
+      "品牌工具",
+      "AI"
     ],
     "url": "https://brandmark.io/",
     "mine": false
@@ -863,9 +952,10 @@
     "description": "一个免费的工具，用于生成图标，包括文本、图像和表情符号选项。",
     "icon": "fas fa-icons",
     "tags": [
-      "设计",
-      "图标",
-      "图形"
+      "Favicon生成",
+      "图标设计",
+      "在线工具",
+      "图形工具"
     ],
     "url": "https://favicon.io/",
     "mine": false
@@ -876,9 +966,10 @@
     "description": "一个 AI 驱动的工具，可以快速轻松地创建标志和品牌资产。",
     "icon": "fas fa-lightbulb",
     "tags": [
-      "设计",
-      "AI",
-      "品牌"
+      "AI图像生成",
+      "Logo设计",
+      "品牌工具",
+      "AI"
     ],
     "url": "https://ideogram.ai/",
     "mine": false
@@ -889,9 +980,10 @@
     "description": "一个用于轻松创建简约和现代标志的工具。",
     "icon": "fas fa-pen-nib",
     "tags": [
-      "设计",
-      "简约",
-      "品牌"
+      "Logo设计",
+      "简约设计",
+      "品牌工具",
+      "在线工具"
     ],
     "url": "https://logo.surf/",
     "mine": false
@@ -902,9 +994,10 @@
     "description": "一个简单而有效的方式，让创作者通过一次性支付获得支持和打赏。",
     "icon": "fas fa-coffee",
     "tags": [
-      "打赏",
-      "支持",
-      "支付"
+      "创作者支持",
+      "打赏平台",
+      "在线收款",
+      "众筹"
     ],
     "url": "https://www.buymeacoffee.com/",
     "mine": false
@@ -915,8 +1008,10 @@
     "description": "一个全面的在线支付处理平台，帮助企业在全球范围内接受支付。",
     "icon": "fas fa-money-bill-wave",
     "tags": [
-      "支付",
-      "API"
+      "在线支付",
+      "支付API",
+      "Stripe",
+      "电子商务"
     ],
     "url": "https://stripe.com/",
     "mine": false
@@ -927,8 +1022,10 @@
     "description": "免费的 AI SEO 工具，提供 SEO 生成器。",
     "icon": "fas fa-robot",
     "tags": [
-      "插件",
-      "SEO"
+      "AI SEO",
+      "SEO工具",
+      "内容生成",
+      "AI"
     ],
     "url": "https://aitdk.com/",
     "mine": false
@@ -939,9 +1036,10 @@
     "description": "谷歌提供的免费工具，帮助您监控、维护和排查网站在谷歌搜索结果中的表现。",
     "icon": "fas fa-search",
     "tags": [
-      "搜索",
-      "网站",
-      "监控"
+      "SEO工具",
+      "网站监控",
+      "Google",
+      "网站管理员工具"
     ],
     "url": "https://search.google.com/search-console",
     "mine": false
@@ -952,9 +1050,11 @@
     "description": "一个免费的分析工具，通过热图、会话录制和高级数据分析提供用户行为的见解。",
     "icon": "fas fa-chart-pie",
     "tags": [
-      "分析",
-      "SEO",
-      "用户行为"
+      "用户行为分析",
+      "热图",
+      "会话录制",
+      "Microsoft",
+      "数据分析"
     ],
     "url": "https://clarity.microsoft.com/",
     "mine": false
@@ -965,8 +1065,9 @@
     "description": "一个提供网站流量、用户参与度和竞争分析的工具，帮助您了解并提升您的数字存在。",
     "icon": "fas fa-chart-line",
     "tags": [
-      "网站流量",
-      "分析",
+      "竞品分析",
+      "网站流量分析",
+      "市场洞察",
       "SEO"
     ],
     "url": "https://www.similarweb.com/",
@@ -978,9 +1079,11 @@
     "description": "Material You风格的随机选择器，用于随机选择一个或多个选项，帮你作出决定",
     "icon": "fas fa-list-check",
     "tags": [
-      "随机",
-      "选择",
-      "Material You"
+      "随机选择器",
+      "决策工具",
+      "Material You",
+      "小工具",
+      "在线工具"
     ],
     "url": "https://md.jerryz.com.cn/choice",
     "mine": true
@@ -991,9 +1094,11 @@
     "description": "Material You风格的图片主色提取器",
     "icon": "fas fa-crosshairs",
     "tags": [
+      "颜色提取",
       "Material You",
-      "颜色",
-      "提取"
+      "图片工具",
+      "小工具",
+      "在线工具"
     ],
     "url": "https://md.jerryz.com.cn/color",
     "mine": true
@@ -1004,8 +1109,11 @@
     "description": "使用四个数字和基本运算，计算得到24的益智游戏，采用Material You Design",
     "icon": "fas fa-gamepad",
     "tags": [
-      "小游戏",
-      "Material You"
+      "益智游戏",
+      "24点",
+      "Material You",
+      "在线游戏",
+      "小游戏"
     ],
     "url": "https://md.jerryz.com.cn/24",
     "mine": true
@@ -1016,8 +1124,12 @@
     "description": "一个使用 React 构建的现代 Web 应用（支持 Android），旨在帮助用户科学地追踪、管理和分析他们的咖啡因摄入量，并提供基于科学模型的代谢估算和健康建议。",
     "icon": "fas fa-mug-hot",
     "tags": [
-      "健康",
-      "咖啡"
+      "健康管理",
+      "咖啡因追踪",
+      "React",
+      "PWA",
+      "个人项目",
+      "Web应用"
     ],
     "url": "https://ct.jerryz.com.cn",
     "mine": true
@@ -1028,6 +1140,9 @@
     "description": "B站博主 -LKs- 《良心到难以置信的网站推荐》",
     "icon": "fab fa-bilibili",
     "tags": [
+      "网站推荐",
+      "资源导航",
+      "效率工具",
       "工具集"
     ],
     "url": "https://lkssite.vip/",
