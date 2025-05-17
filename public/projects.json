@@ -1075,5 +1075,18 @@
     ],
     "url": "https://md.jerryz.com.cn",
     "mine": true
+  },
+  {
+    "id": "83",
+    "title": "Markdown在线转换器",
+    "description": "强大的在线Markdown转换工具，实时将Markdown转换为富文本预览或HTML页面",
+    "icon": "fab fa-markdown",
+    "tags": [
+      "Material You",
+      "小工具",
+      "Markdown"
+    ],
+    "url": "https://md.jerryz.com.cn/md",
+    "mine": true
   }
 ]
