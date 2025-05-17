@@ -62,7 +62,7 @@
       <a href="https://github.com/YangguangZhou/Tools" target="_blank"><i class="fas fa-code-branch"></i> GitHub</a>
     </div>
     <div class="copyright">
-      Copyright &copy; 2023-2025
+      Copyright &copy; 2023-{{ new Date().getFullYear() }}
       <a href="https://jerryz.com.cn" target="_blank">Jerry Zhou</a>
     </div>
   </template>

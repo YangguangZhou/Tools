@@ -224,7 +224,6 @@
 </template>
 
 <script>
-// Script remains unchanged
 import axios from 'axios';
 
 export default {
@@ -298,8 +297,9 @@ export default {
     async fetchProjects() {
       this.isLoading = true;
       try {
+        const timestamp = new Date().getTime();
         const res = await axios.get(
-          'https://raw.githubusercontent.com/YangguangZhou/Tools/refs/heads/main/public/projects.json'
+          `https://raw.githubusercontent.com/YangguangZhou/Tools/refs/heads/main/public/projects.json?t=${timestamp}`
         );
         this.projects = res.data;
       } catch (error) {
@@ -492,8 +492,9 @@ export default {
     async getCurrentFileContent() {
       const githubToken = process.env.VUE_APP_GITHUB_TOKEN;
       try {
+        const timestamp = new Date().getTime();
         const response = await axios.get(
-          'https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json',
+          `https://api.github.com/repos/YangguangZhou/Tools/contents/public/projects.json?t=${timestamp}`,
           {
             headers: {
               Authorization: `Bearer ${githubToken}`
