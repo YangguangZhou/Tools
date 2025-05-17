@@ -1147,5 +1147,18 @@
     ],
     "url": "https://lkssite.vip/",
     "mine": false
+  },
+  {
+    "id": "80",
+    "title": "这就是VV",
+    "description": "收录了全网张维为所有发言，可以通过AI检索",
+    "icon": "fas fa-image-portrait",
+    "tags": [
+      "AI",
+      "梗图",
+      "图片"
+    ],
+    "url": "https://vv.cicada000.work/",
+    "mine": false
   }
 ]
