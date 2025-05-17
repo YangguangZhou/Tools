@@ -95,37 +95,29 @@
       return {
         searchText: "",
         projects: [],
-        sortMethod: "random",
+        sortMethod: "random", // 默认排序方式可以根据产品需求调整
         originalProjects: [],
         isLoading: true,
       };
     },
     async created() {
-    try {
-      const projectsResponse = await axios.get("./projects.json");
-      this.originalProjects = projectsResponse.data;
-      
-      const viewsResponse = await axios.get("https://counter-sever.jerryz.com.cn/json");
-      const viewsData = viewsResponse.data;
-      
-      // this.projects = this.originalProjects.map(project => {
-      //   const viewInfo = viewsData.find(item => item.name === `tools-${project.id}`);
-      //   project.views = viewInfo ? viewInfo.times : 0;
-      //   return project;
-      // });
-      const updatePromises = this.originalProjects.map(async (project) => {
-        const viewInfo = viewsData.find(item => item.name === `tools-${project.id}`);
-        project.views = viewInfo ? viewInfo.times : 0;
-        return project;
-      });
-      
-      await Promise.all(updatePromises);
-      this.sortProjects();
-      this.isLoading = false;
-    } catch (error) {
-      console.error(error);
-    }
-  },
+      try {
+        const projectsResponse = await axios.get("./projects.json");
+        // 初始化项目，并为每个项目设置默认 views 为 0
+        this.originalProjects = projectsResponse.data.map(project => ({
+          ...project,
+          views: 0 
+        }));
+        
+        this.sortProjects(); // 根据初始数据（views为0）进行排序
+        this.isLoading = false; // 先显示卡片
+        
+        this.loadProjectViews(); // 然后异步加载真实访问量
+      } catch (error) {
+        console.error("Error loading initial project data:", error);
+        this.isLoading = false; // 即使出错也停止加载状态
+      }
+    },
     computed: {
       filteredProjects() {
         const lowerSearchText = this.searchText.toLowerCase();
@@ -145,20 +137,51 @@
       },
     },
     methods: {
+      async loadProjectViews() {
+        try {
+          const viewsResponse = await axios.get("https://counter-sever.jerryz.com.cn/json");
+          const viewsData = viewsResponse.data;
+          
+          const viewsMap = new Map();
+          viewsData.forEach(item => {
+            viewsMap.set(item.name, item.times);
+          });
+
+          let viewsUpdated = false;
+          this.originalProjects.forEach(project => {
+            const projectKey = `tools-${project.id}`;
+            if (viewsMap.has(projectKey)) {
+              const newViews = viewsMap.get(projectKey);
+              if (project.views !== newViews) {
+                project.views = newViews;
+                viewsUpdated = true;
+              }
+            }
+          });
+
+          // 如果访问量有更新，并且当前是按访问量排序，则重新排序
+          if (viewsUpdated) {
+            this.sortProjects(); 
+          }
+        } catch (error) {
+          console.error("Error loading project views:", error);
+        }
+      },
       tagClicked(tag) {
         this.searchText = tag;
       },
       sortProjects() {
+        let sortedProjects = [...this.originalProjects]; // 从原始数据创建副本进行排序
         if (this.sortMethod === "random") {
-          this.projects = shuffle([...this.originalProjects]);
+          this.projects = shuffle(sortedProjects);
         } 
           else if (this.sortMethod === "views") {
-          this.projects = [...this.originalProjects];
-          this.projects.sort((a, b) => b.views - a.views);
+          sortedProjects.sort((a, b) => b.views - a.views);
+          this.projects = sortedProjects;
         } 
-        else {
-          this.projects = [...this.originalProjects];
-          this.projects.sort((a, b) => b.recommended - a.recommended);
+        else { // 'recommended' or any other default
+          sortedProjects.sort((a, b) => (b.recommended || 0) - (a.recommended || 0));
+          this.projects = sortedProjects;
         }
       },
     },

@@ -410,7 +410,7 @@
     "id": "32",
     "title": "Poems",
     "description": "包含所有高中新课标古诗词，有翻译、注音和辅助背诵功能",
-    "icon": "fas fa-newpaper",
+    "icon": "fas fa-newspaper",
     "tags": [
       "古诗词",
       "学习"
