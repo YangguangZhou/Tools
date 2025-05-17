@@ -1160,5 +1160,19 @@
     ],
     "url": "https://vv.cicada000.work/",
     "mine": false
+  },
+  {
+    "id": "81",
+    "title": "飓风素材库",
+    "description": "来自影视飓风的免费可商用视频/图片素材库",
+    "icon": "fas fa-video",
+    "tags": [
+      "免费",
+      "素材",
+      "视频",
+      "图片"
+    ],
+    "url": "https://www.ysjf.com/material",
+    "mine": false
   }
 ]
