@@ -1,0 +1,76 @@
+name: 申请收录新项目/工具
+description: 提交一个新的项目或工具以便收录到 Tools & Projects 网站。
+title: "[申请收录]: "
+labels: ["enhancement", "new-project"]
+assignees: ''
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢您抽出时间来提交新的项目/工具！请尽可能详细地填写以下信息，以便我们更快地审核和添加。
+
+  - type: input
+    id: project-title
+    attributes:
+      label: 项目/工具名称
+      description: "请输入项目或工具的名称。"
+      placeholder: "例如：My Awesome Tool"
+    validations:
+      required: true
+
+  - type: textarea
+    id: project-description
+    attributes:
+      label: 项目/工具简介
+      description: "请用一两句话简要描述这个项目或工具的功能和特点。"
+      placeholder: "例如：一个可以帮助开发者提高效率的在线JSON格式化工具。"
+    validations:
+      required: true
+
+  - type: input
+    id: project-url
+    attributes:
+      label: 项目/工具链接 (URL)
+      description: "请输入可以直接访问到该项目或工具的网址。"
+      placeholder: "https://example.com/my-awesome-tool"
+    validations:
+      required: true
+
+  - type: input
+    id: project-icon
+    attributes:
+      label: 项目/工具图标 (可选)
+      description: |
+        请输入项目/工具的图标，必须为一个 Font Awesome 图标类名 (例如: `fas fa-star`)。您可以从 [Font Awesome 官网](https://fontawesome.com/search) 查找。
+      placeholder: "例如: fas fa-cogs"
+    validations:
+      required: false
+
+  - type: textarea
+    id: project-tags
+    attributes:
+      label: 项目/工具标签 (可选)
+      description: "请输入一些相关的标签，用英文逗号 (,) 分隔。这将有助于用户搜索和分类。"
+      placeholder: "例如: 开发, 数据库, 分析"
+    validations:
+      required: false
+      
+  - type: textarea
+    id: additional-info
+    attributes:
+      label: 补充说明 (可选)
+      description: "如果您有其他需要说明的信息，例如推荐理由、使用场景等，请在此处填写。"
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: 确认事项
+      description: 在提交此申请前，请确认以下内容。
+      options:
+        - label: 我已检查过现有的项目列表，确认此项目尚未被收录。
+          required: true
+        - label: 我确认提供的项目链接是有效的，并且项目内容符合相关法律法规和道德规范。
+          required: true
