@@ -1186,5 +1186,19 @@
     ],
     "url": "https://www.emojiall.com/zh-hans",
     "mine": false
+  },
+  {
+    "id": "83",
+    "title": "GetModels - API模型查询",
+    "description": "在线查询OpenAI及兼容API的可用模型列表，Material You风格",
+    "icon": "fas fa-hexagon-nodes",
+    "tags": [
+      "API",
+      "OpenAI",
+      "工具",
+      "Material You"
+    ],
+    "url": "https://md.jerryz.com.cn/models",
+    "mine": true
   }
 ]
