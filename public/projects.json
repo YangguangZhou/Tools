@@ -162,17 +162,17 @@
   {
     "id": "12",
     "title": "颜色转换器",
-    "description": "16进制色值与RGB色值的转换器",
+    "description": "16进制色值与RGB色值的转换器，实时预览",
     "icon": "fas fa-palette",
     "tags": [
       "颜色转换",
       "RGB",
       "HEX",
-      "CSS",
       "小工具",
-      "开发工具"
+      "开发工具",
+      "Material You"
     ],
-    "url": "https://color.jerryz.com.cn",
+    "url": "https://md.jerryz.com.cn/converter",
     "mine": true
   },
   {
